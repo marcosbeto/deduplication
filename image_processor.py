@@ -35,9 +35,7 @@ class Image_Processor(object):
 
 				if int(aviso_id) in self.array_avisos_online:
 					if "1200x1200" in dir_name:
-						print "5"
 						if os.path.isdir(dir100x75):
-							print "6"
 							download_100x75 = False
 
 					if download_100x75:
