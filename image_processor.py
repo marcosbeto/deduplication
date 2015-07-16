@@ -13,14 +13,16 @@ class Image_Processor(object):
 
 		models = Models()
 
-		number_of_files = 0
+		self.number_of_files = 0
 
-		def step((ext), dir_name, files):
+		def step((ext), dir_name, files, self):
 
 			download_100x75 = True
 
 			aviso_id = dir_name[dir_name.rfind("Constants.LOCAL_DIR_SAVE_PHOTO")+len(Constants.LOCAL_DIR_SAVE_PHOTO)+2:dir_name.rfind("/")]
 			aviso_id = aviso_id.translate(None, "/")
+
+			print aviso_id
 
 			if "100x75" in dir_name or "1200x1200" in dir_name:
 
@@ -49,10 +51,10 @@ class Image_Processor(object):
 								except:
 									pass
 
-								if number_of_files%1000==0:
-									print number_of_files
+								if self.number_of_files%1000==0:
+									print self.number_of_files
 
-								number_of_files +=1
+								self.number_of_files +=1
 
 						models.add_image_histogram(aviso_json)
 		 
