@@ -22,14 +22,18 @@ class Image_Processor(object):
 			aviso_id = dir_name[dir_name.rfind("Constants.LOCAL_DIR_SAVE_PHOTO")+len(Constants.LOCAL_DIR_SAVE_PHOTO)+2:dir_name.rfind("/")]
 			aviso_id = aviso_id.translate(None, "/")
 
-			print aviso_id
+			
 
 			if "100x75" in dir_name or "1200x1200" in dir_name:
 
 				dir100x75 = dir_name[:dir_name.rfind("/")] + "/100x75"
 				dir1200x1200 = dir_name[:dir_name.rfind("/")] + "/1200x1200"
 
-				if models.is_aviso_online(aviso_id):
+				print "before"
+				is_avison_online = models.is_aviso_online(aviso_id)
+				print "after"
+				
+				if is_avison_online:
 
 					if "1200x1200" in dir_name:
 						if os.path.isdir(dir100x75):
