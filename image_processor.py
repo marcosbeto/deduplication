@@ -29,10 +29,10 @@ class Image_Processor(object):
 				dir100x75 = dir_name[:dir_name.rfind("/")] + "/100x75"
 				dir1200x1200 = dir_name[:dir_name.rfind("/")] + "/1200x1200"
 
-				print "before"
+				print dir_name
 				is_avison_online = models.is_aviso_online(aviso_id)
 				print "after"
-				
+
 				if is_avison_online:
 
 					if "1200x1200" in dir_name:
@@ -55,8 +55,8 @@ class Image_Processor(object):
 								except:
 									pass
 
-								if self.number_of_files%1000==0:
-									print self.number_of_files
+								# if self.number_of_files%1000==0:
+								print self.number_of_files
 
 								self.number_of_files +=1
 
