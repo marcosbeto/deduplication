@@ -15,52 +15,56 @@ class Image_Processor(object):
 
 		self.number_of_files = 0
 
-		def step((ext, self), dir_name, files):
+		array_avisos_online = models.get_all_avisos_online()
 
-			download_100x75 = True
+		print array_avisos_online
 
-			aviso_id = dir_name[dir_name.rfind("Constants.LOCAL_DIR_SAVE_PHOTO")+len(Constants.LOCAL_DIR_SAVE_PHOTO)+2:dir_name.rfind("/")]
-			aviso_id = aviso_id.translate(None, "/")
+		# def step((ext, self), dir_name, files):
 
-			if "100x75" in dir_name or "1200x1200" in dir_name:
+		# 	download_100x75 = True
 
-				dir100x75 = dir_name[:dir_name.rfind("/")] + "/100x75"
-				dir1200x1200 = dir_name[:dir_name.rfind("/")] + "/1200x1200"
+		# 	aviso_id = dir_name[dir_name.rfind("Constants.LOCAL_DIR_SAVE_PHOTO")+len(Constants.LOCAL_DIR_SAVE_PHOTO)+2:dir_name.rfind("/")]
+		# 	aviso_id = aviso_id.translate(None, "/")
 
-				# print dir_name
-				is_avison_online = models.is_aviso_online(aviso_id)
-				# print "after"
+		# 	if "100x75" in dir_name or "1200x1200" in dir_name:
 
-				if is_avison_online:
+		# 		dir100x75 = dir_name[:dir_name.rfind("/")] + "/100x75"
+		# 		dir1200x1200 = dir_name[:dir_name.rfind("/")] + "/1200x1200"
 
-					if "1200x1200" in dir_name:
-						if os.path.isdir(dir100x75):
-							download_100x75 = False
+		# 		# print dir_name
+		# 		is_avison_online = models.is_aviso_online(aviso_id)
+		# 		# print "after"
 
-					if download_100x75:
+		# 		if is_avison_online:
 
-						aviso_json = {"id_aviso":aviso_id, "photos":[]}
+		# 			if "1200x1200" in dir_name:
+		# 				if os.path.isdir(dir100x75):
+		# 					download_100x75 = False
 
-						for file_name in files:
+		# 			if download_100x75:
 
-							if file_name.lower().endswith(ext):
+		# 				aviso_json = {"id_aviso":aviso_id, "photos":[]}
+
+		# 				for file_name in files:
+
+		# 					if file_name.lower().endswith(ext):
 								
-								try:
-									#generating the histogram and adding it to the json to be added to mongo
-									hist = self.get_histogram(os.path.join(dir_name, file_name)) 
-									hist_json = {"photo_path":dir_name + "/" + file_name, "histogram":json.dumps(hist.tolist())}
-									aviso_json["photos"].append(hist_json)
-								except:
-									pass
+		# 						try:
+		# 							#generating the histogram and adding it to the json to be added to mongo
+		# 							hist = self.get_histogram(os.path.join(dir_name, file_name)) 
+		# 							hist_json = {"photo_path":dir_name + "/" + file_name, "histogram":json.dumps(hist.tolist())}
+		# 							aviso_json["photos"].append(hist_json)
+		# 						except:
+		# 							pass
 
-								if self.number_of_files%100==0:
-									print self.number_of_files
+		# 						if self.number_of_files%100==0:
+		# 							print self.number_of_files
 
-								self.number_of_files +=1
+		# 						self.number_of_files +=1
 
-						models.add_image_histogram(aviso_json)
+		# 				models.add_image_histogram(aviso_json)
 		 
-		os.path.walk(Constants.LOCAL_DIR_SAVE_PHOTO, step, ('.jpg', self))
+		# os.path.walk(Constants.LOCAL_DIR_SAVE_PHOTO, step, ('.jpg', self))
 
 
 	def create_images_histogram_collection(self):

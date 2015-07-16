@@ -30,6 +30,20 @@ class Models(object):
 	def add_image_histogram(self, aviso_json):
 		self.con_mongo.ads_histograms_3.insert(aviso_json)
 
+	def get_all_avisos_online(self):
+		
+		array_all_avisos_online = []		
+		all_avisos_online = self.con_mongo.avisosonline.find()
+
+		#iterate in all avisos that have some photo with the same histogram
+		for aviso_online in all_avisos_online:
+
+			#getting all photos of the aviso that is being compared
+			id_aviso_online = aviso_online.get("idaviso")
+			array_all_avisos_online.append(id_aviso_online)
+
+		return array_all_avisos_online
+
 
 	# this method is responsible for selecting each photo of all avisos from ads_histograms collection
 	# and find if it has any other equal histogram in that collection. The result will be a collection that
