@@ -40,7 +40,7 @@ class Models(object):
 
 			#getting all photos of the aviso that is being compared
 			id_aviso_online = aviso_online.get("idaviso")
-			array_all_avisos_online.append(id_aviso_online)
+			array_all_avisos_online.append(int(id_aviso_online))
 
 		return array_all_avisos_online
 
