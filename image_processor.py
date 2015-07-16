@@ -58,7 +58,7 @@ class Image_Processor(object):
 
 						models.add_image_histogram(aviso_json)
 		 
-		os.path.walk(Constants.LOCAL_DIR_SAVE_PHOTO, step, ('.jpg'))
+		os.path.walk(Constants.LOCAL_DIR_SAVE_PHOTO, step, ('.jpg'), self)
 
 
 	def create_images_histogram_collection(self):
