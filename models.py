@@ -1,10 +1,12 @@
 import sys
 import pymongo
+from pymongo import MongoClient
 import json
 from json import loads
 import simplejson
 import utils
 import time
+
 
 from bson.objectid import ObjectId
 from bson import json_util
@@ -19,7 +21,7 @@ class Models(object):
 
 	def __db_mongo(self):		
 		utils.print_inline("\n[db] Connecting MongoDB... \n")
-		connection = pymongo.Connection('localhost')
+		connection = MongoClient('localhost', 27017)
 		db = connection['deduplication']
 
 		print "MongoDB - Connected [OK]"
