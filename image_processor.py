@@ -15,7 +15,7 @@ class Image_Processor(object):
 
 		self.number_of_files = 0
 
-		def step((ext), dir_name, files, self):
+		def step((ext, self), dir_name, files):
 
 			download_100x75 = True
 
