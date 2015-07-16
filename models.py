@@ -26,7 +26,7 @@ class Models(object):
 		return db
 
 	def add_image_histogram(self, aviso_json):
-		self.con_mongo.ads_histograms.insert(aviso_json)
+		self.con_mongo.ads_histograms_3.insert(aviso_json)
 
 
 	# this method is responsible for selecting each photo of all avisos from ads_histograms collection
@@ -96,6 +96,16 @@ class Models(object):
 
 		print "[OK] Analized " + str(number_of_avisos) + " avisos and 'ads_similar' collection created."
 	
+
+	def is_aviso_online(self,aviso_id):
+
+		aviso_online = self.con_mongo.avisosonline.find({"idaviso":int(aviso_id)}).count()
+
+		if aviso_online > 0:
+			return True
+
+		return False
+
 	def create_equals_avisos_collection(self):
 
 		start = time.time()

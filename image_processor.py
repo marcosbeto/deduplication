@@ -2,19 +2,68 @@ import json
 import os
 import cv2
 import time
+import pymongo
 
 from models import Models
 from constants import Constants
 
 class Image_Processor(object):	
 
-	def create_images_histogram_collection(self):
+	def create_images_histogram_from_images_backup_iw(self):
 
 		models = Models()
 
 		number_of_files = 0
 
-		data_json = []
+		def step((ext), dir_name, files):
+
+			download_100x75 = True
+
+			aviso_id = dir_name[dir_name.rfind("Constants.LOCAL_DIR_SAVE_PHOTO")+len(Constants.LOCAL_DIR_SAVE_PHOTO)+2:dir_name.rfind("/")]
+			aviso_id = aviso_id.translate(None, "/")
+
+			if "100x75" in dir_name or "1200x1200" in dir_name:
+
+				dir100x75 = dir_name[:dir_name.rfind("/")] + "/100x75"
+				dir1200x1200 = dir_name[:dir_name.rfind("/")] + "/1200x1200"
+
+				if models.is_aviso_online(aviso_id):
+
+					if "1200x1200" in dir_name:
+						if os.path.isdir(dir100x75):
+							download_100x75 = False
+
+					if download_100x75:
+
+						aviso_json = {"id_aviso":aviso_id, "photos":[]}
+
+						for file_name in files:
+
+							if file_name.lower().endswith(ext):
+								
+								try:
+									#generating the histogram and adding it to the json to be added to mongo
+									hist = self.get_histogram(os.path.join(dir_name, file_name)) 
+									hist_json = {"photo_path":dir_name + "/" + file_name, "histogram":json.dumps(hist.tolist())}
+									aviso_json["photos"].append(hist_json)
+								except:
+									pass
+
+								if number_of_files%1000==0:
+									print number_of_files
+
+								number_of_files +=1
+
+						models.add_image_histogram(aviso_json)
+		 
+		os.path.walk(Constants.LOCAL_DIR_SAVE_PHOTO, step, ('.jpg'))
+
+
+	def create_images_histogram_collection(self):
+
+		models = Models()
+
+		number_of_files = 0
 
 		for dir_name, dir_names, file_names in os.walk(Constants.LOCAL_DIR_SAVE_PHOTO):
 
