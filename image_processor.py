@@ -39,7 +39,7 @@ class Image_Processor(object):
 				except ValueError:
 					aviso_id_int = 0
 				
-				if aviso_id in self.array_avisos_online:
+				if aviso_id_int in self.array_avisos_online:
 					
 					if "1200x1200" in dir_name:
 						if os.path.isdir(dir100x75):
