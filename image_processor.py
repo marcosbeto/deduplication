@@ -34,32 +34,31 @@ class Image_Processor(object):
 				# is_avison_online = models.is_aviso_online(aviso_id)
 				# print "after"
 
-				try:
-					if isinstance(aviso_id, int ) and int(aviso_id) in self.array_avisos_online:
-						
-						if "1200x1200" in dir_name:
-							if os.path.isdir(dir100x75):
-								download_100x75 = False
+				
+				if isinstance(aviso_id, int) and int(aviso_id) in self.array_avisos_online:
+					
+					if "1200x1200" in dir_name:
+						if os.path.isdir(dir100x75):
+							download_100x75 = False
 
-						if download_100x75:
+					if download_100x75:
 
-							aviso_json = {"id_aviso":aviso_id, "photos":[]}
+						aviso_json = {"id_aviso":aviso_id, "photos":[]}
 
-							for file_name in files:
+						for file_name in files:
 
-								if file_name.lower().endswith(ext):
+							if file_name.lower().endswith(ext):
 
-									try:
-										#generating the histogram and adding it to the json to be added to mongo
-										hist = self.get_histogram(os.path.join(dir_name, file_name)) 
-										hist_json = {"photo_path":dir_name + "/" + file_name, "histogram":json.dumps(hist.tolist())}
-										aviso_json["photos"].append(hist_json)
-									except:
-										pass
+								try:
+									#generating the histogram and adding it to the json to be added to mongo
+									hist = self.get_histogram(os.path.join(dir_name, file_name)) 
+									hist_json = {"photo_path":dir_name + "/" + file_name, "histogram":json.dumps(hist.tolist())}
+									aviso_json["photos"].append(hist_json)
+								except:
+									pass
 
-							models.add_image_histogram(aviso_json)
-				except:
-					pass
+						models.add_image_histogram(aviso_json)
+				
 
 				if self.number_of_files%100==0:
 					print self.number_of_files
