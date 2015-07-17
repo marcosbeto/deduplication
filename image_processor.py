@@ -35,9 +35,9 @@ class Image_Processor(object):
 				# print "after"
 
 				try: 
-			        aviso_id_int = int(aviso_id)
-			    except ValueError:
-			    	aviso_id_int = 0
+					aviso_id_int = int(aviso_id)
+				except ValueError:
+					aviso_id_int = 0
 				
 				if aviso_id in self.array_avisos_online:
 					
