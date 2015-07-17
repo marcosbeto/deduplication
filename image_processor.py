@@ -34,9 +34,12 @@ class Image_Processor(object):
 				# is_avison_online = models.is_aviso_online(aviso_id)
 				# print "after"
 
-				print isinstance(aviso_id, int)
+				try: 
+			        aviso_id_int = int(aviso_id)
+			    except ValueError:
+			    	aviso_id_int = 0
 				
-				if int(aviso_id) in self.array_avisos_online:
+				if aviso_id in self.array_avisos_online:
 					
 					if "1200x1200" in dir_name:
 						if os.path.isdir(dir100x75):
