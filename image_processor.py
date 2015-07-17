@@ -35,7 +35,8 @@ class Image_Processor(object):
 				# print "after"
 
 				try:
-					if aviso_id in self.array_avisos_online:
+					if isinstance(aviso_id, int ) and int(aviso_id) in self.array_avisos_online:
+						
 						if "1200x1200" in dir_name:
 							if os.path.isdir(dir100x75):
 								download_100x75 = False
