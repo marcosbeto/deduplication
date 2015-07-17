@@ -34,6 +34,7 @@ class Image_Processor(object):
 				# is_avison_online = models.is_aviso_online(aviso_id)
 				# print "after"
 
+				print isinstance(aviso_id, int)
 				
 				if int(aviso_id) in self.array_avisos_online:
 					
