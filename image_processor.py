@@ -12,18 +12,6 @@ from constants import Constants
 
 class Image_Processor(object):	
 
-
-	def get_histogram(self, dir_name, file_name):
-		try:
-			#generating the histogram and adding it to the json to be added to mongo
-			hist = self.get_histogram(os.path.join(dir_name, file_name)) 
-			return hist
-		except:
-			pass
-
-		return None
-
-
 	def create_images_histogram_from_onlie_ads(self):	
 		models = Models()
 
@@ -67,10 +55,14 @@ class Image_Processor(object):
 					folder_name = Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + folder_to_download
 
 					for file in os.listdir(folder_name):
+						
 						if file.endswith(".jpg"):
-							hist = self.get_histogram(folder_name, file)
-							hist_json = {"photo_path":dir_name + "/" + file_name, "histogram":json.dumps(hist.tolist())}
-							aviso_json["photos"].append(hist_json)
+							try:
+								hist = self.get_histogram(os.path.join(folder_name, file))
+								hist_json = {"photo_path":folder_name + "/" + file, "histogram":json.dumps(hist.tolist())}
+								aviso_json["photos"].append(hist_json)
+							except:
+								pass
 							print aviso_json
 
 					# if len(os.listdir(folder_name))>0:
