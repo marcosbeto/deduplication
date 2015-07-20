@@ -5,6 +5,7 @@ import time
 import pymongo
 import re
 from os import walk
+from os import path
 
 from models import Models
 from constants import Constants
