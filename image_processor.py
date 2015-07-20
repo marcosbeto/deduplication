@@ -69,9 +69,12 @@ class Image_Processor(object):
 
 				# self.number_of_files +=1
 			else:
+			
 				if self.number_of_files%100==0:
 					print self.number_of_files
+			
 				self.number_of_files +=1
+			
 				print aviso_id
 		os.path.walk(Constants.LOCAL_DIR_SAVE_PHOTO, step, ('.jpg', self))
 
