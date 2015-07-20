@@ -32,14 +32,11 @@ class Image_Processor(object):
 				for folder_name in aviso_id_splitted:
 					complete_folder +=  folder_name + "/"
 
-				print Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder
+				# print Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder
 
-				f = []
-				for (dirpath, dirnames, filenames) in walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
-					f.extend(filenames)
-					break
+				files = filter(path.isfile, os.listdir(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder))
 
-				print f
+				print files
 
 
 	def create_images_histogram_from_images_backup_iw(self):
