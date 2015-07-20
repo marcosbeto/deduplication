@@ -29,7 +29,7 @@ class Image_Processor(object):
 				complete_folder = "2/"
 
 				for folder_name in aviso_id_splitted:
-					complete_folder += "/" + folder_name
+					complete_folder +=  folder_name + "/"
 
 				print complete_folder
 
