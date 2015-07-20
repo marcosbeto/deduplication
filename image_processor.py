@@ -21,7 +21,7 @@ class Image_Processor(object):
 
 		for aviso_online in self.array_avisos_online:
 
-			if (len(aviso_online)<10)
+			if len(aviso_online)<10:
 				print format(int(aviso_online), "010")
 
 
