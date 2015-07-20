@@ -34,7 +34,7 @@ class Image_Processor(object):
 				print Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder
 
 				f = []
-				for (dirpath, dirnames, filenames) in walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
+				for (dirpath, dirnames, filenames) in os.path.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
 					f.extend(filenames)
 					break
 
