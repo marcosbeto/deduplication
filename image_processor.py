@@ -20,7 +20,9 @@ class Image_Processor(object):
 		print "[Ok]"		
 
 		for aviso_online in self.array_avisos_online:
-			print aviso_online
+
+			if (len(aviso_online)<10)
+				print format(int(aviso_online), "010")
 
 
 	def create_images_histogram_from_images_backup_iw(self):
