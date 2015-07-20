@@ -3,6 +3,7 @@ import os
 import cv2
 import time
 import pymongo
+import re
 
 from models import Models
 from constants import Constants
@@ -22,7 +23,15 @@ class Image_Processor(object):
 		for aviso_online in self.array_avisos_online:
 
 			if len(str(aviso_online))<10:
-				print format(int(aviso_online), "010")
+				aviso_id = format(int(aviso_online), "010")
+				aviso_id_splitted = re.findall(r'.{1,2}',s,re.DOTALL)
+
+				complete_folder = "2/"
+
+				for folder_name in aviso_id_splitted:
+					complete_folder += "/" + folder_name
+
+				print complete_folder
 
 
 	def create_images_histogram_from_images_backup_iw(self):
