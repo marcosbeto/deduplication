@@ -26,7 +26,7 @@ class Image_Processor(object):
 			aviso_id = dir_name[dir_name.rfind("Constants.LOCAL_DIR_SAVE_PHOTO")+len(Constants.LOCAL_DIR_SAVE_PHOTO)+2:dir_name.rfind("/")]
 			aviso_id = aviso_id.translate(None, "/")
 			
-			if "100x75" in dir_name or "1200x1200" in dir_name:
+			if not "100x75" in dir_name and not "1200x1200" in dir_name:
 				# dir100x75 = dir_name[:dir_name.rfind("/")] + "/100x75"
 				# dir1200x1200 = dir_name[:dir_name.rfind("/")] + "/1200x1200"
 
@@ -68,7 +68,7 @@ class Image_Processor(object):
 				# 	print self.number_of_files
 
 				# self.number_of_files +=1
-			else:
+			# else:
 			
 				if self.number_of_files%100==0:
 					print self.number_of_files
