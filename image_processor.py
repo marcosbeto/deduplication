@@ -51,12 +51,11 @@ class Image_Processor(object):
 				for root, dirs, files in os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
 
 					folder_to_download = ""
-				    
-				    for folder in dirs:
+					for folder in dirs:
 
-				    	if folder == "100x75":
+						if folder == "100x75":
 
-				    		folder_to_download = "100x75"
+							folder_to_download = "100x75"
 							break
 
 						elif folder == "1200x1200":
@@ -65,12 +64,12 @@ class Image_Processor(object):
 							break
 
 
-				    folder_name = Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + folder_to_download
+					folder_name = Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + folder_to_download
 
-		    		for file in os.listdir(folder_name):
-					    if file.endswith(".jpg"):
-					        hist = self.get_histogram(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + "100x75", file)
-					        hist_json = {"photo_path":dir_name + "/" + file_name, "histogram":json.dumps(hist.tolist())}
+					for file in os.listdir(folder_name):
+						if file.endswith(".jpg"):
+							hist = self.get_histogram(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + "100x75", file)
+							hist_json = {"photo_path":dir_name + "/" + file_name, "histogram":json.dumps(hist.tolist())}
 							aviso_json["photos"].append(hist_json)
 							print aviso_json
 
@@ -81,10 +80,10 @@ class Image_Processor(object):
 
 
 
-				    break
+					break
 
 
-				    # print files
+					# print files
 
 				# for file in os.listdir(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
 				#     if file.endswith(".jpg"):
