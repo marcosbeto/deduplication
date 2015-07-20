@@ -33,7 +33,7 @@ class Image_Processor(object):
 				for folder_name in aviso_id_splitted:
 					complete_folder +=  folder_name + "/"
 
-				# print Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder
+				print Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder
 
 				files = filter(path.isfile, os.listdir(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder))
 
