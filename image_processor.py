@@ -30,18 +30,18 @@ class Image_Processor(object):
 
 			aviso_json = {"id_aviso":aviso_id, "photos":[]}
 
-			if len(str(aviso_id))<10:
-				aviso_id = format(int(aviso_id), "010")
-
-			aviso_id_splitted = re.findall(r'.{1,2}',str(aviso_id),re.DOTALL)
-
-			complete_folder = ""
-
-			for folder_name in aviso_id_splitted:
-				complete_folder +=  folder_name + "/"
-
 			# print os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder)
 			try:
+
+				if len(str(aviso_id))<10:
+					aviso_id = format(int(aviso_id), "010")
+
+				aviso_id_splitted = re.findall(r'.{1,2}',str(aviso_id),re.DOTALL)
+
+				complete_folder = ""
+
+				for folder_name in aviso_id_splitted:
+					complete_folder +=  folder_name + "/"
 				
 				for root, dirs, files in os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
 
