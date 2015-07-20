@@ -13,6 +13,17 @@ from constants import Constants
 class Image_Processor(object):	
 
 
+	def get_histogram(dir_name, file_name, self):
+		try:
+			#generating the histogram and adding it to the json to be added to mongo
+			hist = self.get_histogram(os.path.join(dir_name, file_name)) 
+			return hist
+		except:
+			pass
+
+		return None
+
+
 	def create_images_histogram_from_onlie_ads(self):	
 		models = Models()
 
@@ -28,6 +39,8 @@ class Image_Processor(object):
 				aviso_id = format(int(aviso_online), "010")
 				aviso_id_splitted = re.findall(r'.{1,2}',aviso_id,re.DOTALL)
 
+				aviso_json = {"id_aviso":aviso_id, "photos":[]}
+
 				complete_folder = ""
 
 				for folder_name in aviso_id_splitted:
@@ -36,18 +49,41 @@ class Image_Processor(object):
 				# print os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder)
 
 				for root, dirs, files in os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
-				    # print root
-				    # print dirs
 
+					folder_to_download = ""
+				    
 				    for folder in dirs:
-				    	
+
 				    	if folder == "100x75":
-				    		for file in os.listdir(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + "100x75"):
-							    if file.endswith(".jpg"):
-							        print(file)
+
+				    		folder_to_download = "100x75"
+							break
+
+						elif folder == "1200x1200":
+
+							folder_to_download = "1200x1200"
+							break
+
+
+				    folder_name = Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + folder_to_download
+
+		    		for file in os.listdir(folder_name):
+					    if file.endswith(".jpg"):
+					        hist = self.get_histogram(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + "100x75", file)
+					        hist_json = {"photo_path":dir_name + "/" + file_name, "histogram":json.dumps(hist.tolist())}
+							aviso_json["photos"].append(hist_json)
+							print aviso_json
+
+					# if len(os.listdir(folder_name))>0:
+					# 	models.add_image_histogram(aviso_json)
+
+
+
 
 
 				    break
+
+
 				    # print files
 
 				# for file in os.listdir(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
