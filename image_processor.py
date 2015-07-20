@@ -26,12 +26,19 @@ class Image_Processor(object):
 				aviso_id = format(int(aviso_online), "010")
 				aviso_id_splitted = re.findall(r'.{1,2}',aviso_id,re.DOTALL)
 
-				complete_folder = "2/"
+				complete_folder = ""
 
 				for folder_name in aviso_id_splitted:
 					complete_folder +=  folder_name + "/"
 
-				print complete_folder
+				print Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder
+
+				f = []
+				for (dirpath, dirnames, filenames) in walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
+					f.extend(filenames)
+					break
+
+				print f
 
 
 	def create_images_histogram_from_images_backup_iw(self):
@@ -54,10 +61,6 @@ class Image_Processor(object):
 			if "100x75" in dir_name or "1200x1200" in dir_name:
 				dir100x75 = dir_name[:dir_name.rfind("/")] + "/100x75"
 				dir1200x1200 = dir_name[:dir_name.rfind("/")] + "/1200x1200"
-
-				# print dir_name
-				# is_avison_online = models.is_aviso_online(aviso_id)
-				# print "after"
 
 				try: 
 					aviso_id_int = int(aviso_id)
