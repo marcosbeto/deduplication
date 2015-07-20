@@ -24,6 +24,7 @@ class Image_Processor(object):
 		for aviso_online in self.array_avisos_online:
 
 			if len(str(aviso_online))<10:
+				
 				aviso_id = format(int(aviso_online), "010")
 				aviso_id_splitted = re.findall(r'.{1,2}',aviso_id,re.DOTALL)
 
