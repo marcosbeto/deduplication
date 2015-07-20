@@ -27,10 +27,10 @@ class Image_Processor(object):
 				aviso_id = format(int(aviso_online), "010")
 				aviso_id_splitted = re.findall(r'.{1,2}',aviso_id,re.DOTALL)
 
-				if self.number_of_files%100==0:
-					print self.number_of_files
+				if number_of_files%100==0:
+					print number_of_files
 
-				self.number_of_files +=1
+				number_of_files +=1
 
 				aviso_json = {"id_aviso":aviso_id, "photos":[]}
 
