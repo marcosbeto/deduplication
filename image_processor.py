@@ -24,7 +24,7 @@ class Image_Processor(object):
 
 			if len(str(aviso_online))<10:
 				aviso_id = format(int(aviso_online), "010")
-				aviso_id_splitted = re.findall(r'.{1,2}',s,re.DOTALL)
+				aviso_id_splitted = re.findall(r'.{1,2}',aviso_id,re.DOTALL)
 
 				complete_folder = "2/"
 
