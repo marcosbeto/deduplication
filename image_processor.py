@@ -37,7 +37,16 @@ class Image_Processor(object):
 
 				for root, dirs, files in os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
 				    # print root
-				    print dirs
+				    # print dirs
+
+				    for folder in dirs:
+				    	
+				    	if folder == "100x75":
+				    		for file in os.listdir(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + "100x75"):
+							    if file.endswith(".jpg"):
+							        print(file)
+
+
 				    break
 				    # print files
 
