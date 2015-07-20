@@ -15,7 +15,7 @@ class Image_Processor(object):
 	def create_images_histogram_from_onlie_ads(self):	
 		models = Models()
 
-		self.number_of_files = 0
+		number_of_files = 0
 
 		print "Retrieving all online avisos. Please, wait..."
 		self.array_avisos_online = models.get_all_avisos_online()
@@ -27,6 +27,11 @@ class Image_Processor(object):
 				aviso_id = format(int(aviso_online), "010")
 				aviso_id_splitted = re.findall(r'.{1,2}',aviso_id,re.DOTALL)
 
+				if self.number_of_files%100==0:
+					print self.number_of_files
+
+				self.number_of_files +=1
+
 				aviso_json = {"id_aviso":aviso_id, "photos":[]}
 
 				complete_folder = ""
@@ -35,44 +40,40 @@ class Image_Processor(object):
 					complete_folder +=  folder_name + "/"
 
 				# print os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder)
+				try:
+					
+					for root, dirs, files in os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
 
-				for root, dirs, files in os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
+						folder_to_download = ""
+						for folder in dirs:
 
-					folder_to_download = ""
-					for folder in dirs:
+							if folder == "100x75":
 
-						if folder == "100x75":
+								folder_to_download = "100x75"
+								break
 
-							folder_to_download = "100x75"
-							break
+							elif folder == "1200x1200":
 
-						elif folder == "1200x1200":
-
-							folder_to_download = "1200x1200"
-							break
+								folder_to_download = "1200x1200"
+								break
 
 
-					folder_name = Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + folder_to_download
+						folder_name = Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + folder_to_download
 
-					for file in os.listdir(folder_name):
-						
-						if file.endswith(".jpg"):
-							try:
+						for file in os.listdir(folder_name):
+							
+							if file.endswith(".jpg"):
 								hist = self.get_histogram(os.path.join(folder_name, file))
 								hist_json = {"photo_path":folder_name + "/" + file, "histogram":json.dumps(hist.tolist())}
 								aviso_json["photos"].append(hist_json)
-							except:
-								pass
-							print aviso_json
 
-					# if len(os.listdir(folder_name))>0:
-					# 	models.add_image_histogram(aviso_json)
+						if len(os.listdir(folder_name))>0:
+							models.add_image_histogram(aviso_json)
 
+						break
 
-
-
-
-					break
+				except:
+					pass
 
 
 					# print files

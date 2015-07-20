@@ -28,7 +28,7 @@ class Models(object):
 		return db
 
 	def add_image_histogram(self, aviso_json):
-		self.con_mongo.ads_histograms.insert(aviso_json)
+		self.con_mongo.ads_histograms_online.insert(aviso_json)
 
 	def get_all_avisos_online(self):
 		
