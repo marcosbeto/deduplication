@@ -38,6 +38,7 @@ class Image_Processor(object):
 				for root, dirs, files in os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
 				    # print root
 				    print dirs
+				    break
 				    # print files
 
 				# for file in os.listdir(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
