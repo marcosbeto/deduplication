@@ -35,7 +35,7 @@ class Image_Processor(object):
 
 				print Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder
 
-				files = filter(path.isfile, os.listdir(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder))
+				files = filter(path.isfile, os.listdir("/"))
 
 				print files
 
