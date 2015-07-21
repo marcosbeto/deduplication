@@ -75,9 +75,13 @@ class Models(object):
 		#getting all avisos from histogram table in mongo 
 		print "Retrieving all online avisos. Please, wait..."
 		all_avisos = self.con_mongo.ads_histograms_online.find()
-		print "[OK]"
+		print "[Ok]"
 
 		for aviso in all_avisos:
+
+			now = time.time()
+			if number_of_avisos%100==0:
+				print str(number_of_avisos) + " - " + str(now-start)
 			
 			number_of_avisos += 1
 			aviso_has_similar_photos = False
@@ -122,9 +126,7 @@ class Models(object):
 					aviso_json["photos"].append(main_photo_json);
 			
 			
-			now = time.time()
-			if number_of_avisos%100==0:
-				print str(number_of_avisos) + " - " + str(now-start)
+			
 
 			#saves in mongo the aviso json if there is any photo that has others equal photos 
 			if aviso_has_similar_photos:
