@@ -58,7 +58,7 @@ class Models(object):
 
 		return array_all_avisos_online
 
-	def save_id_aviso_not_histogram_table(aviso_json):
+	def save_id_aviso_not_histogram_table(self, aviso_json):
 
 		self.con_mongo.ads_similar.insert(aviso_json)
 
