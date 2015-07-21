@@ -18,8 +18,12 @@ class Image_Processor(object):
 
 		number_of_files = 0
 
+		print "Retrieving all online avisos. Please, wait..."
 		array_avisos_online = models.get_all_avisos_online()
+		print '[Ok]'
+		print "Retrieving all histogramed avisos. Please, wait..."
 		array_avisos_with_hist = models.get_all_avisos_with_histogram()
+		print '[Ok]'
 
 		for aviso_online_id in array_avisos_online:
 
