@@ -12,6 +12,33 @@ from constants import Constants
 
 class Image_Processor(object):	
 
+	def outside_images(self):
+
+		number_of_files = 0
+
+		array_avisos_online = models.get_all_avisos_online()
+		array_avisos_with_hist = models.get_all_avisos_with_histogram()
+
+		for aviso_online_id in array_avisos_online:
+
+			is_on_hist_table = False
+
+			for aviso_online_with_hist_id in array_avisos_with_hist:
+
+				if aviso_online_id == aviso_online_with_hist_id:
+					is_on_hist_table = True
+
+			if not is_on_hist_table:
+				aviso_json = {"id_aviso":aviso_id}
+				models.save_id_aviso_not_histogram_table(aviso_json)
+
+			if number_of_files%100==0:
+				print number_of_files
+
+			number_of_files +=1
+
+
+
 	def create_images_histogram_from_onlie_ads(self):	
 		models = Models()
 

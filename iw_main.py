@@ -7,8 +7,8 @@ class IW_Main(object):
         
         # Downloader().download_photos()
 
-        Image_Processor().create_images_histogram_from_onlie_ads()
-        
+        # Image_Processor().create_images_histogram_from_onlie_ads()
+        Image_Processor().outside_images()
         # Image_Processor().create_images_histogram_from_images_backup_iw()
 
         # Image_Processor().create_images_histogram_collection()

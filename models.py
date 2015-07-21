@@ -44,6 +44,24 @@ class Models(object):
 
 		return array_all_avisos_online
 
+	def get_all_avisos_with_histogram(self):
+		
+		array_all_avisos_online = []		
+		all_avisos_online = self.con_mongo.ads_histograms_online.find()
+
+		#iterate in all avisos that have some photo with the same histogram
+		for aviso_online in all_avisos_online:
+
+			#getting all photos of the aviso that is being compared
+			id_aviso_online = aviso_online.get("id_aviso")
+			array_all_avisos_online.append(int(id_aviso_online))
+
+		return array_all_avisos_online
+
+	def save_id_aviso_not_histogram_table(aviso_json):
+
+		self.con_mongo.ads_similar.insert(aviso_json)
+
 
 	# this method is responsible for selecting each photo of all avisos from ads_histograms collection
 	# and find if it has any other equal histogram in that collection. The result will be a collection that
