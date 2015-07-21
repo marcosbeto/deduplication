@@ -46,7 +46,7 @@ class Image_Processor(object):
 
 
 
-	def create_images_histogram_from_onlie_ads(self):	
+	def create_images_histogram_from_online_ads(self):	
 		models = Models()
 
 		number_of_files = 0

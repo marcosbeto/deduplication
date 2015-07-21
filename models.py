@@ -73,7 +73,9 @@ class Models(object):
 		number_of_avisos = 0
 		
 		#getting all avisos from histogram table in mongo 
-		all_avisos = self.con_mongo.ads_histograms.find()
+		print "Retrieving all online avisos. Please, wait..."
+		all_avisos = self.con_mongo.ads_histograms_online.find()
+		print "[OK]"
 
 		for aviso in all_avisos:
 			
