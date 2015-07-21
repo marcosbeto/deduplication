@@ -14,6 +14,8 @@ class Image_Processor(object):
 
 	def outside_images(self):
 
+		models = Models()
+
 		number_of_files = 0
 
 		array_avisos_online = models.get_all_avisos_online()
