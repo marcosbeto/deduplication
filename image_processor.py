@@ -33,9 +33,10 @@ class Image_Processor(object):
 
 				if aviso_online_id == aviso_online_with_hist_id:
 					is_on_hist_table = True
+					break
 
 			if not is_on_hist_table:
-				aviso_json = {"id_aviso":aviso_id}
+				aviso_json = {"id_aviso":aviso_online_id}
 				models.save_id_aviso_not_histogram_table(aviso_json)
 
 			if number_of_files%100==0:
