@@ -47,7 +47,7 @@ class Models(object):
 	def get_all_avisos_with_histogram(self):
 		
 		array_all_avisos_online = []		
-		all_avisos_online = self.con_mongo.ads_histograms_online.find({},{"id_aviso":1, "photos":0})
+		all_avisos_online = self.con_mongo.ads_histograms_online.find({},{"photos":0})
 
 		#iterate in all avisos that have some photo with the same histogram
 		for aviso_online in all_avisos_online:
