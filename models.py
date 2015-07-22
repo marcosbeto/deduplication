@@ -187,7 +187,11 @@ class Models(object):
 
 			#saves in mongo the aviso json if there is any photo that has others equal photos 
 			if aviso_has_similar_photos:
-				self.con_mongo.ads_similar.insert(aviso_json)
+				try:
+					self.con_mongo.ads_similar.insert(aviso_json)
+				except:
+					print aviso_json
+					pass
 
 		print "[OK] Analized " + str(number_of_avisos) + " avisos and 'ads_similar' collection created."
 	
