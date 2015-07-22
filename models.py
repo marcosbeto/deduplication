@@ -95,6 +95,11 @@ class Models(object):
 		self.con_mongo.ads_similar.insert(aviso_json)
 
 
+	def comptest(self, s):
+		print 'original length:', len(s)
+		print 'zlib compressed length:', len(zlib.compress(s))
+		print 'bz2 compressed length:', len(bz2.compress(s))
+
 	# this method is responsible for selecting each photo of all avisos from ads_histograms collection
 	# and find if it has any other equal histogram in that collection. The result will be a collection that
 	# has all the ads that has at least one duplicated photo 
@@ -140,6 +145,7 @@ class Models(object):
 				formated_id_aviso = format(int(id_aviso), "010")
 
 				#improve this query: 1. remove $ne 2. Create Index for histogram field
+				self.comptest(photo.get("histogram"))
 				equals_avisos = self.con_mongo.ads_histograms_online_array.find({"photos":photo.get("histogram")})
 				print "[OK]"
 				#iterate in all avisos that have some photo with the same histogram
