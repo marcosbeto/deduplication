@@ -69,7 +69,7 @@ class Models(object):
 			#getting all photos of the aviso that is being compared
 			id_aviso_online = aviso_online.get("id_aviso")
 			photos = aviso_online.get("photos")
-			aviso_json = {"id_aviso":id_aviso_online,"photos:"[]}
+			aviso_json = {"id_aviso":id_aviso_online,"photos":[]}
 
 			for photo in photos:
 				histogram = photo.get("histogram")
