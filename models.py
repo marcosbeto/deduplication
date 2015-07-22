@@ -113,8 +113,8 @@ class Models(object):
 		for aviso in all_avisos:
 
 			now = time.time()
-			if number_of_avisos%100==0:
-				print str(number_of_avisos) + " - " + str(now-start)
+			# if number_of_avisos%100==0:
+			print str(number_of_avisos)
 			
 			number_of_avisos += 1
 			aviso_has_similar_photos = False
