@@ -153,7 +153,7 @@ class Models(object):
 
 				#improve this query: 1. remove $ne 2. Create Index for histogram field
 				print '[0]'
-				self.comptest(photo.get("histogram"))
+				# self.comptest(photo.get("histogram"))
 				print '[1]'
 				equals_avisos = self.con_mongo.ads_histograms_online_compressed.find({"photos":photo.get("histogram")}).sort({"photos":1})
 				print "[OK]"
