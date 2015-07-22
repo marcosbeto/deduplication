@@ -141,8 +141,8 @@ class Models(object):
 			#iterating in all photos of the ad
 			for photo in photos:
 
-				print 'photo\n\n'
-				print photo
+				# print 'photo\n\n'
+				# print photo
 
 				is_photo_similar = False                
 				
@@ -165,11 +165,13 @@ class Models(object):
 					#iterating in all photos to verify which one has the same histogram
 					for photo_compare in photos_compare:
 
-						print 'photo_compare\n\n'
-						print photo_compare
+						# print 'photo_compare\n\n'
+						# print photo_compare
 						
 						#verifying if the photo has the same histogram, excluding photos of the same aviso
 						if photo==photo_compare:
+
+							print 'igual'
 							#json that saves the data of the similar photo that will be saved in similar_photos[] of main_photo_json
 							similar_photo_json = {"similar_id_aviso":other_aviso.get("id_aviso"), "similar_photo":photo_compare.get("photo_path")}
 							main_photo_json["similar_photos"].append(similar_photo_json)
