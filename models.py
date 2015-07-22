@@ -74,7 +74,7 @@ class Models(object):
 			aviso_json = {"id_aviso":id_aviso_online,"photos":[]}
 
 			if number_of_avisos%10==0:
-				print str(number_of_avisos) + " - " + str(now-start)
+				print str(number_of_avisos)
 			
 			number_of_avisos += 1
 
