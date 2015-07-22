@@ -108,6 +108,8 @@ class Models(object):
 				#iterate in all avisos that have some photo with the same histogram
 				for other_aviso in equals_avisos:
 
+					print "aqui"
+
 					#getting all photos of the aviso that is being compared
 					photos_compare = other_aviso.get("photos")
 
