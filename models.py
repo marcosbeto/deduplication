@@ -58,6 +58,27 @@ class Models(object):
 
 		return array_all_avisos_online
 
+	def get_all_avisos_histogram_online(self):
+
+		array_all_avisos_online = []		
+		all_avisos_online = self.con_mongo.ads_histograms_online.find()
+
+		#iterate in all avisos that have some photo with the same histogram
+		for aviso_online in all_avisos_online:
+
+			#getting all photos of the aviso that is being compared
+			id_aviso_online = aviso_online.get("id_aviso")
+			photos = aviso_online.get("photos")
+			aviso_json = {"id_aviso":id_aviso_online,"photos:"[]}
+
+			for photo in photos:
+				histogram = photo.get("histogram")
+				aviso_json["photos"].append(histogram)
+			
+			array_all_avisos_online.append(aviso_json)
+
+		return array_all_avisos_online
+
 	def save_id_aviso_not_histogram_table(self, aviso_json):
 
 		self.con_mongo.ads_similar.insert(aviso_json)
@@ -75,6 +96,7 @@ class Models(object):
 		#getting all avisos from histogram table in mongo 
 		print "Retrieving all online avisos. Please, wait..."
 		all_avisos = self.con_mongo.ads_histograms_online.find()
+		all_avisos_to_compare_array = self.get_all_avisos_histogram_online()
 		print "[Ok]"
 
 		for aviso in all_avisos:
@@ -108,7 +130,7 @@ class Models(object):
 				equals_avisos = self.con_mongo.ads_histograms.find({"photos.histogram":photo.get("histogram"),"id_aviso":{"$ne":formated_id_aviso}}).count()
 				print "[OK]" + str(equals_avisos)
 				#iterate in all avisos that have some photo with the same histogram
-				
+
 				# for other_aviso in equals_avisos:
 
 				# 	print "aqui"
