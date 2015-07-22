@@ -147,7 +147,7 @@ class Models(object):
 				is_photo_similar = False                
 				
 				#json that will save the data of the main photo that is being compared
-				main_photo_json = {"main_photo": photo, "similar_photos":[]}
+				main_photo_json = {"similar_photos":[]}
 
 				#finding photos with the same histogram
 				formated_id_aviso = format(int(id_aviso), "010")
