@@ -96,6 +96,7 @@ class Models(object):
 			#iterating in all photos of the ad
 			for photo in photos:
 
+				print "aqui0"
 				is_photo_similar = False                
 				
 				#json that will save the data of the main photo that is being compared
