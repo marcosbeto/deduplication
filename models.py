@@ -118,7 +118,7 @@ class Models(object):
 		
 		#getting all avisos from histogram table in mongo 
 		print "Retrieving all online avisos. Please, wait..."
-		all_avisos = self.con_mongo.ads_histograms_online.find()
+		all_avisos = self.con_mongo.ads_histograms_online_compressed.find()
 		# all_avisos_to_compare_array = self.get_all_avisos_histogram_online()
 		print "[Ok]"
 
@@ -141,17 +141,20 @@ class Models(object):
 			#iterating in all photos of the ad
 			for photo in photos:
 
+				print 'photo\n\n'
+				print photo
+
 				is_photo_similar = False                
 				
 				#json that will save the data of the main photo that is being compared
-				main_photo_json = {"main_photo": photo.get("photo_path"), "similar_photos":[]}
+				main_photo_json = {"main_photo": photo, "similar_photos":[]}
 
 				#finding photos with the same histogram
 				formated_id_aviso = format(int(id_aviso), "010")
 
 				#improve this query: 1. remove $ne 2. Create Index for histogram field
 				# self.comptest(photo.get("histogram"))
-				equals_avisos = self.con_mongo.ads_histograms_online_compressed.find({"photos":photo.get("histogram"),"id_aviso":{"$ne":formated_id_aviso}}).sort([("photos", 1)])
+				equals_avisos = self.con_mongo.ads_histograms_online_compressed.find({"photos":photo}).sort([("photos", 1)])
 				#iterate in all avisos that have some photo with the same histogram
 
 				for other_aviso in equals_avisos:
@@ -161,9 +164,12 @@ class Models(object):
 
 					#iterating in all photos to verify which one has the same histogram
 					for photo_compare in photos_compare:
+
+						print 'photo_compare\n\n'
+						print photo_compare
 						
 						#verifying if the photo has the same histogram, excluding photos of the same aviso
-						if photo.get("histogram")==photo_compare.get("histogram"):
+						if photo==photo_compare:
 							#json that saves the data of the similar photo that will be saved in similar_photos[] of main_photo_json
 							similar_photo_json = {"similar_id_aviso":other_aviso.get("id_aviso"), "similar_photo":photo_compare.get("photo_path")}
 							main_photo_json["similar_photos"].append(similar_photo_json)
