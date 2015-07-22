@@ -140,7 +140,7 @@ class Models(object):
 				formated_id_aviso = format(int(id_aviso), "010")
 
 				#improve this query: 1. remove $ne 2. Create Index for histogram field
-				equals_avisos = self.con_mongo.ads_histograms.find({"photos.histogram":photo.get("histogram")})
+				equals_avisos = self.con_mongo.ads_histograms_online_array.find({"photos":photo.get("histogram")})
 				print "[OK]"
 				#iterate in all avisos that have some photo with the same histogram
 
