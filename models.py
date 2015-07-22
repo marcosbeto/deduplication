@@ -119,7 +119,7 @@ class Models(object):
 		#getting all avisos from histogram table in mongo 
 		print "Retrieving all online avisos. Please, wait..."
 		all_avisos = self.con_mongo.ads_histograms_online.find()
-		all_avisos_to_compare_array = self.get_all_avisos_histogram_online()
+		# all_avisos_to_compare_array = self.get_all_avisos_histogram_online()
 		print "[Ok]"
 
 		for aviso in all_avisos:
@@ -155,7 +155,7 @@ class Models(object):
 				print '[0]'
 				self.comptest(photo.get("histogram"))
 				print '[1]'
-				equals_avisos = self.con_mongo.ads_histograms_online_array.find({"photos":photo.get("histogram")})
+				equals_avisos = self.con_mongo.ads_histograms_online_compressed.find({"photos":photo.get("histogram")}).sort({"photos":1})
 				print "[OK]"
 				#iterate in all avisos that have some photo with the same histogram
 
