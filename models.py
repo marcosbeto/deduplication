@@ -73,10 +73,7 @@ class Models(object):
 			photos = aviso_online.get("photos")
 			aviso_json = {"id_aviso":id_aviso_online,"photos":[]}
 
-			if number_of_avisos%1000==0:
-				print str(number_of_avisos)
 			
-			number_of_avisos += 1
 
 			for photo in photos:
 				histogram = photo.get("histogram")
@@ -84,6 +81,11 @@ class Models(object):
 			
 			# array_all_avisos_online.append(aviso_json)
 
+			if number_of_avisos%1000==0:
+				print str(number_of_avisos)
+			
+			number_of_avisos += 1
+			
 			self.con_mongo.ads_histograms_online_array.insert(aviso_json)
 
 		return array_all_avisos_online
