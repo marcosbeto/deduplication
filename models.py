@@ -125,8 +125,8 @@ class Models(object):
 		for aviso in all_avisos:
 
 			now = time.time()
-			# if number_of_avisos%100==0:
-			print str(number_of_avisos)
+			if number_of_avisos%100==0:
+				print str(number_of_avisos)
 			
 			number_of_avisos += 1
 			aviso_has_similar_photos = False
@@ -141,27 +141,20 @@ class Models(object):
 			#iterating in all photos of the ad
 			for photo in photos:
 
-				print "aqui0"
 				is_photo_similar = False                
 				
 				#json that will save the data of the main photo that is being compared
 				main_photo_json = {"main_photo": photo.get("photo_path"), "similar_photos":[]}
 
 				#finding photos with the same histogram
-				print "Searching..."
 				formated_id_aviso = format(int(id_aviso), "010")
 
 				#improve this query: 1. remove $ne 2. Create Index for histogram field
-				print '[0]'
 				# self.comptest(photo.get("histogram"))
-				print '[1]'
-				equals_avisos = self.con_mongo.ads_histograms_online_compressed.find({"photos":photo.get("histogram")}).sort([("photos", 1)])
-				print "[OK]"
+				equals_avisos = self.con_mongo.ads_histograms_online_compressed.find({"photos":photo.get("histogram"),"id_aviso":{"$ne":formated_id_aviso}}).sort([("photos", 1)])
 				#iterate in all avisos that have some photo with the same histogram
 
 				for other_aviso in equals_avisos:
-
-					print "aqui"
 
 					#getting all photos of the aviso that is being compared
 					photos_compare = other_aviso.get("photos")
@@ -177,11 +170,9 @@ class Models(object):
 							aviso_has_similar_photos = True
 							is_photo_similar = True
 
-					print "aqui2"
 				
 				#saves main_photo_json if exists a photo inside the other aviso that is equal to the aviso main photo
 
-				print "prox"
 				if is_photo_similar:
 					aviso_json["photos"].append(main_photo_json);
 			
