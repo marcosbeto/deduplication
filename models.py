@@ -60,6 +60,8 @@ class Models(object):
 
 	def get_all_avisos_histogram_online(self):
 
+		number_of_avisos = 0
+
 		array_all_avisos_online = []		
 		all_avisos_online = self.con_mongo.ads_histograms_online.find()
 
@@ -70,6 +72,11 @@ class Models(object):
 			id_aviso_online = aviso_online.get("id_aviso")
 			photos = aviso_online.get("photos")
 			aviso_json = {"id_aviso":id_aviso_online,"photos":[]}
+
+			if number_of_avisos%10==0:
+				print str(number_of_avisos) + " - " + str(now-start)
+			
+			number_of_avisos += 1
 
 			for photo in photos:
 				histogram = photo.get("histogram")
