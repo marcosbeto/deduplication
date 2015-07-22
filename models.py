@@ -6,7 +6,8 @@ from json import loads
 import simplejson
 import utils
 import time
-
+import zlib
+import bz2
 
 from bson.objectid import ObjectId
 from bson import json_util
