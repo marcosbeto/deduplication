@@ -79,6 +79,7 @@ class Models(object):
 			for photo in photos:
 				histogram = photo.get("histogram")
 				histrogram_compressed = zlib.compress(histogram)
+				histrogram_compressed = unicode(histrogram_compressed, "utf-8")
 				aviso_json["photos"].append(histrogram_compressed)
 			
 			# array_all_avisos_online.append(aviso_json)
