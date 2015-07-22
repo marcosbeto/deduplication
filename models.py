@@ -80,7 +80,7 @@ class Models(object):
 
 			for photo in photos:
 				histogram = photo.get("histogram")
-				aviso_json["photos"].append(histogram)
+				# aviso_json["photos"].append(histogram)
 			
 			array_all_avisos_online.append(aviso_json)
 
