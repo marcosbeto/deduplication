@@ -141,7 +141,7 @@ class Models(object):
 
 				#improve this query: 1. remove $ne 2. Create Index for histogram field
 				equals_avisos = self.con_mongo.ads_histograms.find({"photos.histogram":photo.get("histogram")})
-				print "[OK]" + str(equals_avisos)
+				print "[OK]"
 				#iterate in all avisos that have some photo with the same histogram
 
 				for other_aviso in equals_avisos:
@@ -165,6 +165,7 @@ class Models(object):
 					print "aqui2"
 				
 				#saves main_photo_json if exists a photo inside the other aviso that is equal to the aviso main photo
+				print "prox"
 				if is_photo_similar:
 					aviso_json["photos"].append(main_photo_json);
 			
