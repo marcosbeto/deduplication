@@ -100,6 +100,8 @@ class Models(object):
 		print 'original length:', len(s)
 		print 'zlib compressed length:', len(zlib.compress(s))
 		print 'bz2 compressed length:', len(bz2.compress(s))
+		print 'zlib decompressed length:', len(zlib.decompress(s))
+		print 'bz2 decompressed length:', len(bz2.decompress(s))
 
 	# this method is responsible for selecting each photo of all avisos from ads_histograms collection
 	# and find if it has any other equal histogram in that collection. The result will be a collection that
