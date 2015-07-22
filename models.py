@@ -125,7 +125,7 @@ class Models(object):
 		for aviso in all_avisos:
 
 			now = time.time()
-			if number_of_avisos%100==0:
+			if number_of_avisos%1000==0:
 				print str(number_of_avisos)
 			
 			number_of_avisos += 1
@@ -135,8 +135,8 @@ class Models(object):
 			id_aviso = aviso.get("id_aviso")
 			photos = aviso.get("photos")  
 
-			number_of_ads = len(photos)          
-			aviso_json = {"id_aviso": id_aviso, "photos":[], "number_of_ads":number_of_ads}
+			number_of_photos = len(photos)          
+			aviso_json = {"id": id_aviso, "ph":[], "np":number_of_photos}
 
 			#iterating in all photos of the ad
 			for photo in photos:
@@ -147,7 +147,7 @@ class Models(object):
 				is_photo_similar = False                
 				
 				#json that will save the data of the main photo that is being compared
-				main_photo_json = {"similar_photos":[]}
+				main_photo_json = {"sp":[]}
 
 				#finding photos with the same histogram
 				formated_id_aviso = format(int(id_aviso), "010")
@@ -171,8 +171,8 @@ class Models(object):
 						#verifying if the photo has the same histogram, excluding photos of the same aviso
 						if photo==photo_compare:
 							#json that saves the data of the similar photo that will be saved in similar_photos[] of main_photo_json
-							similar_photo_json = {"similar_id_aviso":other_aviso.get("id_aviso")}
-							main_photo_json["similar_photos"].append(similar_photo_json)
+							similar_photo_json = {"s":other_aviso.get("id_aviso")}
+							main_photo_json["sp"].append(similar_photo_json)
 							aviso_has_similar_photos = True
 							is_photo_similar = True
 
@@ -180,10 +180,7 @@ class Models(object):
 				#saves main_photo_json if exists a photo inside the other aviso that is equal to the aviso main photo
 
 				if is_photo_similar:
-					aviso_json["photos"].append(main_photo_json);
-			
-			
-			
+					aviso_json["ph"].append(main_photo_json);		
 
 			#saves in mongo the aviso json if there is any photo that has others equal photos 
 			if aviso_has_similar_photos:
