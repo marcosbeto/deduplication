@@ -104,7 +104,7 @@ class Models(object):
 				#finding photos with the same histogram
 				print "Searching..."
 				equals_avisos = self.con_mongo.ads_histograms.find({"photos.histogram":photo.get("histogram"),"id_aviso":{"$ne":id_aviso}})
-				print "[OK]" + str(len(equals_avisos))
+				print "[OK]" + str(len(photos))
 				#iterate in all avisos that have some photo with the same histogram
 				for other_aviso in equals_avisos:
 
@@ -124,7 +124,7 @@ class Models(object):
 							aviso_has_similar_photos = True
 							is_photo_similar = True
 
-					print "aqui"
+					print "aqui2"
 				
 				#saves main_photo_json if exists a photo inside the other aviso that is equal to the aviso main photo
 				if is_photo_similar:
