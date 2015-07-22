@@ -154,7 +154,7 @@ class Models(object):
 
 				#improve this query: 1. remove $ne 2. Create Index for histogram field
 				# self.comptest(photo.get("histogram"))
-				equals_avisos = self.con_mongo.ads_histograms_online_compressed.find({"photos":photo}).sort([("photos", 1)])
+				equals_avisos = self.con_mongo.ads_histograms_online_compressed.find({"photos":photo,"id_aviso":{"$ne":formated_id_aviso}}).sort([("photos", 1)])
 				#iterate in all avisos that have some photo with the same histogram
 
 				for other_aviso in equals_avisos:
@@ -170,10 +170,8 @@ class Models(object):
 						
 						#verifying if the photo has the same histogram, excluding photos of the same aviso
 						if photo==photo_compare:
-
-							print 'igual'
 							#json that saves the data of the similar photo that will be saved in similar_photos[] of main_photo_json
-							similar_photo_json = {"similar_id_aviso":other_aviso.get("id_aviso"), "similar_photo":photo_compare.get("photo_path")}
+							similar_photo_json = {"similar_id_aviso":other_aviso.get("id_aviso")}
 							main_photo_json["similar_photos"].append(similar_photo_json)
 							aviso_has_similar_photos = True
 							is_photo_similar = True
