@@ -155,7 +155,7 @@ class Models(object):
 				print '[0]'
 				# self.comptest(photo.get("histogram"))
 				print '[1]'
-				equals_avisos = self.con_mongo.ads_histograms_online_compressed.find({"photos":photo.get("histogram")}).sort({"photos":1})
+				equals_avisos = self.con_mongo.ads_histograms_online_compressed.find({"photos":photo.get("histogram")}).sort([("photos", 1)])
 				print "[OK]"
 				#iterate in all avisos that have some photo with the same histogram
 
