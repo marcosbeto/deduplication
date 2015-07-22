@@ -105,28 +105,29 @@ class Models(object):
 				#finding photos with the same histogram
 				print "Searching..."
 				formated_id_aviso = format(int(id_aviso), "010")
-				equals_avisos = self.con_mongo.ads_histograms.find({"photos.histogram":photo.get("histogram"),"id_aviso":{"$ne":formated_id_aviso}})
-				print "[OK]" + str(formated_id_aviso.count())
+				equals_avisos = self.con_mongo.ads_histograms.find({"photos.histogram":photo.get("histogram"),"id_aviso":{"$ne":formated_id_aviso}}).count()
+				print "[OK]" + str(equals_avisos)
 				#iterate in all avisos that have some photo with the same histogram
-				for other_aviso in equals_avisos:
+				
+				# for other_aviso in equals_avisos:
 
-					print "aqui"
+				# 	print "aqui"
 
-					#getting all photos of the aviso that is being compared
-					photos_compare = other_aviso.get("photos")
+				# 	#getting all photos of the aviso that is being compared
+				# 	photos_compare = other_aviso.get("photos")
 
-					#iterating in all photos to verify which one has the same histogram
-					for photo_compare in photos_compare:
+				# 	#iterating in all photos to verify which one has the same histogram
+				# 	for photo_compare in photos_compare:
 						
-						#verifying if the photo has the same histogram, excluding photos of the same aviso
-						if photo.get("histogram")==photo_compare.get("histogram"):
-							#json that saves the data of the similar photo that will be saved in similar_photos[] of main_photo_json
-							similar_photo_json = {"similar_id_aviso":other_aviso.get("id_aviso"), "similar_photo":photo_compare.get("photo_path")}
-							main_photo_json["similar_photos"].append(similar_photo_json)
-							aviso_has_similar_photos = True
-							is_photo_similar = True
+				# 		#verifying if the photo has the same histogram, excluding photos of the same aviso
+				# 		if photo.get("histogram")==photo_compare.get("histogram"):
+				# 			#json that saves the data of the similar photo that will be saved in similar_photos[] of main_photo_json
+				# 			similar_photo_json = {"similar_id_aviso":other_aviso.get("id_aviso"), "similar_photo":photo_compare.get("photo_path")}
+				# 			main_photo_json["similar_photos"].append(similar_photo_json)
+				# 			aviso_has_similar_photos = True
+				# 			is_photo_similar = True
 
-					print "aqui2"
+				# 	print "aqui2"
 				
 				#saves main_photo_json if exists a photo inside the other aviso that is equal to the aviso main photo
 				if is_photo_similar:
