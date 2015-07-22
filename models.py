@@ -165,6 +165,7 @@ class Models(object):
 					print "aqui2"
 				
 				#saves main_photo_json if exists a photo inside the other aviso that is equal to the aviso main photo
+
 				print "prox"
 				if is_photo_similar:
 					aviso_json["photos"].append(main_photo_json);
