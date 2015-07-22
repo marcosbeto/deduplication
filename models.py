@@ -78,7 +78,8 @@ class Models(object):
 
 			for photo in photos:
 				histogram = photo.get("histogram")
-				aviso_json["photos"].append(histogram)
+				histrogram_compressed = zlib.compress(histogram)
+				aviso_json["photos"].append(histrogram_compressed)
 			
 			# array_all_avisos_online.append(aviso_json)
 
@@ -87,7 +88,7 @@ class Models(object):
 			
 			number_of_avisos += 1
 
-			self.con_mongo.ads_histograms_online_array.insert(aviso_json)
+			self.con_mongo.ads_histograms_online_compressed.insert(aviso_json)
 
 		return array_all_avisos_online
 
@@ -115,7 +116,7 @@ class Models(object):
 		#getting all avisos from histogram table in mongo 
 		print "Retrieving all online avisos. Please, wait..."
 		all_avisos = self.con_mongo.ads_histograms_online.find()
-		# all_avisos_to_compare_array = self.get_all_avisos_histogram_online()
+		all_avisos_to_compare_array = self.get_all_avisos_histogram_online()
 		print "[Ok]"
 
 		for aviso in all_avisos:
