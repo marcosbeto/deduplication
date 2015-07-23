@@ -264,31 +264,29 @@ class Models(object):
 						#did not find any similar id_aviso or the array is empty
 						if not similar_aviso_already_on_array:                            
 
-							similar_aviso_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso}).sort([("id", 1)])
+							similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso}).sort([("id", 1)])
+							
 							try:
-								if number_of_similar_aviso_analyzed>3000:
-								 	print similar_id_aviso
-								similar_aviso_support = loads(dumps(similar_aviso_support))
-								if number_of_similar_aviso_analyzed>3000:
-								 	print 'loaded_end'
-
-								number_of_ads_similar = similar_aviso.get("np")
-								number_of_ads_similar = similar_aviso_support[0].get("np")
-
-								# print "number_of_ads_similar: " + str(number_of_ads_similar) + " | number_of_ads_similar: " + str(number_of_ads_similar)
-
-								percentage_of_similar = utils.percentage(1,number_of_ads_similar)
-
-								similar_aviso_json = {"id":similar_id_aviso,
-								"npe":1, #"num_photos_equal":1,
-								"npt": number_of_ads_similar, #"num_photos_total": number_of_ads_similar,
-								"npp":number_of_ads_similar, #"num_photos_parent":number_of_ads_similar,
-								"pssp": int(percentage_of_similar), #"percentage_similar_self_parent": int(percentage_of_similar),
-
-								}
 								
-								#adding the similar aviso with the percentage of the similarity between the photos of both avisos
-								unique_similar_avisos.append(similar_aviso_json)
+								for similar_aviso_support in similar_avisos_support:
+
+									number_of_ads_similar = similar_aviso_support.get("np")
+
+									# print "number_of_ads_similar: " + str(number_of_ads_similar) + " | number_of_ads_similar: " + str(number_of_ads_similar)
+
+									percentage_of_similar = utils.percentage(1,number_of_ads_similar)
+
+									similar_aviso_json = {"id":similar_id_aviso,
+									"npe":1, #"num_photos_equal":1,
+									"npt": number_of_ads_similar, #"num_photos_total": number_of_ads_similar,
+									"npp":number_of_ads_similar, #"num_photos_parent":number_of_ads_similar,
+									"pssp": int(percentage_of_similar), #"percentage_similar_self_parent": int(percentage_of_similar),
+
+									}
+									
+									#adding the similar aviso with the percentage of the similarity between the photos of both avisos
+									unique_similar_avisos.append(similar_aviso_json)
+								
 							except:
 								print "passou"
 								pass
