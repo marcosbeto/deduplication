@@ -237,6 +237,11 @@ class Models(object):
 					
 					#getting the id of the aviso that has a image equal to the one being analized
 					similar_id_aviso = similar_photo.get("s")
+					number_of_photos_similar_aviso = similar_photo.get("np")
+					
+					if number_of_photos_similar_aviso > 3:
+						number_of_photos_similar_aviso_lt = (90*number_of_photos_similar_aviso)/100
+						number_of_photos_similar_aviso_gt = (100*number_of_photos_similar_aviso)/100
 
 					if not invalid_images:
 
@@ -264,13 +269,19 @@ class Models(object):
 						#did not find any similar id_aviso or the array is empty
 						if not similar_aviso_already_on_array:                            
 
-							similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso},no_cursor_timeout=True).sort([("id", 1)]).batch_size(100)
+							similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np" : { $gt :  number_of_photos_similar_aviso_lt, $lt : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
 							
 							try:
 								
 								for similar_aviso_support in similar_avisos_support:
 
 									if number_of_similar_aviso_analyzed>3000 and number_of_similar_aviso_analyzed<4000:
+										
+										if number_of_similar_aviso_analyzed>3140:
+											print 'similar_aviso.get("id"): ' + str(similar_aviso.get("id"))
+											print 'similar_aviso_support.get("id"): ' + str(similar_aviso_support.get("id"))
+											print 'similar_aviso_support.get("np"): ' + str(similar_aviso_support.get("np"))
+
 										if number_of_similar_aviso_analyzed%10==0:
 											now = time.time()
 											print str(number_of_similar_aviso_analyzed) + " - " + str(now-start)
