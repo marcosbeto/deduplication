@@ -265,7 +265,11 @@ class Models(object):
 						if not similar_aviso_already_on_array:                            
 
 							similar_aviso_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso}).sort([("id", 1)])
+							if number_of_similar_aviso_analyzed>3000:
+								print similar_id_aviso
 							similar_aviso_support = loads(dumps(similar_aviso_support))
+							if number_of_similar_aviso_analyzed>3000:
+								print 'loaded_end'
 
 							number_of_ads_similar = similar_aviso.get("np")
 							number_of_ads_similar = similar_aviso_support[0].get("np")
