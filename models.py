@@ -237,7 +237,7 @@ class Models(object):
 					
 					#getting the id of the aviso that has a image equal to the one being analized
 					similar_id_aviso = similar_photo.get("s")
-					number_of_photos_similar_aviso = similar_photo.get("np")
+					number_of_photos_similar_aviso = similar_aviso.get("np")
 
 					number_of_photos_similar_aviso_lt = 0
 					number_of_photos_similar_aviso_gt = 0
