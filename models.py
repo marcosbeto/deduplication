@@ -264,11 +264,16 @@ class Models(object):
 						#did not find any similar id_aviso or the array is empty
 						if not similar_aviso_already_on_array:                            
 
-							similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso}).sort([("id", 1)])
+							similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso}).sort([("id", 1)]).batch_size(100)
 							
 							try:
 								
 								for similar_aviso_support in similar_avisos_support:
+
+									if number_of_similar_aviso_analyzed>3000 and number_of_similar_aviso_analyzed<4000:
+										if number_of_similar_aviso_analyzed%10==0:
+											now = time.time()
+											print str(number_of_similar_aviso_analyzed) + " - " + str(now-start)
 
 									number_of_ads_similar = similar_aviso_support.get("np")
 
