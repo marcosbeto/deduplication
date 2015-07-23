@@ -235,6 +235,10 @@ class Image_Processor(object):
 		return hist
 
 	
+	def save_compressed_histogram_online(self):
+		models = Models()
+		models.save_compressed_histogram_online()
+		
 	def create_similar_photos_collection(self):
 		models = Models()
 		models.create_similar_photos_collection()

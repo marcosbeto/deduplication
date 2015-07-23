@@ -14,9 +14,9 @@ class IW_Main(object):
 
         # Image_Processor().create_images_histogram_from_images_backup_iw() <---- USED WITH ALL PHOTOS FROM BACKUP
         # Image_Processor().create_images_histogram_collection() # <---- USED WITH API
-        
+        Image_Processor().save_compressed_histogram_online()
         # Image_Processor().create_similar_photos_collection()
-        Image_Processor().create_equals_avisos_collection()
+        # Image_Processor().create_equals_avisos_collection()
         # Image_Processor().create_raw_equal_avisos()
         # Image_Processor().create_duplicateds_group_collection()
 

@@ -61,7 +61,7 @@ class Models(object):
 
 		return array_all_avisos_online
 
-	def get_all_avisos_histogram_online(self):
+	def save_compressed_histogram_online(self):
 
 		number_of_avisos = 0
 
@@ -76,12 +76,13 @@ class Models(object):
 			photos = aviso_online.get("photos")
 			aviso_json = {"id_aviso":id_aviso_online,"photos":[]}
 
-			
+			set_photos = set(photos)
 
-			for photo in photos:
+			for photo in set_photos:
 				histogram = photo.get("histogram")
 				histrogram_compressed = zlib.compress(histogram)
 				histrogram_compressed = histrogram_compressed.decode('utf-8', 'ignore')
+				# if not histrogram_compressed in aviso_json["photos"]:
 				aviso_json["photos"].append(histrogram_compressed)
 			
 			# array_all_avisos_online.append(aviso_json)
@@ -119,7 +120,6 @@ class Models(object):
 		#getting all avisos from histogram table in mongo 
 		print "Retrieving all online avisos. Please, wait..."
 		all_avisos = self.con_mongo.ads_histograms_online_compressed.find()
-		# all_avisos_to_compare_array = self.get_all_avisos_histogram_online()
 		print "[Ok]"
 
 		for aviso in all_avisos:
