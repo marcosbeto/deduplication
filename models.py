@@ -206,7 +206,7 @@ class Models(object):
 		number_of_similar_aviso_analyzed = 0
 
 		print "Searching in ads_similar collection..."
-		all_similar_avisos = self.con_mongo.ads_similar.find()
+		all_similar_avisos = self.con_mongo.ads_similar_new.find()
 		print "[Ok]"
 
 		#iterating in all avisos that has duplicated images
@@ -278,12 +278,12 @@ class Models(object):
 							try:
 
 								if number_of_photos_similar_aviso_lt == 0 or number_of_photos_similar_aviso_gt == 0:
-									similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
+									similar_avisos_support = self.con_mongo.ads_similar_new.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
 									# if printer:
 									# 	if self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso}).count()>0:
 									# 		print "Counting"
 								else:
-									similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
+									similar_avisos_support = self.con_mongo.ads_similar_new.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
 									# if printer:
 									# 	if self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}}).count()>0:
 									# 		print "Counting"
