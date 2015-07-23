@@ -90,7 +90,7 @@ class Models(object):
 			
 			number_of_avisos += 1
 
-			self.con_mongo.ads_histograms_online_compressed.insert(aviso_json)
+			self.con_mongo.ads_histograms_online_compressed_new.insert(aviso_json)
 
 		return array_all_avisos_online
 
