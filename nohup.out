@@ -1,0 +1,125 @@
+mongod --help for help and startup options
+Thu Jul 16 22:48:40 [initandlisten] MongoDB starting : pid=59664 port=27017 dbpath=/data/db/ 64-bit host=TestingSolr
+Thu Jul 16 22:48:40 [initandlisten] 
+Thu Jul 16 22:48:40 [initandlisten] ** WARNING: You are running on a NUMA machine.
+Thu Jul 16 22:48:40 [initandlisten] **          We suggest launching mongod like this to avoid performance problems:
+Thu Jul 16 22:48:40 [initandlisten] **              numactl --interleave=all mongod [other options]
+Thu Jul 16 22:48:40 [initandlisten] 
+Thu Jul 16 22:48:40 [initandlisten] db version v2.0.4, pdfile version 4.5
+Thu Jul 16 22:48:40 [initandlisten] git version: nogitversion
+Thu Jul 16 22:48:40 [initandlisten] build info: Linux lamiak 2.6.42-37-generic #58-Ubuntu SMP Thu Jan 24 15:28:10 UTC 2013 x86_64 BOOST_LIB_VERSION=1_46_1
+Thu Jul 16 22:48:40 [initandlisten] options: {}
+Thu Jul 16 22:48:40 [initandlisten] journal dir=/data/db/journal
+Thu Jul 16 22:48:40 [initandlisten] recover : no journal files present, no recovery needed
+Thu Jul 16 22:48:40 [websvr] admin web console waiting for connections on port 28017
+Thu Jul 16 22:48:40 [initandlisten] waiting for connections on port 27017
+Thu Jul 16 22:48:58 [initandlisten] connection accepted from 192.168.14.50:64776 #1
+Thu Jul 16 22:49:00 [initandlisten] connection accepted from 127.0.0.1:52394 #2
+Thu Jul 16 22:49:05 [initandlisten] connection accepted from 192.168.14.50:64796 #3
+Thu Jul 16 22:49:05 [conn2] end connection 127.0.0.1:52394
+Thu Jul 16 22:49:10 got kill or ctrl c or hup signal 2 (Interrupt), will terminate after current cmd ends
+Thu Jul 16 22:49:10 [interruptThread] now exiting
+Thu Jul 16 22:49:10 dbexit: 
+Thu Jul 16 22:49:10 [interruptThread] shutdown: going to close listening sockets...
+Thu Jul 16 22:49:10 [interruptThread] closing listening socket: 6
+Thu Jul 16 22:49:10 [interruptThread] closing listening socket: 7
+Thu Jul 16 22:49:10 [interruptThread] closing listening socket: 8
+Thu Jul 16 22:49:10 [interruptThread] removing socket file: /tmp/mongodb-27017.sock
+Thu Jul 16 22:49:10 [interruptThread] shutdown: going to flush diaglog...
+Thu Jul 16 22:49:10 [interruptThread] shutdown: going to close sockets...
+Thu Jul 16 22:49:10 [interruptThread] shutdown: waiting for fs preallocator...
+Thu Jul 16 22:49:10 [interruptThread] shutdown: lock for final commit...
+Thu Jul 16 22:49:10 [interruptThread] shutdown: final commit...
+Thu Jul 16 22:49:10 [interruptThread] shutdown: closing all files...
+Thu Jul 16 22:49:10 [interruptThread] closeAllFiles() finished
+Thu Jul 16 22:49:10 [interruptThread] journalCleanup...
+Thu Jul 16 22:49:10 [interruptThread] removeJournalFiles
+Thu Jul 16 22:49:10 [interruptThread] shutdown: removing fs lock...
+Thu Jul 16 22:49:10 dbexit: really exiting now
+mongod --help for help and startup options
+Thu Jul 16 22:57:07 [initandlisten] MongoDB starting : pid=60573 port=27017 dbpath=/data/db/ 64-bit host=TestingSolr
+Thu Jul 16 22:57:07 [initandlisten] db version v2.0.4, pdfile version 4.5
+Thu Jul 16 22:57:07 [initandlisten] git version: nogitversion
+Thu Jul 16 22:57:07 [initandlisten] build info: Linux lamiak 2.6.42-37-generic #58-Ubuntu SMP Thu Jan 24 15:28:10 UTC 2013 x86_64 BOOST_LIB_VERSION=1_46_1
+Thu Jul 16 22:57:07 [initandlisten] options: {}
+Thu Jul 16 22:57:07 [initandlisten] journal dir=/data/db/journal
+Thu Jul 16 22:57:07 [initandlisten] recover : no journal files present, no recovery needed
+Thu Jul 16 22:57:07 [websvr] admin web console waiting for connections on port 28017
+Thu Jul 16 22:57:07 [initandlisten] waiting for connections on port 27017
+Thu Jul 16 22:57:36 got kill or ctrl c or hup signal 2 (Interrupt), will terminate after current cmd ends
+Thu Jul 16 22:57:36 [interruptThread] now exiting
+Thu Jul 16 22:57:36 dbexit: 
+Thu Jul 16 22:57:36 [interruptThread] shutdown: going to close listening sockets...
+Thu Jul 16 22:57:36 [interruptThread] closing listening socket: 6
+Thu Jul 16 22:57:36 [interruptThread] closing listening socket: 7
+Thu Jul 16 22:57:36 [interruptThread] closing listening socket: 8
+Thu Jul 16 22:57:36 [interruptThread] removing socket file: /tmp/mongodb-27017.sock
+Thu Jul 16 22:57:36 [interruptThread] shutdown: going to flush diaglog...
+Thu Jul 16 22:57:36 [interruptThread] shutdown: going to close sockets...
+Thu Jul 16 22:57:36 [interruptThread] shutdown: waiting for fs preallocator...
+Thu Jul 16 22:57:36 [interruptThread] shutdown: lock for final commit...
+Thu Jul 16 22:57:36 [interruptThread] shutdown: final commit...
+Thu Jul 16 22:57:36 [interruptThread] shutdown: closing all files...
+Thu Jul 16 22:57:36 [interruptThread] closeAllFiles() finished
+Thu Jul 16 22:57:36 [interruptThread] journalCleanup...
+Thu Jul 16 22:57:36 [interruptThread] removeJournalFiles
+Thu Jul 16 22:57:36 [interruptThread] shutdown: removing fs lock...
+Thu Jul 16 22:57:36 dbexit: really exiting now
+mongod --help for help and startup options
+Thu Jul 16 22:57:38 [initandlisten] MongoDB starting : pid=60587 port=27017 dbpath=/data/db/ 64-bit host=TestingSolr
+Thu Jul 16 22:57:38 [initandlisten] db version v2.0.4, pdfile version 4.5
+Thu Jul 16 22:57:38 [initandlisten] git version: nogitversion
+Thu Jul 16 22:57:38 [initandlisten] build info: Linux lamiak 2.6.42-37-generic #58-Ubuntu SMP Thu Jan 24 15:28:10 UTC 2013 x86_64 BOOST_LIB_VERSION=1_46_1
+Thu Jul 16 22:57:38 [initandlisten] options: {}
+Thu Jul 16 22:57:38 [initandlisten] journal dir=/data/db/journal
+Thu Jul 16 22:57:38 [initandlisten] recover : no journal files present, no recovery needed
+Thu Jul 16 22:57:38 [websvr] admin web console waiting for connections on port 28017
+Thu Jul 16 22:57:38 [initandlisten] waiting for connections on port 27017
+Thu Jul 16 22:57:54 got kill or ctrl c or hup signal 2 (Interrupt), will terminate after current cmd ends
+Thu Jul 16 22:57:54 [interruptThread] now exiting
+Thu Jul 16 22:57:54 dbexit: 
+Thu Jul 16 22:57:54 [interruptThread] shutdown: going to close listening sockets...
+Thu Jul 16 22:57:54 [interruptThread] closing listening socket: 6
+Thu Jul 16 22:57:54 [interruptThread] closing listening socket: 7
+Thu Jul 16 22:57:54 [interruptThread] closing listening socket: 8
+Thu Jul 16 22:57:54 [interruptThread] removing socket file: /tmp/mongodb-27017.sock
+Thu Jul 16 22:57:54 [interruptThread] shutdown: going to flush diaglog...
+Thu Jul 16 22:57:54 [interruptThread] shutdown: going to close sockets...
+Thu Jul 16 22:57:54 [interruptThread] shutdown: waiting for fs preallocator...
+Thu Jul 16 22:57:54 [interruptThread] shutdown: lock for final commit...
+Thu Jul 16 22:57:54 [interruptThread] shutdown: final commit...
+Thu Jul 16 22:57:54 [interruptThread] shutdown: closing all files...
+Thu Jul 16 22:57:54 [interruptThread] closeAllFiles() finished
+Thu Jul 16 22:57:54 [interruptThread] journalCleanup...
+Thu Jul 16 22:57:54 [interruptThread] removeJournalFiles
+Thu Jul 16 22:57:54 [interruptThread] shutdown: removing fs lock...
+Thu Jul 16 22:57:54 dbexit: really exiting now
+mongod --help for help and startup options
+Thu Jul 16 22:58:10 [initandlisten] MongoDB starting : pid=60689 port=27017 dbpath=/data/db/ 64-bit host=TestingSolr
+Thu Jul 16 22:58:10 [initandlisten] db version v2.0.4, pdfile version 4.5
+Thu Jul 16 22:58:10 [initandlisten] git version: nogitversion
+Thu Jul 16 22:58:10 [initandlisten] build info: Linux lamiak 2.6.42-37-generic #58-Ubuntu SMP Thu Jan 24 15:28:10 UTC 2013 x86_64 BOOST_LIB_VERSION=1_46_1
+Thu Jul 16 22:58:10 [initandlisten] options: {}
+Thu Jul 16 22:58:10 [initandlisten] journal dir=/data/db/journal
+Thu Jul 16 22:58:10 [initandlisten] recover : no journal files present, no recovery needed
+Thu Jul 16 22:58:10 [websvr] admin web console waiting for connections on port 28017
+Thu Jul 16 22:58:10 [initandlisten] waiting for connections on port 27017
+Thu Jul 16 22:58:58 [initandlisten] connection accepted from 192.168.14.50:50331 #1
+Thu Jul 16 22:59:05 [initandlisten] connection accepted from 192.168.14.50:50351 #2
+Thu Jul 16 22:59:10 [clientcursormon] mem (MB) res:15 virt:756 mapped:0
+Thu Jul 16 22:59:58 [initandlisten] connection accepted from 192.168.14.50:50652 #3
+Thu Jul 16 23:00:06 [initandlisten] connection accepted from 192.168.14.50:50671 #4
+Thu Jul 16 23:00:10 [clientcursormon] mem (MB) res:15 virt:886 mapped:0
+Thu Jul 16 23:03:23 [initandlisten] connection accepted from 127.0.0.1:52396 #5
+Thu Jul 16 23:03:23 [initandlisten] connection accepted from 127.0.0.1:52397 #6
+Thu Jul 16 23:03:35 [conn6] build index deduplication.ads_histograms { _id: 1 }
+Thu Jul 16 23:03:35 [conn6] build index done 0 records 0 secs
+Thu Jul 16 23:04:10 [clientcursormon] mem (MB) res:26 virt:1976 mapped:464
+Thu Jul 16 23:05:10 [clientcursormon] mem (MB) res:30 virt:1976 mapped:464
+Thu Jul 16 23:07:10 [clientcursormon] mem (MB) res:40 virt:1976 mapped:464
+Thu Jul 16 23:08:10 [clientcursormon] mem (MB) res:47 virt:1976 mapped:464
+Thu Jul 16 23:10:10 [clientcursormon] mem (MB) res:57 virt:1976 mapped:464
+Thu Jul 16 23:10:56 [conn6] end connection 127.0.0.1:52397
+Thu Jul 16 23:10:56 [conn5] end connection 127.0.0.1:52396
+Thu Jul 16 23:11:09 [conn4] CMD: drop deduplication.ads_histograms
+Thu Jul 16 23:11:10 [clientcursormon] mem (MB) res:67 virt:1976 mapped:464
