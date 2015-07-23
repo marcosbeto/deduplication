@@ -272,26 +272,34 @@ class Models(object):
 						#did not find any similar id_aviso or the array is empty
 						if not similar_aviso_already_on_array:      
 
-							# if number_of_photos_similar_aviso_lt == 0 or number_of_photos_similar_aviso_gt == 0:
-							# 	similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)	                      
-							# else:
-							# 	similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
+							printer = False
 
-							if (number_of_similar_aviso_analyzed>3060 and number_of_similar_aviso_analyzed<3070) or number_of_similar_aviso_analyzed>3140:
-									print "Searching"
+
+							if (number_of_similar_aviso_analyzed>3060 and number_of_similar_aviso_analyzed<3070) or (number_of_similar_aviso_analyzed>3110 and number_of_similar_aviso_analyzed<3120) or (number_of_similar_aviso_analyzed>3140 and number_of_similar_aviso_analyzed<3150):
+									printer = True
+
+							if printer:
+								"Searching"
+
+							if number_of_photos_similar_aviso_lt == 0 or number_of_photos_similar_aviso_gt == 0:
+								similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)	                      
+							else:
+								similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
+
+
 							
-							similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
+							# similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
 							
-							if (number_of_similar_aviso_analyzed>3060 and number_of_similar_aviso_analyzed<3070) or number_of_similar_aviso_analyzed>3140:
+							if printer:
 								print "[OK]"
 
 							try:
 								
 								for similar_aviso_support in similar_avisos_support:
 
-									if number_of_similar_aviso_analyzed>3000 and number_of_similar_aviso_analyzed<4000:
+									if number_of_similar_aviso_analyzed>3000 and number_of_similar_aviso_analyzed<5000:
 										
-										if (number_of_similar_aviso_analyzed>3060 and number_of_similar_aviso_analyzed<3070) or number_of_similar_aviso_analyzed>3140:
+										if printer:
 											print 'similar_aviso.get("id"): ' + str(similar_aviso.get("id"))
 											print 'similar_aviso_support.get("id"): ' + str(similar_aviso_support.get("id"))
 											print 'similar_aviso_support.get("np"): ' + str(similar_aviso_support.get("np"))
