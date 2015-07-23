@@ -264,7 +264,7 @@ class Models(object):
 						#did not find any similar id_aviso or the array is empty
 						if not similar_aviso_already_on_array:                            
 
-							similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso},timeout=False).sort([("id", 1)]).batch_size(100)
+							similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso},no_cursor_timeout=True).sort([("id", 1)]).batch_size(100)
 							
 							try:
 								
