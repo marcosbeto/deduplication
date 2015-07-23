@@ -230,10 +230,10 @@ class Models(object):
 					invalid_images = False;
 
 					#verifying if image is not one of the invalid images strings
-					for image_to_delete in Constants.NOT_ALLOWED_IMAGES:
-						if image_to_delete in similar_photo.get("sp"):
-							invalid_images = True
-							break
+					# for image_to_delete in Constants.NOT_ALLOWED_IMAGES:
+					# 	if image_to_delete in similar_photo.get("s"):
+					# 		invalid_images = True
+					# 		break
 					
 					#getting the id of the aviso that has a image equal to the one being analized
 					similar_id_aviso = similar_photo.get("s")
