@@ -279,30 +279,25 @@ class Models(object):
 
 							try:
 
-								if printer:
-									"Searching"
-
 								if number_of_photos_similar_aviso_lt == 0 or number_of_photos_similar_aviso_gt == 0:
 									similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
-									if printer:
-										print "Counting"
-										print self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso}).count()
+									# if printer:
+									# 	if self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso}).count()>0:
+									# 		print "Counting"
 								else:
 									similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
-									if printer:
-										print "Counting"
-										print self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}}).count()
+									# if printer:
+									# 	if self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}}).count()>0:
+									# 		print "Counting"
 
 								# similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
 
-								if printer:
-									print "[OK]"
-								
 								for similar_aviso_support in similar_avisos_support:
 
 									# if number_of_similar_aviso_analyzed>3000 and number_of_similar_aviso_analyzed<5000:
 										
 									if printer:
+										print str(number_of_similar_aviso_analyzed) + " [OK]"
 										print 'similar_aviso.get("id"): ' + str(similar_aviso.get("id"))
 										print 'similar_aviso.get("np"): ' + str(similar_aviso.get("np"))
 										print 'similar_aviso_support.get("id"): ' + str(similar_aviso_support.get("id"))
