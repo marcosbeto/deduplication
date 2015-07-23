@@ -241,6 +241,8 @@ class Models(object):
 
 					number_of_photos_similar_aviso_lt = 0
 					number_of_photos_similar_aviso_gt = 0
+
+					print number_of_photos_similar_aviso
 					
 					if number_of_photos_similar_aviso > 3:
 						number_of_photos_similar_aviso_lt = (90*number_of_photos_similar_aviso)/100
