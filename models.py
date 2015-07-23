@@ -238,6 +238,9 @@ class Models(object):
 					#getting the id of the aviso that has a image equal to the one being analized
 					similar_id_aviso = similar_photo.get("s")
 					number_of_photos_similar_aviso = similar_photo.get("np")
+
+					number_of_photos_similar_aviso_lt = 0
+					number_of_photos_similar_aviso_gt = 0
 					
 					if number_of_photos_similar_aviso > 3:
 						number_of_photos_similar_aviso_lt = (90*number_of_photos_similar_aviso)/100
@@ -267,9 +270,12 @@ class Models(object):
 								unique_similar_avisos[index]['pssp'] = int(percentage_of_similar) #ppercentage_similar_self_parent
 								
 						#did not find any similar id_aviso or the array is empty
-						if not similar_aviso_already_on_array:                            
+						if not similar_aviso_already_on_array:      
 
-							similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
+							if number_of_photos_similar_aviso_lt == 0 or number_of_photos_similar_aviso_gt == 0:
+								similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)	                      
+							else:
+								similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
 							
 							try:
 								
