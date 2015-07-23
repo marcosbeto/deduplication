@@ -76,14 +76,12 @@ class Models(object):
 			photos = aviso_online.get("photos")
 			aviso_json = {"id_aviso":id_aviso_online,"photos":[]}
 
-			set_photos = set(photos)
-
-			for photo in set_photos:
+			for photo in photos:
 				histogram = photo.get("histogram")
 				histrogram_compressed = zlib.compress(histogram)
 				histrogram_compressed = histrogram_compressed.decode('utf-8', 'ignore')
-				# if not histrogram_compressed in aviso_json["photos"]:
-				aviso_json["photos"].append(histrogram_compressed)
+				if not histrogram_compressed in aviso_json["photos"]:
+					aviso_json["photos"].append(histrogram_compressed)
 			
 			# array_all_avisos_online.append(aviso_json)
 
