@@ -117,7 +117,7 @@ class Models(object):
 		
 		#getting all avisos from histogram table in mongo 
 		print "Retrieving all online avisos. Please, wait..."
-		all_avisos = self.con_mongo.ads_histograms_online_compressed.find()
+		all_avisos = self.con_mongo.ads_histograms_online_compressed_new.find()
 		print "[Ok]"
 
 		for aviso in all_avisos:
@@ -152,7 +152,7 @@ class Models(object):
 
 				#improve this query: 1. remove $ne 2. Create Index for histogram field
 				# self.comptest(photo.get("histogram"))
-				equals_avisos = self.con_mongo.ads_histograms_online_compressed.find({"photos":photo,"id_aviso":{"$ne":id_aviso}}).sort([("photos", 1)])
+				equals_avisos = self.con_mongo.ads_histograms_online_compressed_new.find({"photos":photo,"id_aviso":{"$ne":id_aviso}}).sort([("photos", 1)])
 				#iterate in all avisos that have some photo with the same histogram
 
 				for other_aviso in equals_avisos:
@@ -183,7 +183,7 @@ class Models(object):
 			#saves in mongo the aviso json if there is any photo that has others equal photos 
 			if aviso_has_similar_photos:
 				try:
-					self.con_mongo.ads_similar.insert(aviso_json)
+					self.con_mongo.ads_similar_new.insert(aviso_json)
 				except:
 					print aviso_json
 					pass
