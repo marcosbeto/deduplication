@@ -277,15 +277,21 @@ class Models(object):
 							# else:
 							# 	similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
 
+							if (number_of_similar_aviso_analyzed>3060 and number_of_similar_aviso_analyzed<3070) or number_of_similar_aviso_analyzed>3140:
+									print "Searching"
+							
 							similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
 							
+							if (number_of_similar_aviso_analyzed>3060 and number_of_similar_aviso_analyzed<3070) or number_of_similar_aviso_analyzed>3140:
+								print "[OK]"
+
 							try:
 								
 								for similar_aviso_support in similar_avisos_support:
 
 									if number_of_similar_aviso_analyzed>3000 and number_of_similar_aviso_analyzed<4000:
 										
-										if number_of_similar_aviso_analyzed>3140:
+										if (number_of_similar_aviso_analyzed>3060 and number_of_similar_aviso_analyzed<3070) or number_of_similar_aviso_analyzed>3140:
 											print 'similar_aviso.get("id"): ' + str(similar_aviso.get("id"))
 											print 'similar_aviso_support.get("id"): ' + str(similar_aviso_support.get("id"))
 											print 'similar_aviso_support.get("np"): ' + str(similar_aviso_support.get("np"))
@@ -314,6 +320,9 @@ class Models(object):
 							except:
 								print "passou"
 								pass
+
+							if (number_of_similar_aviso_analyzed>3060 and number_of_similar_aviso_analyzed<3070) or number_of_similar_aviso_analyzed>3140:
+								print "Final!"
 
 
 			only_equal_avisos = []
