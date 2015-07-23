@@ -245,6 +245,9 @@ class Models(object):
 					if number_of_photos_similar_aviso > 3:
 						number_of_photos_similar_aviso_lt = (90*number_of_photos_similar_aviso)/100
 						number_of_photos_similar_aviso_gt = (100*number_of_photos_similar_aviso)/100
+						print 'number_of_photos_similar_aviso_lt: ' + number_of_photos_similar_aviso_lt 
+						print 'number_of_photos_similar_aviso_gt: ' + number_of_photos_similar_aviso_gt
+
 
 					if not invalid_images:
 
@@ -274,40 +277,38 @@ class Models(object):
 
 							printer = False
 
+							# if (number_of_similar_aviso_analyzed>3060 and number_of_similar_aviso_analyzed<3070) or (number_of_similar_aviso_analyzed>3110 and number_of_similar_aviso_analyzed<3120) or (number_of_similar_aviso_analyzed>3140 and number_of_similar_aviso_analyzed<3150):
+							# 		printer = True
 
-							if (number_of_similar_aviso_analyzed>3060 and number_of_similar_aviso_analyzed<3070) or (number_of_similar_aviso_analyzed>3110 and number_of_similar_aviso_analyzed<3120) or (number_of_similar_aviso_analyzed>3140 and number_of_similar_aviso_analyzed<3150):
-									printer = True
-
-							if printer:
-								"Searching"
-
-							if number_of_photos_similar_aviso_lt == 0 or number_of_photos_similar_aviso_gt == 0:
-								similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)	                      
-							else:
-								similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
-
-
+							# if printer:
+							# 	"Searching"
 							
-							# similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
-							
-							if printer:
-								print "[OK]"
+							# if printer:
+							# 	print "[OK]"
 
 							try:
+
+								if number_of_photos_similar_aviso_lt == 0 or number_of_photos_similar_aviso_gt == 0:
+									similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)	                      
+								else:
+									similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
+
+								# similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
 								
 								for similar_aviso_support in similar_avisos_support:
 
-									if number_of_similar_aviso_analyzed>3000 and number_of_similar_aviso_analyzed<5000:
+									# if number_of_similar_aviso_analyzed>3000 and number_of_similar_aviso_analyzed<5000:
 										
-										if printer:
-											print 'similar_aviso.get("id"): ' + str(similar_aviso.get("id"))
-											print 'similar_aviso_support.get("id"): ' + str(similar_aviso_support.get("id"))
-											print 'similar_aviso_support.get("np"): ' + str(similar_aviso_support.get("np"))
+									# 	if printer:
+									# 		print 'similar_aviso.get("id"): ' + str(similar_aviso.get("id"))
+									# 		print 'similar_aviso_support.get("id"): ' + str(similar_aviso_support.get("id"))
+									# 		print 'similar_aviso_support.get("np"): ' + str(similar_aviso_support.get("np"))
 
-										if number_of_similar_aviso_analyzed%10==0:
-											now = time.time()
-											print str(number_of_similar_aviso_analyzed) + " - " + str(now-start)
+									# 	if number_of_similar_aviso_analyzed%10==0:
+									# 		now = time.time()
+									# 		print str(number_of_similar_aviso_analyzed) + " - " + str(now-start)
 
+									number_of_ads_similar_parent = similar_aviso.get("np")
 									number_of_ads_similar = similar_aviso_support.get("np")
 
 									# print "number_of_ads_similar: " + str(number_of_ads_similar) + " | number_of_ads_similar: " + str(number_of_ads_similar)
@@ -317,7 +318,7 @@ class Models(object):
 									similar_aviso_json = {"id":similar_id_aviso,
 									"npe":1, #"num_photos_equal":1,
 									"npt": number_of_ads_similar, #"num_photos_total": number_of_ads_similar,
-									"npp":number_of_ads_similar, #"num_photos_parent":number_of_ads_similar,
+									"npp":number_of_ads_similar_parent, #"num_photos_parent":number_of_ads_similar,
 									"pssp": int(percentage_of_similar), #"percentage_similar_self_parent": int(percentage_of_similar),
 
 									}
@@ -329,8 +330,8 @@ class Models(object):
 								print "passou"
 								pass
 
-							if (number_of_similar_aviso_analyzed>3060 and number_of_similar_aviso_analyzed<3070) or number_of_similar_aviso_analyzed>3140:
-								print "Final!"
+							# if (number_of_similar_aviso_analyzed>3060 and number_of_similar_aviso_analyzed<3070) or number_of_similar_aviso_analyzed>3140:
+							# 	print "Final!"
 
 
 			only_equal_avisos = []
