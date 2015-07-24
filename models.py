@@ -302,8 +302,8 @@ class Models(object):
 
 				only_equal_avisos = []
 
-				print 'unique_similar_avisos: ' + str(similar_aviso.get("id"))
-				print unique_similar_avisos
+				# print 'unique_similar_avisos: ' + str(similar_aviso.get("id"))
+				# print unique_similar_avisos
 
 				# adding to json only ads that have more than 90% of similarity in the group of both photos
 				for unique_similar_aviso in unique_similar_avisos:
