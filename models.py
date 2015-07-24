@@ -221,6 +221,8 @@ class Models(object):
 			if number_of_photos_similar_aviso > 3:
 				number_of_photos_similar_aviso_lt = (90*number_of_photos_similar_aviso)/100
 				number_of_photos_similar_aviso_gt = (100*number_of_photos_similar_aviso)/100
+				print 'number_of_photos_similar_aviso_lt: ' + str(number_of_photos_similar_aviso_lt)
+				print 'number_of_photos_similar_aviso_gt: ' + str(number_of_photos_similar_aviso_gt)
 
 
 			unique_similar_avisos = []
