@@ -206,7 +206,7 @@ class Models(object):
 		number_of_similar_aviso_analyzed = 0
 
 		print "Searching in ads_similar collection..."
-		all_similar_avisos = self.con_mongo.ads_similar_new.find()
+		all_similar_avisos = self.con_mongo.ads_similar_new.find({'id':30198})
 		print "[Ok]"
 
 		#iterating in all avisos that has duplicated images
@@ -290,7 +290,7 @@ class Models(object):
 			print 'unique_similar_avisos: ' + str(similar_aviso.get("id"))
 			print unique_similar_avisos
 
-			# adding to json only ads that have more than 85% of similarity in the group of both photos
+			# adding to json only ads that have more than 90% of similarity in the group of both photos
 			for unique_similar_aviso in unique_similar_avisos:
 
 				percentage_number_of_photos = utils.percentage(unique_similar_aviso['npe'],unique_similar_aviso['npt'])
@@ -302,7 +302,7 @@ class Models(object):
 					
 			#inserting in mongo the collection of equals avisos
 			if len(aviso_json["eq"]) > 0:
-				self.con_mongo.ads_equals_2.insert(aviso_json)
+				self.con_mongo.ads_equals_3.insert(aviso_json)
 
 			number_of_similar_aviso_analyzed += 1
 
