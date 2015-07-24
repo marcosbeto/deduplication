@@ -389,77 +389,101 @@ class Models(object):
 
 	def create_duplicateds_group_collection(self):
 
-		print "Searching..."
-		all_duplicated_avisos = self.con_mongo.ads_equals.find(no_cursor_timeout=False).sort([("id", 1)]).batch_size(1000)
-		print "[Ok]"
 
-		all_equals_json = []
+		done = False
+		skip = 0
 
-		all_avisos = 0
-
-		number_of_similar_aviso_analyzed = 0
-
-		printer = False
-
-		for duplicated_aviso in all_duplicated_avisos:
-
-			number_of_similar_aviso_analyzed += 1
-
-			if number_of_similar_aviso_analyzed>2840:
-				printer = True
-
-			if number_of_similar_aviso_analyzed%1==0:
-				print str(number_of_similar_aviso_analyzed)
-
-
-			aviso_already_analized = False
-			some_equal = False
-
-			number_of_grouped = 0;
-
-			#json that saves the raw_equal_avisos and the avisos[] that have this respective raw
-			grouped_equal_avisos = {"avisos":[],"rea":duplicated_aviso.get("rea")} #raw_equal_avisos
-
-			#adding the aviso that is being analized aviso to avisos[] array
-			# grouped_equal_avisos["avisos"].append(duplicated_aviso.get("id_aviso"))
+		while not done:
 			
-			for compared_aviso in all_equals_json:
+			print "Searching..."
+			
+			all_duplicated_avisos = self.con_mongo.ads_equals.find(no_cursor_timeout=False).sort([("id", 1)]).skip(skip)
+			print "[Ok]"
 
-				group_avisos_duplicated = compared_aviso.get("avisos")
-				
-				for aviso_duplicated in group_avisos_duplicated:
+			all_equals_json = []
+
+			all_avisos = 0
+
+			number_of_similar_aviso_analyzed = 0
+
+			printer = False
+
+			try:
+
+				for duplicated_aviso in all_duplicated_avisos:
+
+					skip += 1
+
+					number_of_similar_aviso_analyzed += 1
+
+					if number_of_similar_aviso_analyzed>2840:
+						printer = True
+
+					if number_of_similar_aviso_analyzed%1==0:
+						print str(number_of_similar_aviso_analyzed)
+
+
+					aviso_already_analized = False
+					some_equal = False
+
+					number_of_grouped = 0;
+
+					#json that saves the raw_equal_avisos and the avisos[] that have this respective raw
+					grouped_equal_avisos = {"avisos":[],"rea":duplicated_aviso.get("rea")} #raw_equal_avisos
+
+					#adding the aviso that is being analized aviso to avisos[] array
+					# grouped_equal_avisos["avisos"].append(duplicated_aviso.get("id_aviso"))
 					
-					if duplicated_aviso.get("id") == aviso_duplicated.get("id"):
-						aviso_already_analized = True
-						# print "aviso_already_analized = TRUE"
+					for compared_aviso in all_equals_json:
+
+						group_avisos_duplicated = compared_aviso.get("avisos")
+						
+						for aviso_duplicated in group_avisos_duplicated:
+							
+							if duplicated_aviso.get("id") == aviso_duplicated.get("id"):
+								aviso_already_analized = True
+								# print "aviso_already_analized = TRUE"
 
 
-			if not aviso_already_analized:
+					if not aviso_already_analized:
 
-				all_duplicated_avisos_compare = self.con_mongo.ads_equals.find(no_cursor_timeout=False).sort([("id", 1)]).batch_size(100000)
+						skip_compare = 0
+						done_compare = False
 
-				#iterating in other avisos to see if there is a raw avisos equal to group them
-				for duplicated_aviso_compare in all_duplicated_avisos_compare:
+						while not done_compare:
 
-					#checking if they have the same raw
-					if duplicated_aviso_compare.get("rea")!=None and duplicated_aviso.get("rea")!=None and set(duplicated_aviso_compare.get("rea")) == set(duplicated_aviso.get("rea")):
-						some_equal = True
-						#if they are different ads add to avisos[] array of avisos with the same raw
-						#if duplicated_aviso.get("id_aviso") != duplicated_aviso_compare.get("id_aviso"):
-						grouped_equal_avisos["avisos"].append({"id":duplicated_aviso_compare.get("id"),"url":""})
+							all_duplicated_avisos_compare = self.con_mongo.ads_equals.find().sort([("id", 1)]).skip(skip_compare)
 
-			all_avisos += 1
-			
-			if some_equal:
-				try:
-					all_equals_json.append(grouped_equal_avisos)
-					if printer:
-						print "Antes"
-					self.con_mongo.ads_equals_grouped.insert(grouped_equal_avisos)
-					if printer:
-						print "Depois"
-				except:
-					print all_equals_json
-					pass
+							#iterating in other avisos to see if there is a raw avisos equal to group them
+							try:
+								for duplicated_aviso_compare in all_duplicated_avisos_compare:
 
+									skip_compare += 1
+
+									#checking if they have the same raw
+									if duplicated_aviso_compare.get("rea")!=None and duplicated_aviso.get("rea")!=None and set(duplicated_aviso_compare.get("rea")) == set(duplicated_aviso.get("rea")):
+										some_equal = True
+										#if they are different ads add to avisos[] array of avisos with the same raw
+										#if duplicated_aviso.get("id_aviso") != duplicated_aviso_compare.get("id_aviso"):
+										grouped_equal_avisos["avisos"].append({"id":duplicated_aviso_compare.get("id"),"url":""})
+								done_compare = True
+							except pymongo.errors.OperationFailure, e:
+						        msg = e.message
+						        if not ( msg.startswith( "cursor id" ) and msg.endswith( "not valid at server" ) )
+						            raise
+
+					all_avisos += 1
+					
+					if some_equal:
+						try:
+							all_equals_json.append(grouped_equal_avisos)
+							self.con_mongo.ads_equals_grouped.insert(grouped_equal_avisos)
+						except:
+							print all_equals_json
+							pass
+				done = True
+			except pymongo.errors.OperationFailure, e:
+		        msg = e.message
+		        if not ( msg.startswith( "cursor id" ) and msg.endswith( "not valid at server" ) )
+		            raise
 		print "[OK] Created final collection for duplicated avisos."
