@@ -489,3 +489,33 @@ class Models(object):
 				print all_equals_json
 				pass
 		print "[OK] Created final collection for duplicated avisos."
+
+	def validate_grouped_equals(self):
+
+		skip_compare = 0
+		done_compare = False
+
+		while not done_compare:
+
+			equals_avisos = self.con_mongo.ads_equals.find().sort([("id", 1)]).skip(skip_compare)
+
+			try:
+
+				for equal_aviso in equal_avisos:
+
+					skip_compare += 1
+
+						equals_avisos_grouped = self.con_mongo.ads_equals_grouped.find({"rea":equal_aviso.get("rea")}).sort([("id", 1)]).count()
+
+						if int(equal_aviso_grouped) != 1:
+							print equal_aviso.get("id")
+
+				done_compare = True
+				
+			except:
+				print "excpetion"
+				pass
+
+								
+
+

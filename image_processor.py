@@ -238,7 +238,7 @@ class Image_Processor(object):
 	def save_compressed_histogram_online(self):
 		models = Models()
 		models.save_compressed_histogram_online()
-		
+
 	def create_similar_photos_collection(self):
 		models = Models()
 		models.create_similar_photos_collection()
@@ -258,3 +258,7 @@ class Image_Processor(object):
 	def create_duplicateds_group_collection(self):
 		models = Models()
 		models.create_duplicateds_group_collection()
+
+	def validate_grouped_equals(self):
+		models = Models()
+		models.validate_grouped_equals()
