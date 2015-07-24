@@ -494,6 +494,7 @@ class Models(object):
 
 		skip_compare = 0
 		done_compare = False
+		number_of_similar_aviso_analyzed = 0
 
 		while not done_compare:
 
@@ -502,12 +503,22 @@ class Models(object):
 		
 			for equal_aviso in equals_avisos:
 
+				number_of_similar_aviso_analyzed += 1
+
+				if number_of_similar_aviso_analyzed%10==0:
+					print str(number_of_similar_aviso_analyzed)
+
 				skip_compare += 1
 
-				equals_avisos_grouped = self.con_mongo.ads_equals_grouped.find({"rea":equal_aviso.get("rea")}).sort([("id", 1)]).count()
+				array_rea = equal_aviso.get("rea")
 
-				if int(equals_avisos_grouped) != 1:
-					print equal_aviso.get("id")
+				for aviso_id in array_rea:
+
+					equals_avisos_grouped = self.con_mongo.ads_equals_grouped.find({"rea":{"$in":[aviso_id]}}).sort([("id", 1)]).count()
+
+					if int(equals_avisos_grouped) != 1:
+						print equal_aviso.get("id")
+
 
 			done_compare = True
 
