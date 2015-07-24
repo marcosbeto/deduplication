@@ -405,7 +405,7 @@ class Models(object):
 
 			number_of_similar_aviso_analyzed += 1
 
-			if (number_of_similar_aviso_analyzed>2840:
+			if number_of_similar_aviso_analyzed>2840:
 				printer = True
 
 			if number_of_similar_aviso_analyzed%1==0:
