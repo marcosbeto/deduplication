@@ -258,12 +258,12 @@ class Models(object):
 						try:
 
 							#searching for a similar avisos inside similar photos that have the same number of photo of the main aviso that is being searched
-							if number_of_photos_similar_aviso_lt == 0 or number_of_photos_similar_aviso_gt == 0:
-								similar_avisos_support = self.con_mongo.ads_similar_new.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
-							else:
-								similar_avisos_support = self.con_mongo.ads_similar_new.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
+							# if number_of_photos_similar_aviso_lt == 0 or number_of_photos_similar_aviso_gt == 0:
+							# 	similar_avisos_support = self.con_mongo.ads_similar_new.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
+							# else:
+							# 	similar_avisos_support = self.con_mongo.ads_similar_new.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
 						
-							# similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
+							similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
 
 							for similar_aviso_support in similar_avisos_support:
 
