@@ -403,7 +403,7 @@ class Models(object):
 
 			number_of_similar_aviso_analyzed += 1
 
-			if number_of_similar_aviso_analyzed%100==0:
+			if number_of_similar_aviso_analyzed%1==0:
 				print str(number_of_similar_aviso_analyzed)
 
 
