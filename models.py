@@ -396,7 +396,15 @@ class Models(object):
 
 		all_avisos = 0
 
+		number_of_similar_aviso_analyzed = 0
+
 		for duplicated_aviso in all_duplicated_avisos:
+
+			number_of_similar_aviso_analyzed += 1
+
+			if number_of_similar_aviso_analyzed%100==0:
+				print str(number_of_similar_aviso_analyzed)
+
 
 			aviso_already_analized = False
 			some_equal = False

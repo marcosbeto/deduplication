@@ -17,8 +17,8 @@ class IW_Main(object):
         # Image_Processor().save_compressed_histogram_online()
         # Image_Processor().create_similar_photos_collection()
         # Image_Processor().create_equals_avisos_collection()
-        Image_Processor().create_raw_equal_avisos()
-        # Image_Processor().create_duplicateds_group_collection()
+        # Image_Processor().create_raw_equal_avisos()
+        Image_Processor().create_duplicateds_group_collection()
 
 
 if __name__ == '__main__':
