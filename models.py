@@ -500,7 +500,6 @@ class Models(object):
 			equals_avisos = self.con_mongo.ads_equals.find().sort([("id", 1)]).skip(skip_compare)
 
 		
-
 			for equal_aviso in equals_avisos:
 
 				skip_compare += 1
