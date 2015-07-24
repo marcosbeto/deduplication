@@ -333,7 +333,7 @@ class Models(object):
 		
 		start = time.time()
 
-		all_duplicated_avisos = self.con_mongo.ads_equals_new.find()
+		all_duplicated_avisos = self.con_mongo.ads_equals_new.find().sort([("id", 1)])
 
 		number_of_similar_aviso_analyzed = 0
 
@@ -371,7 +371,7 @@ class Models(object):
 			
 			print "Searching..."
 			
-			all_duplicated_avisos = self.con_mongo.ads_equals.find(no_cursor_timeout=False).sort([("id", 1)]).skip(skip)
+			all_duplicated_avisos = self.con_mongo.ads_equals_new.find(no_cursor_timeout=False).sort([("id", 1)]).skip(skip)
 			print "[Ok]"
 
 			all_equals_json = []
@@ -426,7 +426,7 @@ class Models(object):
 
 						while not done_compare:
 
-							all_duplicated_avisos_compare = self.con_mongo.ads_equals.find().sort([("id", 1)]).skip(skip_compare)
+							all_duplicated_avisos_compare = self.con_mongo.ads_equals_new.find().sort([("id", 1)]).skip(skip_compare)
 
 							#iterating in other avisos to see if there is a raw avisos equal to group them
 							try:
@@ -452,7 +452,7 @@ class Models(object):
 					if some_equal:
 						try:
 							all_equals_json.append(grouped_equal_avisos)
-							self.con_mongo.ads_equals_grouped.insert(grouped_equal_avisos)
+							self.con_mongo.ads_equals_grouped_new.insert(grouped_equal_avisos)
 						except:
 							print all_equals_json
 							pass
