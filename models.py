@@ -471,7 +471,7 @@ class Models(object):
 								msg = e.message
 								print msg
 								print all_equals_json
-									pass
+								pass
 
 					all_avisos += 1
 					
@@ -487,5 +487,5 @@ class Models(object):
 				msg = e.message
 				print msg
 				print all_equals_json
-					pass
+				pass
 		print "[OK] Created final collection for duplicated avisos."
