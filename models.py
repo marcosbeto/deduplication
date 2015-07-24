@@ -390,7 +390,7 @@ class Models(object):
 	def create_duplicateds_group_collection(self):
 
 		print "Searching..."
-		all_duplicated_avisos = self.con_mongo.ads_equals.find().sort([("id", 1)])
+		all_duplicated_avisos = self.con_mongo.ads_equals.find().sort([("id", 1)]).skip( 2847 )
 		print "[Ok]"
 
 		all_equals_json = []
