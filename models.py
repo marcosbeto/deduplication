@@ -390,7 +390,7 @@ class Models(object):
 	def create_duplicateds_group_collection(self):
 
 		print "Searching..."
-		all_duplicated_avisos = self.con_mongo.ads_equals.find().sort([("id", 1)]).skip( 2847 )
+		all_duplicated_avisos = self.con_mongo.ads_equals.find(no_cursor_timeout=False).sort([("id", 1)]).batch_size(1000)
 		print "[Ok]"
 
 		all_equals_json = []
@@ -399,9 +399,14 @@ class Models(object):
 
 		number_of_similar_aviso_analyzed = 0
 
+		printer = False
+
 		for duplicated_aviso in all_duplicated_avisos:
 
 			number_of_similar_aviso_analyzed += 1
+
+			if (number_of_similar_aviso_analyzed>2840:
+				printer = True
 
 			if number_of_similar_aviso_analyzed%1==0:
 				print str(number_of_similar_aviso_analyzed)
@@ -431,7 +436,7 @@ class Models(object):
 
 			if not aviso_already_analized:
 
-				all_duplicated_avisos_compare = self.con_mongo.ads_equals.find().sort([("id", 1)])
+				all_duplicated_avisos_compare = self.con_mongo.ads_equals.find(no_cursor_timeout=False).sort([("id", 1)]).batch_size(100000)
 
 				#iterating in other avisos to see if there is a raw avisos equal to group them
 				for duplicated_aviso_compare in all_duplicated_avisos_compare:
@@ -446,7 +451,15 @@ class Models(object):
 			all_avisos += 1
 			
 			if some_equal:
-				all_equals_json.append(grouped_equal_avisos)
-				self.con_mongo.ads_equals_grouped.insert(grouped_equal_avisos)
+				try:
+					all_equals_json.append(grouped_equal_avisos)
+					if printer:
+						print "Antes"
+					self.con_mongo.ads_equals_grouped.insert(grouped_equal_avisos)
+					if printer:
+						print "Depois"
+				except:
+					print all_equals_json
+					pass
 
 		print "[OK] Created final collection for duplicated avisos."
