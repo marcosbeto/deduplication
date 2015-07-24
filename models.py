@@ -468,9 +468,9 @@ class Models(object):
 										grouped_equal_avisos["avisos"].append({"id":duplicated_aviso_compare.get("id"),"url":""})
 								done_compare = True
 							except pymongo.errors.OperationFailure, e:
-						        msg = e.message
-						        if not ( msg.startswith( "cursor id" ) and msg.endswith( "not valid at server" ) )
-						            raise
+								msg = e.message
+								if not ( msg.startswith( "cursor id" ) and msg.endswith( "not valid at server" ) )
+									raise
 
 					all_avisos += 1
 					
@@ -483,7 +483,7 @@ class Models(object):
 							pass
 				done = True
 			except pymongo.errors.OperationFailure, e:
-		        msg = e.message
-		        if not ( msg.startswith( "cursor id" ) and msg.endswith( "not valid at server" ) )
-		            raise
+				msg = e.message
+				if not ( msg.startswith( "cursor id" ) and msg.endswith( "not valid at server" ) )
+					raise
 		print "[OK] Created final collection for duplicated avisos."
