@@ -469,8 +469,9 @@ class Models(object):
 								done_compare = True
 							except pymongo.errors.OperationFailure, e:
 								msg = e.message
-								if not ( msg.startswith( "cursor id" ) and msg.endswith( "not valid at server" ) ):
-									raise
+								print msg
+								print all_equals_json
+									pass
 
 					all_avisos += 1
 					
@@ -484,6 +485,7 @@ class Models(object):
 				done = True
 			except pymongo.errors.OperationFailure, e:
 				msg = e.message
-				if not ( msg.startswith( "cursor id" ) and msg.endswith( "not valid at server" ) ):
-					raise
+				print msg
+				print all_equals_json
+					pass
 		print "[OK] Created final collection for duplicated avisos."
