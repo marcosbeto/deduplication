@@ -361,6 +361,8 @@ class Models(object):
 
 		all_duplicated_avisos = self.con_mongo.ads_equals.find()
 
+		number_of_similar_aviso_analyzed = 0
+
 		for duplicated_aviso in all_duplicated_avisos:
 				
 			raw_equal_avisos = []
@@ -373,6 +375,12 @@ class Models(object):
 			for equal_aviso in equal_avisos:
 
 				raw_equal_avisos.append(equal_aviso.get("id"))
+
+			number_of_similar_aviso_analyzed += 1
+
+			if number_of_similar_aviso_analyzed%100==0:
+				print str(number_of_similar_aviso_analyzed)
+
 
 			self.con_mongo.ads_equals.update({"id" :duplicated_aviso.get("id")},{'$set' : {"rea":raw_equal_avisos}}) #raw_equal_avisos
 
