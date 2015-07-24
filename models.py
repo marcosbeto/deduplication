@@ -431,7 +431,7 @@ class Models(object):
 
 			if not aviso_already_analized:
 
-				all_duplicated_avisos_compare = self.con_mongo.ads_equals.find()
+				all_duplicated_avisos_compare = self.con_mongo.ads_equals.find().sort([("id", 1)])
 
 				#iterating in other avisos to see if there is a raw avisos equal to group them
 				for duplicated_aviso_compare in all_duplicated_avisos_compare:
