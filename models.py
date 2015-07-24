@@ -412,7 +412,7 @@ class Models(object):
 			number_of_grouped = 0;
 
 			#json that saves the raw_equal_avisos and the avisos[] that have this respective raw
-			grouped_equal_avisos = {"avisos":[],"raw_equal_avisos":duplicated_aviso.get("raw_equal_avisos")}
+			grouped_equal_avisos = {"avisos":[],"rea":duplicated_aviso.get("rea")} #raw_equal_avisos
 
 			#adding the aviso that is being analized aviso to avisos[] array
 			# grouped_equal_avisos["avisos"].append(duplicated_aviso.get("id_aviso"))
@@ -423,7 +423,7 @@ class Models(object):
 				
 				for aviso_duplicated in group_avisos_duplicated:
 					
-					if duplicated_aviso.get("id_aviso") == aviso_duplicated.get("id_aviso"):
+					if duplicated_aviso.get("id") == aviso_duplicated.get("id"):
 						aviso_already_analized = True
 						# print "aviso_already_analized = TRUE"
 
@@ -436,11 +436,11 @@ class Models(object):
 				for duplicated_aviso_compare in all_duplicated_avisos_compare:
 
 					#checking if they have the same raw
-					if duplicated_aviso_compare.get("raw_equal_avisos")!=None and duplicated_aviso.get("raw_equal_avisos")!=None and set(duplicated_aviso_compare.get("raw_equal_avisos")) == set(duplicated_aviso.get("raw_equal_avisos")):
+					if duplicated_aviso_compare.get("rea")!=None and duplicated_aviso.get("rea")!=None and set(duplicated_aviso_compare.get("rea")) == set(duplicated_aviso.get("rea")):
 						some_equal = True
 						#if they are different ads add to avisos[] array of avisos with the same raw
 						#if duplicated_aviso.get("id_aviso") != duplicated_aviso_compare.get("id_aviso"):
-						grouped_equal_avisos["avisos"].append({"id_aviso":duplicated_aviso_compare.get("id_aviso"),"url":""})
+						grouped_equal_avisos["avisos"].append({"id":duplicated_aviso_compare.get("id"),"url":""})
 
 			all_avisos += 1
 			
