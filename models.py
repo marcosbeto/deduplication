@@ -499,22 +499,20 @@ class Models(object):
 
 			equals_avisos = self.con_mongo.ads_equals.find().sort([("id", 1)]).skip(skip_compare)
 
-			try:
+		
 
-				for equal_aviso in equal_avisos:
+			for equal_aviso in equal_avisos:
 
-					skip_compare += 1
+				skip_compare += 1
 
-					equals_avisos_grouped = self.con_mongo.ads_equals_grouped.find({"rea":equal_aviso.get("rea")}).sort([("id", 1)]).count()
+				equals_avisos_grouped = self.con_mongo.ads_equals_grouped.find({"rea":equal_aviso.get("rea")}).sort([("id", 1)]).count()
 
-					if int(equal_aviso_grouped) != 1:
-						print equal_aviso.get("id")
+				if int(equal_aviso_grouped) != 1:
+					print equal_aviso.get("id")
 
-				done_compare = True
-				
-			except:
-				print "excpetion"
-				pass
+			done_compare = True
+
+			
 
 								
 
