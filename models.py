@@ -440,7 +440,7 @@ class Models(object):
 							except pymongo.errors.OperationFailure, e:
 								msg = e.message
 								print msg
-								print duplicated_aviso.get("id")
+								print "first except: " + str(duplicated_aviso.get("id"))
 								pass
 
 					all_avisos += 1
@@ -450,7 +450,7 @@ class Models(object):
 							all_equals_json.append(grouped_equal_avisos)
 							self.con_mongo.ads_equals_grouped_new.insert(grouped_equal_avisos)
 						except:
-							print all_equals_json
+							print "second except: " + str(duplicated_aviso.get("id"))
 							pass
 				done = True
 			except pymongo.errors.OperationFailure, e:
