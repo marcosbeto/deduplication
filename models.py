@@ -367,6 +367,7 @@ class Models(object):
 		done = False
 		skip = 0
 		number_of_similar_aviso_analyzed = 0
+		all_failed_ids = []
 
 		while not done:
 			
@@ -441,6 +442,7 @@ class Models(object):
 								msg = e.message
 								print msg
 								print "first except: " + str(duplicated_aviso.get("id"))
+								all_failed_ids.append(str(duplicated_aviso.get("id")))
 								pass
 
 					all_avisos += 1
@@ -451,15 +453,19 @@ class Models(object):
 							self.con_mongo.ads_equals_grouped_new.insert(grouped_equal_avisos)
 						except:
 							print "second except: " + str(duplicated_aviso.get("id"))
+							all_failed_ids.append(str(duplicated_aviso.get("id")))
 							pass
 				done = True
 			except pymongo.errors.OperationFailure, e:
 				msg = e.message
 				print msg
-				print "third except: " + str(duplicated_aviso.get("id"))
+				print "thirdr except: " + str(duplicated_aviso.get("id"))
+				all_failed_ids.append(str(duplicated_aviso.get("id")))
 				pass
 
 		print "[OK] Created final collection for duplicated avisos."
+		print 'all_failed_ids: '
+		print all_failed_ids
 
 	def validate_grouped_equals(self):
 
