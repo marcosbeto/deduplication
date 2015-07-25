@@ -388,10 +388,7 @@ class Models(object):
 					skip += 1
 
 					number_of_similar_aviso_analyzed += 1
-
-					if number_of_similar_aviso_analyzed>2840:
-						printer = True
-
+					
 					if number_of_similar_aviso_analyzed%1==0:
 						utils.print_inline(str(number_of_similar_aviso_analyzed) + "-")
 
@@ -443,7 +440,7 @@ class Models(object):
 							except pymongo.errors.OperationFailure, e:
 								msg = e.message
 								print msg
-								print all_equals_json
+								print duplicated_aviso.get("id")
 								pass
 
 					all_avisos += 1
