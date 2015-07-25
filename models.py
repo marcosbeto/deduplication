@@ -371,7 +371,7 @@ class Models(object):
 			
 			print "Searching..."
 			
-			all_duplicated_avisos = self.con_mongo.ads_pre_equals_new.find(no_cursor_timeout=False).sort([("id", 1)]).skip(skip)
+			all_duplicated_avisos = self.con_mongo.ads_pre_equals_new_copy.find(no_cursor_timeout=False).sort([("id", 1)]).skip(skip)
 			print "[Ok]"
 
 			all_equals_json = []
@@ -426,7 +426,7 @@ class Models(object):
 
 						while not done_compare:
 
-							all_duplicated_avisos_compare = self.con_mongo.ads_pre_equals_new.find().sort([("id", 1)]).skip(skip_compare)
+							all_duplicated_avisos_compare = self.con_mongo.ads_pre_equals_new_copy.find().sort([("id", 1)]).skip(skip_compare)
 
 							#iterating in other avisos to see if there is a raw avisos equal to group them
 							try:
