@@ -456,9 +456,9 @@ class Models(object):
 			except pymongo.errors.OperationFailure, e:
 				msg = e.message
 				print msg
-				print "second except: " + str(duplicated_aviso.get("id"))
+				print "third except: " + str(duplicated_aviso.get("id"))
 				pass
-				
+
 		print "[OK] Created final collection for duplicated avisos."
 
 	def validate_grouped_equals(self):
