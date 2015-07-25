@@ -308,8 +308,8 @@ class Models(object):
 				# adding to json only ads that have more than 90% of similarity in the group of both photos
 				for unique_similar_aviso in unique_similar_avisos:
 
-					percentage_number_of_photos = utils.percentage(unique_similar_aviso['npe'],unique_similar_aviso['npt'])
-
+					percentage_number_of_photos = utils.percentage(unique_similar_aviso['npp'],unique_similar_aviso['npt'])
+					
 					#checkinf if the aviso being compared to main_aviso has similar number of photos
 					if percentage_number_of_photos>=90 and percentage_number_of_photos<=100:
 						if unique_similar_aviso['pssp']>90:
@@ -317,7 +317,7 @@ class Models(object):
 						
 				#inserting in mongo the collection of equals avisos
 				if len(aviso_json["eq"]) > 0:
-					self.con_mongo.ads_equals_new.insert(aviso_json)
+					self.con_mongo.ads_pre_equals_new.insert(aviso_json)
 
 				number_of_similar_aviso_analyzed += 1
 
