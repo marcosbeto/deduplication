@@ -366,6 +366,7 @@ class Models(object):
 
 		done = False
 		skip = 0
+		number_of_similar_aviso_analyzed = 0
 
 		while not done:
 			
@@ -377,8 +378,6 @@ class Models(object):
 			all_equals_json = []
 
 			all_avisos = 0
-
-			number_of_similar_aviso_analyzed = 0
 
 			printer = False
 
@@ -394,7 +393,7 @@ class Models(object):
 						printer = True
 
 					if number_of_similar_aviso_analyzed%1==0:
-						print str(number_of_similar_aviso_analyzed)
+						utils.print_inline(str(number_of_similar_aviso_analyzed) + "-")
 
 
 					aviso_already_analized = False
