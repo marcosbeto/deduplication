@@ -2345,6 +2345,10 @@ class Models(object):
 		    2920833674,
 		    2921390555
 		]
+
+		for a1 in ar1:
+			if not a1 in ar2:
+				print a1
 								
 
 
