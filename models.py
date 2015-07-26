@@ -509,7 +509,7 @@ class Models(object):
 					rea = duplicated_aviso.get("rea")
 
 					#json that saves the raw_equal_avisos and the avisos[] that have this respective raw
-					grouped_equal_avisos = {"avisos":[],"rea":duplicated_aviso.get("rea")} #raw_equal_avisos
+					grouped_equal_avisos = {"rea":[]} #raw_equal_avisos
 
 					#adding the aviso that is being analized aviso to avisos[] array
 					# grouped_equal_avisos["avisos"].append(duplicated_aviso.get("id_aviso"))
@@ -522,7 +522,8 @@ class Models(object):
 							break
 					
 					if not already_added:
-						self.con_mongo.ads_rea.insert(rea)
+						grouped_equal_avisos["rea"].append(rea)
+						self.con_mongo.ads_rea.insert(grouped_equal_avisos)
 						for aviso_id in rea:
 							avisos_added.append(aviso_id)
 					
