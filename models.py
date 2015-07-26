@@ -505,6 +505,7 @@ class Models(object):
 		
 	def validate_arr(self):
 		ar1 = [
+		    914220861,
 		    918534431,
 		    918537294,
 		    918645061,
@@ -1426,6 +1427,7 @@ class Models(object):
 		]
 
 		ar2 = [
+		    914220571,
 		    918534431,
 		    918537294,
 		    918645061,
@@ -2349,6 +2351,8 @@ class Models(object):
 		for a1 in ar2:
 			if not a1 in ar1:
 				print a1
+
+		print "finished"
 								
 
 
