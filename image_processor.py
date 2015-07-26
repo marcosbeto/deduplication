@@ -262,3 +262,7 @@ class Image_Processor(object):
 	def validate_grouped_equals(self):
 		models = Models()
 		models.validate_grouped_equals()
+
+	def validate_arr(self):
+		models = Models()
+		models.validate_arr()
