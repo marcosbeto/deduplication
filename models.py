@@ -497,7 +497,7 @@ class Models(object):
 				print "== " + str(equals_avisos_grouped)
 				
 				if int(equals_avisos_grouped) != 1:
-					print aviso_id
+					print equal_aviso.get("id")
 
 
 			done_compare = True
