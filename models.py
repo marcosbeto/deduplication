@@ -494,7 +494,7 @@ class Models(object):
 					equals_avisos_grouped = self.con_mongo.ads_equals_grouped_new.find({"rea":{"$in":[aviso_id]}}).sort([("id", 1)]).count()
 					print "== " + str(equals_avisos_grouped)
 					if int(equals_avisos_grouped) != 1:
-						print equal_aviso.get("id")
+						print aviso_id
 
 
 			done_compare = True
