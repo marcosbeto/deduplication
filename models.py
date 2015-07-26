@@ -565,7 +565,7 @@ class Models(object):
 				for aviso_id in array_rea:
 
 				
-					equals_avisos_grouped = self.con_mongo.ads_rea.find({"rea":{"$in":aviso_id}}).sort([("rea", 1)]).count()
+					equals_avisos_grouped = self.con_mongo.ads_rea.find({"rea":{"$in":[aviso_id]}}).sort([("rea", 1)]).count()
 
 					# print "== " + str(equals_avisos_grouped)
 				
