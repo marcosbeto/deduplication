@@ -266,3 +266,7 @@ class Image_Processor(object):
 	def validate_arr(self):
 		models = Models()
 		models.validate_arr()
+
+	def create_duplicateds_group_collection_new(self):
+		models = Models()
+		models.create_duplicateds_group_collection_new()

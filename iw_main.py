@@ -20,7 +20,7 @@ class IW_Main(object):
         # Image_Processor().create_raw_equal_avisos()
         # Image_Processor().create_duplicateds_group_collection()
         # Image_Processor().validate_grouped_equals()
-        Image_Processor().validate_arr()
+        Image_Processor().create_duplicateds_group_collection_new()
 
 
 if __name__ == '__main__':

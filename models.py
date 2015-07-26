@@ -467,6 +467,78 @@ class Models(object):
 		print 'all_failed_ids: '
 		print all_failed_ids
 
+	def create_duplicateds_group_collection_new(self):
+
+		done = False
+		skip = 0
+		number_of_similar_aviso_analyzed = 0
+		all_failed_ids = []
+
+		while not done:
+			
+			print "Searching..."
+			
+			all_duplicated_avisos = self.con_mongo.ads_pre_equals_new_copy.find(no_cursor_timeout=False).sort([("id", 1)]).skip(skip)
+			print "[Ok]"
+
+			all_equals_json = []
+
+			all_avisos = 0
+
+			printer = False
+
+			avisos_added = []
+
+			try:
+
+				for duplicated_aviso in all_duplicated_avisos:
+
+					skip += 1
+
+					number_of_similar_aviso_analyzed += 1
+					
+					if number_of_similar_aviso_analyzed%1==0:
+						utils.print_inline(str(number_of_similar_aviso_analyzed) + "-")
+
+
+					aviso_already_analized = False
+					some_equal = False
+
+					number_of_grouped = 0;
+
+					rea = duplicated_aviso.get("rea")
+
+					#json that saves the raw_equal_avisos and the avisos[] that have this respective raw
+					grouped_equal_avisos = {"avisos":[],"rea":duplicated_aviso.get("rea")} #raw_equal_avisos
+
+					#adding the aviso that is being analized aviso to avisos[] array
+					# grouped_equal_avisos["avisos"].append(duplicated_aviso.get("id_aviso"))
+
+					already_added = False
+
+					for aviso_id in rea:
+						if aviso_id in avisos_added:
+							already_added = True
+							break
+					
+					if not already_added:
+						self.con_mongo.ads_rea.insert(rea)
+						for aviso_id in rea:
+							avisos_added.append(aviso_id)
+					
+					
+				done = True
+			except pymongo.errors.OperationFailure, e:
+				msg = e.message
+				print msg
+				print "first except: " + str(duplicated_aviso.get("id"))
+				all_failed_ids.append(str(duplicated_aviso.get("id")))
+				pass
+
+		print "[OK] Created final collection for duplicated avisos."
+		print 'all_failed_ids: '
+		print all_failed_ids
+
 	def validate_grouped_equals(self):
 
 		skip_compare = 0
