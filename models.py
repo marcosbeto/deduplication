@@ -489,12 +489,14 @@ class Models(object):
 
 				array_rea = equal_aviso.get("rea")
 
-				for aviso_id in array_rea:
+				# for aviso_id in array_rea:
 
-					equals_avisos_grouped = self.con_mongo.ads_equals_grouped_new.find({"rea":{"$in":[aviso_id]}}).sort([("id", 1)]).count()
-					print "== " + str(equals_avisos_grouped)
-					if int(equals_avisos_grouped) != 1:
-						print aviso_id
+				equals_avisos_grouped = self.con_mongo.ads_equals_grouped_new.find({"rea":{"$in":array_rea}}).sort([("id", 1)]).count()
+
+				print "== " + str(equals_avisos_grouped)
+				
+				if int(equals_avisos_grouped) != 1:
+					print aviso_id
 
 
 			done_compare = True
