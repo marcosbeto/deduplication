@@ -341,7 +341,7 @@ class Models(object):
 				
 			raw_equal_avisos = []
 
-			raw_equal_avisos.append(duplicated_aviso.get("id"))
+			# raw_equal_avisos.append(duplicated_aviso.get("id"))
 			# set(x) == set(y)
 
 			equal_avisos = duplicated_aviso.get("eq")
@@ -356,7 +356,7 @@ class Models(object):
 				print str(number_of_similar_aviso_analyzed)
 
 
-			self.con_mongo.ads_pre_equals_new_copy.update({"id" :duplicated_aviso.get("id")},{'$set' : {"rea":raw_equal_avisos}}) #raw_equal_avisos
+			self.con_mongo.ads_pre_equals_new_copy.update({"id" :duplicated_aviso.get("id")},{'$set' : {"ree":raw_equal_avisos}}) #raw_equal_avisos
 
 		print "[OK] Created the raw fields of duplicated ads."
 
