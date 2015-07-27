@@ -1,10 +1,12 @@
-<h1>Duplicated Ads</h1>
+<h2>Duplicated Ads - Photo Analysis</h2>
 
 {% if duplicateds_avisos %}
     <ul>
+    	<li>
     {% for aviso in duplicateds_avisos %}
-        <li><a href="/redirect_to_aviso/{{ aviso }}" target="_blank">{{ aviso }}</a></li>
+        <a href="/redirect_to_aviso/{{ aviso }}" target="_blank">{{ aviso }}</a>
     {% endfor %}
+    	</li>
     </ul>
 {% else %}
     <p>No duplicated avisos.</p>
