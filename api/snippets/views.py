@@ -43,6 +43,25 @@ def snippet_list(request):
 		return JSONResponse(serializer.errors, status=400)
 
 @csrf_exempt
+def snippet_list_api(request):
+	"""
+	List all code snippets, or create a new snippet.
+	"""
+	if request.method == 'GET':
+		snippets = Snippet.objects.all()
+		serializer = SnippetSerializer(snippets, many=True)
+
+		return JSONResponse(serializer.data)
+
+	elif request.method == 'POST':
+		data = JSONParser().parse(request)
+		serializer = SnippetSerializer(data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return JSONResponse(serializer.data, status=201)
+		return JSONResponse(serializer.errors, status=400)
+
+@csrf_exempt
 def redirect_to_aviso(request, id):
 	try:
 		ad_details_response = api_interface.get_ad_details_from_api(id)
@@ -58,21 +77,54 @@ def snippet_detail(request, id):
 	"""
 	try:
 		snippet = Snippet.objects.raw_query({'rea' : int(id)})
-		all_avisos = snippet.values('rea')[0]
-		print all_avisos['rea']
+		
+		if not snippet:
+			return HttpResponse(status=404)
 
-		ad_details_response = api_interface.get_ad_details_from_api(id)
-		print ad_details_response['data']['url']
-		# print JSONResponse(snippet.data)
+		all_avisos = snippet.values('rea')[0]
 	except Snippet.DoesNotExist:
 		return HttpResponse(status=404)
 
 	if request.method == 'GET':
 		serializer = SnippetSerializer(all_avisos)
-		# template = loader.get_template('templates/duplicateds.html')
 		context = {'duplicateds_avisos': all_avisos['rea']}
+
 		return render(request, 'duplicateds.html', context)
-		return JSONResponse(serializer.data)
+
+	elif request.method == 'PUT':
+		data = JSONParser().parse(request)
+		serializer = SnippetSerializer(snippet, data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return JSONResponse(serializer.data)
+		return JSONResponse(serializer.errors, status=400)
+
+	elif request.method == 'DELETE':
+		snippet.delete()
+		return HttpResponse(status=204)
+
+@csrf_exempt
+def snippet_detail_api(request, id):
+	"""
+	Retrieve, update or delete a code snippet.
+	"""
+	try:
+		snippet = Snippet.objects.raw_query({'rea' : int(id)})
+		# print JSONResponse(snippet.data)
+	except Snippet.DoesNotExist:
+		return HttpResponse(status=404)
+
+	if request.method == 'GET':
+
+		if snippet:
+			all_avisos = snippet.values('rea')[0]
+			serializer = SnippetSerializer(all_avisos)
+			return JSONResponse(serializer.data)
+		else:
+			all_avisos = [{"Message":"No duplicated ads found."}]
+		
+		return JSONResponse(all_avisos)
+		
 
 	elif request.method == 'PUT':
 		data = JSONParser().parse(request)
