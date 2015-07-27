@@ -62,21 +62,27 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'api.urls'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.eggs.Loader',
+)
+
+
+TEMPLATE_DIRS = (
+    os.path.dirname( __file__ ) + '/templates'
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "social_auth.context_processors.social_auth_by_type_backends",
+    "django.core.context_processors.static",
+    "django.core.context_processors.request",
+)
+
 
 WSGI_APPLICATION = 'api.wsgi.application'
 
@@ -112,3 +118,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#CONSTANTS
+
+IMOVELWEB_API_URL_BASE = "http://apim01.imovelweb.com.br"
+
+IMOVELWEB_API_AUTH_URL = IMOVELWEB_API_URL_BASE + "/interface/buscador/dispositivo/registro/"
+IMOVELWEB_API_QUERY_URL = IMOVELWEB_API_URL_BASE + "/interface/buscador/buscarmin"
+IMOVELWEB_API_QUERY_URL_AD_DETAIL = IMOVELWEB_API_URL_BASE + "/interface/buscador/ver/"
+IMOVELWEB_API_QUERY_LOGIN = IMOVELWEB_API_URL_BASE + "/interface/buscador/login"
+IMOVELWEB_API_QUERY_SEMILOGIN = IMOVELWEB_API_URL_BASE + "/interface/buscador/semilogin"
+IMOVELWEB_API_QUERY_UUID_RETRIEVE = IMOVELWEB_API_URL_BASE + "/interface/buscador/getuuidfromemail/"
+IMOVELWEB_API_QUERY_SEND_EMAIL = IMOVELWEB_API_URL_BASE + "/interface/buscador/contactar/email/"
+
+IMOVELWEB_API_QUERY_ADD_FAVORITE = IMOVELWEB_API_URL_BASE + "/interface/buscador/favoritos/agregar/"
+IMOVELWEB_API_QUERY_REMOVE_FAVORITE = IMOVELWEB_API_URL_BASE + "/interface/buscador/favoritos/borrar/"
+IMOVELWEB_API_QUERY_LIST_FAVORITE = IMOVELWEB_API_URL_BASE + "/interface/buscador/favoritos/listado/"
+
+IMOVELWEB_API_USERNAME = "adonde"
+IMOVELWEB_API_PASSWORD = "v1v1radonde"
+IMOVELWEB_API_USER_AGENT = "API_RELA"
+IMOVELWEB_API_UUID = "4788865e3938759052311306ca032077"

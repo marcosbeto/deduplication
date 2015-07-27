@@ -1,0 +1,11 @@
+<h1>Duplicated Ads</h1>
+
+{% if duplicateds_avisos %}
+    <ul>
+    {% for aviso in duplicateds_avisos %}
+        <li><a href="/redirect_to_aviso/{{ aviso }}" target="_blank">{{ aviso }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No duplicated avisos.</p>
+{% endif %}
