@@ -170,6 +170,7 @@ class Models(object):
 						# print photo_compare
 						
 						cv2.compareHist(photo.histogram, photo_compare.histogram, cv2.cv.CV_COMP_BHATTACHARYYA)
+						print "taquicompara"
 						
 						# ------->>>>>>>>>> AQUI Ó !!!!!
 						
