@@ -155,7 +155,9 @@ class Models(object):
 
 				#improve this query: 1. remove $ne 2. Create Index for histogram field
 				# self.comptest(photo.get("histogram"))
+				print "aqui"
 				equals_avisos = self.con_mongo.ads_histograms_online.find({"photos":photo,"id_aviso":{"$ne":id_aviso}}).sort([("photos", 1)])
+				print "aqui2"
 				#iterate in all avisos that have some photo with the same histogram
 
 				for other_aviso in equals_avisos:
@@ -168,7 +170,7 @@ class Models(object):
 
 						# print 'photo_compare\n\n'
 						# print photo_compare
-						
+						print "aqui3"
 						cv2.compareHist(photo.histogram, photo_compare.histogram, cv2.cv.CV_COMP_BHATTACHARYYA)
 						print "taquicompara"
 						
