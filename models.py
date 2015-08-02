@@ -126,7 +126,7 @@ class Models(object):
 		for aviso in all_avisos:
 
 			now = time.time()
-			if number_of_avisos%1000==0:
+			if number_of_avisos%1==0:
 				print str(number_of_avisos)
 			
 			number_of_avisos += 1
