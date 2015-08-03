@@ -6,6 +6,7 @@ import pymongo
 import re
 from os import walk
 from os import path
+import utils
 
 from models import Models
 from constants import Constants
@@ -207,14 +208,17 @@ class Image_Processor(object):
 					for file_name_ in file_names_:
 
 						try:
-							#generating the histogram and adding it to the json to be added to mongo
-							hist = self.get_histogram(os.path.join(dir_name, subdir_name, file_name_)) 
-							hist_json = {"photo_path":subdir_name + "/" + file_name_, "histogram":json.dumps(hist.tolist())}
-							aviso_json["photos"].append(hist_json)                                
+							# #generating the histogram and adding it to the json to be added to mongo
+							hist = self.get_histogram(self, os.path.join(dir_name, subdir_name, file_name_)) 
+							
+							if hist!=None:
+								hist_json = {"photo_path":subdir_name + "/" + file_name_, "histogram":json.dumps(hist.tolist())}
+								aviso_json["photos"].append(hist_json)                                
+						
 						except:
 							pass
 
-						if number_of_files%1000==0:
+						if number_of_files%100==0:
 							print number_of_files
 
 						number_of_files +=1
@@ -226,13 +230,28 @@ class Image_Processor(object):
 
 	#method responsible to calculate the histogram of a photo
 	@staticmethod
-	def get_histogram(image_path):
+	def get_histogram(self, image_path):
 		image = cv2.imread(image_path)
-		hist = cv2.calcHist([image], [0, 1, 2], None, [8, 8, 8],
-			[0, 256, 0, 256, 0, 256])
-		hist = cv2.normalize(hist).flatten()
+		if image!=None:
+			image = self.crop_image(image)
+			hist = cv2.calcHist([image], [0, 1, 2], None, [8, 8, 8],
+				[0, 256, 0, 256, 0, 256])
+			hist = cv2.normalize(hist).flatten()
+			return hist
+		return None
 
-		return hist
+	@staticmethod
+	def crop_image(original_image):
+
+		height, width, channels = original_image.shape
+
+		pixels_offset_y = int(utils.from_percentage(21,height))
+		pixels_offset_x = int(utils.from_percentage(28,width))
+
+		# print 'height: ' + str(height) + ', offset_h: ' + str(pixels_offset_y) + ', width: ' + str(width) + ', offset_w: ' + str(pixels_offset_x)
+
+		cropped_image = original_image[pixels_offset_y:int(height)-pixels_offset_y, pixels_offset_x:int(width)-pixels_offset_x] # Crop from x, y, w, h -> 100, 200, 300, 400
+		return cropped_image
 
 	
 	def save_compressed_histogram_online(self):

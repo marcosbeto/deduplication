@@ -14,6 +14,9 @@ import array
 def percentage(percent, whole):
 	return (percent * 100.0) / whole
 
+def from_percentage(percentage, whole):
+	return (whole * percentage) / 100
+
 def bytesto(bytes, to, bsize=1024):
 	
 	"""convert bytes to megabytes, etc.

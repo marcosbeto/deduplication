@@ -11,7 +11,8 @@ class Constants:
 
 	PHOTO_SIZE_TO_DOWNLOAD = "50x37"
 
-	LOCAL_DIR_SAVE_PHOTO = "../../../iwbackup/avisos/2/"
+	# LOCAL_DIR_SAVE_PHOTO = "../../../iwbackup/avisos/2/"
+	LOCAL_DIR_SAVE_PHOTO = "photos_avisos"
 
 	NUMBER_OF_ADS_RETURNED_API = 18
 
