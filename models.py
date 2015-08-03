@@ -173,9 +173,19 @@ class Models(object):
 						# print 'photo_compare\n\n'
 						# print photo_compare
 						# print "aqui3"
-						hist1 = numpy.array(photo.get("histogram"), dtype=numpy.float32)
-						hist2 = numpy.array(photo_compare.get("histogram"), dtype=numpy.float32)
+						
+						
+						hist1_str = photo.get("histogram")
+						hist2_str = photo_compare.get("histogram")
+
+						array_his1 = [float(x) for x in hist1_str.split()]
+						array_his2 = [float(x) for x in hist2_str.split()]
+
+						hist1 = numpy.array(array_his1, dtype=numpy.float32)
+						hist2 = numpy.array(array_his2, dtype=numpy.float32)
+						
 						result_comparasion = cv2.compareHist(hist1, hist2, cv2.cv.CV_COMP_CORREL)
+
 						print result_comparasion 
 						# "taquicompara"
 						
