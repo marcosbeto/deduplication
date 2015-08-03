@@ -157,7 +157,7 @@ class Models(object):
 				# self.comptest(photo.get("histogram"))
 				# print "aqui"
 				equals_avisos = self.con_mongo.ads_histograms_online.find()
-				print "--->" + str(self.con_mongo.ads_histograms_online.find().count())
+				# print "--->" + str(self.con_mongo.ads_histograms_online.find().count())
 				# print "aqui2"
 				#iterate in all avisos that have some photo with the same histogram
 
@@ -172,7 +172,7 @@ class Models(object):
 						# print 'photo_compare\n\n'
 						# print photo_compare
 						# print "aqui3"
-						result_comparasion = cv2.compareHist(photo.histogram, photo_compare.histogram, cv2.cv.CV_COMP_CORREL)
+						result_comparasion = cv2.compareHist(photo.get("histogram"), photo_compare.get("histogram"), cv2.cv.CV_COMP_CORREL)
 						print result_comparasion 
 						# "taquicompara"
 						
