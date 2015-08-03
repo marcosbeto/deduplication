@@ -40,7 +40,7 @@ class Models(object):
 	def get_all_avisos_online(self):
 		
 		array_all_avisos_online = []		
-		all_avisos_online = self.con_mongo.avisosonline.find()
+		all_avisos_online = self.con_mongo.avisosonline.find().sort([("idaviso", 1)])
 
 		#iterate in all avisos that have some photo with the same histogram
 		for aviso_online in all_avisos_online:
