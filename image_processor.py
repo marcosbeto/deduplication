@@ -99,8 +99,8 @@ class Image_Processor(object):
 				for file in os.listdir(folder_name):
 					
 					if file.endswith(".jpg"):
-						
-						hist = self.get_histogram(os.path.join(folder_name, file))
+
+						hist = self.get_histogram(self, os.path.join(folder_name, file))
 						hist_json = {"photo_path":folder_name + "/" + file, "histogram":json.dumps(hist.tolist())}
 						aviso_json["photos"].append(hist_json)
 
