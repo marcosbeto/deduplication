@@ -122,6 +122,7 @@ class Models(object):
 		#getting all avisos from histogram table in mongo 
 		print "Retrieving all online avisos. Please, wait..."
 		all_avisos = self.con_mongo.ads_histograms_online.find()
+		equals_avisos = self.con_mongo.ads_histograms_online.find()
 		print "[Ok]"
 
 		for aviso in all_avisos:
@@ -157,7 +158,7 @@ class Models(object):
 				#improve this query: 1. remove $ne 2. Create Index for histogram field
 				# self.comptest(photo.get("histogram"))
 				# print "aqui"
-				equals_avisos = self.con_mongo.ads_histograms_online.find()
+				
 				# print "--->" + str(self.con_mongo.ads_histograms_online.find().count())
 				# print "aqui2"
 				#iterate in all avisos that have some photo with the same histogram
