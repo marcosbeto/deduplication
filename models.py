@@ -189,7 +189,7 @@ class Models(object):
 
 						result_comparasion = cv2.compareHist(hist1, hist2, cv2.cv.CV_COMP_CORREL)
 
-						print result_comparasion 
+						# print result_comparasion 
 						# "taquicompara"
 						
 						# ------->>>>>>>>>> AQUI Ó !!!!!
