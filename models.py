@@ -163,7 +163,15 @@ class Models(object):
 				# print "aqui2"
 				#iterate in all avisos that have some photo with the same histogram
 
+				number_of_avisos_2 = 0
+
 				for other_aviso in equals_avisos:
+
+					now2 = time.time()
+					if number_of_avisos_2%1==0:
+						print str(number_of_avisos_2) + " (" + str(now2-start) + ")"
+					
+					number_of_avisos_2 += 1
 
 					#getting all photos of the aviso that is being compared
 					photos_compare = other_aviso.get("photos")
