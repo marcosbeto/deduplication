@@ -127,7 +127,7 @@ class Models(object):
 		for aviso in all_avisos:
 
 			now = time.time()
-			if number_of_avisos%100==0:
+			if number_of_avisos%1==0:
 				print str(number_of_avisos) + " (" + str(now-start) + ")"
 			
 			number_of_avisos += 1
