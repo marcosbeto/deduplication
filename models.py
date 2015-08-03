@@ -156,7 +156,7 @@ class Models(object):
 				#improve this query: 1. remove $ne 2. Create Index for histogram field
 				# self.comptest(photo.get("histogram"))
 				# print "aqui"
-				equals_avisos = self.con_mongo.ads_histograms_online.find({"photos":photo,"id_aviso":{"$ne":id_aviso}}).sort([("photos", 1)])
+				equals_avisos = self.con_mongo.ads_histograms_online.find({"id_aviso":{"$ne":id_aviso}}).sort([("photos", 1)])
 				# print "aqui2"
 				#iterate in all avisos that have some photo with the same histogram
 
