@@ -11,6 +11,7 @@ import utils
 import time
 import zlib
 import bz2
+import numpy
 
 import cv2
 
@@ -172,8 +173,8 @@ class Models(object):
 						# print 'photo_compare\n\n'
 						# print photo_compare
 						# print "aqui3"
-						hist1 = np.array(photo.get("histogram"), dtype=np.float32)
-						hist2 = np.array(photo_compare.get("histogram"), dtype=np.float32)
+						hist1 = numpy.array(photo.get("histogram"), dtype=numpy.float32)
+						hist2 = numpy.array(photo_compare.get("histogram"), dtype=numpy.float32)
 						result_comparasion = cv2.compareHist(hist1, hist2, cv2.cv.CV_COMP_CORREL)
 						print result_comparasion 
 						# "taquicompara"
