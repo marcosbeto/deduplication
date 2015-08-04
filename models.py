@@ -121,7 +121,7 @@ class Models(object):
 		
 		#getting all avisos from histogram table in mongo 
 		print "Retrieving all online avisos. Please, wait..."
-		all_avisos = self.con_mongo.ads_histograms_online_compressed.find()
+		all_avisos = self.con_mongo.ads_histograms_online_compressed.find().sort([("id_aviso", 1)])
 		print "[Ok]"
 
 		for aviso in all_avisos:
