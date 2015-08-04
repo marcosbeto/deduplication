@@ -215,7 +215,7 @@ class Models(object):
 		while not done:
 		
 			print "Searching in ads_similar collection..."
-			all_similar_avisos = self.con_mongo.ads_similar_new.find().sort([("id", 1)]).skip(skip)
+			all_similar_avisos = self.con_mongo.ads_similar.find().sort([("id", 1)]).skip(skip)
 			print "[Ok]"
 
 			#iterating in all avisos that has duplicated images
@@ -300,7 +300,6 @@ class Models(object):
 									done_compare = True
 								
 							except:
-								print "passou"
 								pass
 
 
@@ -321,7 +320,7 @@ class Models(object):
 						
 				#inserting in mongo the collection of equals avisos
 				if len(aviso_json["eq"]) > 0:
-					self.con_mongo.ads_pre_equals_new.insert(aviso_json)
+					self.con_mongo.ads_pre_equals.insert(aviso_json)
 
 				number_of_similar_aviso_analyzed += 1
 
