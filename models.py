@@ -121,15 +121,14 @@ class Models(object):
 		
 		#getting all avisos from histogram table in mongo 
 		print "Retrieving all online avisos. Please, wait..."
-		all_avisos = self.con_mongo.ads_histograms_online.find()
-		equals_avisos = self.con_mongo.ads_histograms_online.find()
+		all_avisos = self.con_mongo.ads_histograms_online_compressed.find()
 		print "[Ok]"
 
 		for aviso in all_avisos:
 
 			now = time.time()
-			if number_of_avisos%1==0:
-				print str(number_of_avisos) + " (" + str(now-start) + ")"
+			if number_of_avisos%1000==0:
+				print str(number_of_avisos)
 			
 			number_of_avisos += 1
 			aviso_has_similar_photos = False
@@ -157,21 +156,10 @@ class Models(object):
 
 				#improve this query: 1. remove $ne 2. Create Index for histogram field
 				# self.comptest(photo.get("histogram"))
-				# print "aqui"
-				
-				# print "--->" + str(self.con_mongo.ads_histograms_online.find().count())
-				# print "aqui2"
+				equals_avisos = self.con_mongo.ads_histograms_online_compressed.find({"photos":photo,"id_aviso":{"$ne":id_aviso}}).sort([("photos", 1)])
 				#iterate in all avisos that have some photo with the same histogram
 
-				number_of_avisos_2 = 0
-
 				for other_aviso in equals_avisos:
-
-					now2 = time.time()
-					if number_of_avisos_2%1==0:
-						print str(number_of_avisos_2) + " (" + str(now2-start) + ")"
-					
-					number_of_avisos_2 += 1
 
 					#getting all photos of the aviso that is being compared
 					photos_compare = other_aviso.get("photos")
@@ -181,35 +169,14 @@ class Models(object):
 
 						# print 'photo_compare\n\n'
 						# print photo_compare
-						# print "aqui3"
 						
-						
-						hist1_str = photo.get("histogram")
-						hist2_str = photo_compare.get("histogram")
-
-						hist1_str = hist1_str[1:-1]
-						hist2_str = hist2_str[1:-1]
-
-						array_his1 = [float(x) for x in hist1_str.split(", ")]
-						array_his2 = [float(x) for x in hist2_str.split(", ")]
-
-						hist1 = numpy.array(array_his1, dtype=numpy.float32)
-						hist2 = numpy.array(array_his2, dtype=numpy.float32)
-
-						result_comparasion = cv2.compareHist(hist1, hist2, cv2.cv.CV_COMP_CORREL)
-
-						# print result_comparasion 
-						# "taquicompara"
-						
-						# ------->>>>>>>>>> AQUI Ó !!!!!
-						
-						# #verifying if the photo has the same histogram, excluding photos of the same aviso
-						# if photo==photo_compare:
-						# 	#json that saves the data of the similar photo that will be saved in similar_photos[] of main_photo_json
-						# 	similar_photo_json = {"s":other_aviso.get("id_aviso")}
-						# 	main_photo_json["sp"].append(similar_photo_json)
-						# 	aviso_has_similar_photos = True
-						# 	is_photo_similar = True
+						#verifying if the photo has the same histogram, excluding photos of the same aviso
+						if photo==photo_compare:
+							#json that saves the data of the similar photo that will be saved in similar_photos[] of main_photo_json
+							similar_photo_json = {"s":other_aviso.get("id_aviso")}
+							main_photo_json["sp"].append(similar_photo_json)
+							aviso_has_similar_photos = True
+							is_photo_similar = True
 
 				
 				#saves main_photo_json if exists a photo inside the other aviso that is equal to the aviso main photo
@@ -218,12 +185,12 @@ class Models(object):
 					aviso_json["ph"].append(main_photo_json);		
 
 			#saves in mongo the aviso json if there is any photo that has others equal photos 
-			# if aviso_has_similar_photos:
-			# 	try:
-			# 		self.con_mongo.ads_similar_new.insert(aviso_json)
-			# 	except:
-			# 		print aviso_json
-			# 		pass
+			if aviso_has_similar_photos:
+				try:
+					self.con_mongo.ads_similar.insert(aviso_json)
+				except:
+					print aviso_json
+					pass
 
 		print "[OK] Analized " + str(number_of_avisos) + " avisos and 'ads_similar' collection created."
 	
