@@ -70,7 +70,7 @@ class Models(object):
 		number_of_avisos = 0
 
 		array_all_avisos_online = []		
-		all_avisos_online = self.con_mongo.ads_histograms_online.find()
+		all_avisos_online = self.con_mongo.ads_histograms_online.find().sort([("id_aviso", 1)])
 
 		#iterate in all avisos that have some photo with the same histogram
 		for aviso_online in all_avisos_online:
@@ -94,7 +94,7 @@ class Models(object):
 			
 			number_of_avisos += 1
 
-			self.con_mongo.ads_histograms_online_compressed_new.insert(aviso_json)
+			self.con_mongo.ads_histograms_online_compressed.insert(aviso_json)
 
 		return array_all_avisos_online
 

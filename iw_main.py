@@ -6,15 +6,18 @@ class IW_Main(object):
     def run(self):
         
         # Downloader().download_photos()
-
-        
         # Image_Processor().outside_images()
         
-        Image_Processor().create_images_histogram_from_online_ads() # <---- CURRENT IN USE: USED WITH BACKUP AND CURRENT ONLINE AVISOS
+        
+        # Image_Processor().create_images_histogram_collection() # <---- USED LOCAL
 
-        # Image_Processor().create_images_histogram_from_images_backup_iw() #<---- USED WITH ALL PHOTOS FROM BACKUP
-        # Image_Processor().create_images_histogram_collection() # <---- USED WITH API
-        # Image_Processor().save_compressed_histogram_online()
+        # Image_Processor().create_images_histogram_from_images_backup_iw() #<---- USED WITH ALL PHOTOS FROM BACKUP (OFFLINE + ONLINE)
+        
+    # Step 1: Cropping and creating histograms from all photos in backup
+        # Image_Processor().create_images_histogram_from_online_ads() # <---- CURRENT IN USE: USED WITH BACKUP AND CURRENT ONLINE AVISOS
+    
+    # Step 2: Compressing histograms string for each photo to make the storage and search less costly
+        Image_Processor().save_compressed_histogram_online()
         
         # Image_Processor().create_similar_photos_collection()
         
