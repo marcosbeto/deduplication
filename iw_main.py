@@ -24,10 +24,12 @@ class IW_Main(object):
     # Step 3: Finds other ads that have similiar photos
         # Image_Processor().create_similar_photos_collection()
     
-    # Step 4: Find the ads that are exactly or __% with similiar photos
-        Image_Processor().create_equals_avisos_collection()
+    # Step 4: Finds the ads that are exactly or __% with similiar photos
+        # Image_Processor().create_equals_avisos_collection()
 
-        # Image_Processor().create_raw_equal_avisos()
+    # Step 5: Creates an array with all equal ads
+        Image_Processor().create_raw_equal_avisos()
+        
         # Image_Processor().create_duplicateds_group_collection()
         # Image_Processor().validate_grouped_equals()
         # Image_Processor().create_duplicateds_group_collection_new()
