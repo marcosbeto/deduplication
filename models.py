@@ -358,8 +358,11 @@ class Models(object):
 			if number_of_similar_aviso_analyzed%100==0:
 				print str(number_of_similar_aviso_analyzed)
 
+			rea = raw_equal_avisos
+			rea.append(duplicated_aviso.get("id"))
 
-			self.con_mongo.ads_pre_equals.update({"id" :duplicated_aviso.get("id")},{'$set' : {"ree":raw_equal_avisos}}) #raw_equal_avisos
+
+			self.con_mongo.ads_pre_equals.update({"id" :duplicated_aviso.get("id")},{'$set' : {"ree":raw_equal_avisos, "rea":rea}}) #raw_equal_avisos
 
 		print "[OK] Created the raw fields of duplicated ads."
 
@@ -376,7 +379,7 @@ class Models(object):
 			
 			print "Searching..."
 			
-			all_duplicated_avisos = self.con_mongo.ads_pre_equals_new_copy.find(no_cursor_timeout=False).sort([("id", 1)]).skip(skip)
+			all_duplicated_avisos = self.con_mongo.ads_pre_equals.find(no_cursor_timeout=False).sort([("id", 1)]).skip(skip)
 			print "[Ok]"
 
 			all_equals_json = []
