@@ -481,7 +481,7 @@ class Models(object):
 			
 			print "Searching..."
 			
-			all_duplicated_avisos = self.con_mongo.ads_pre_equals_new_copy.find(no_cursor_timeout=False).sort([("id", 1)]).skip(skip)
+			all_duplicated_avisos = self.con_mongo.ads_pre_equals.find(no_cursor_timeout=False).sort([("id", 1)]).skip(skip)
 			print "[Ok]"
 
 			all_equals_json = []
@@ -526,7 +526,7 @@ class Models(object):
 					
 					if not already_added:
 						grouped_equal_avisos = {"rea":rea} #raw_equal_avisos
-						self.con_mongo.ads_rea.insert(grouped_equal_avisos)
+						self.con_mongo.snippets_snippet.insert(grouped_equal_avisos)
 						for aviso_id in rea:
 							avisos_added.append(aviso_id)
 					
