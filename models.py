@@ -358,7 +358,7 @@ class Models(object):
 			if number_of_similar_aviso_analyzed%100==0:
 				print str(number_of_similar_aviso_analyzed)
 
-			rea = raw_equal_avisos
+			rea = list(raw_equal_avisos)
 			rea.append(duplicated_aviso.get("id"))
 
 
