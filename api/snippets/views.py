@@ -65,6 +65,8 @@ def snippet_list_api(request):
 def redirect_to_aviso(request, id):
 	try:
 		ad_details_response = api_interface.get_ad_details_from_api(id)
+		print ad_details_response
+
 		return redirect("http://" + ad_details_response['data']['url'])
 		# print JSONResponse(snippet.data)
 	except Snippet.DoesNotExist:
