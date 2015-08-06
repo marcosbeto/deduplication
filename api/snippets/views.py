@@ -67,7 +67,7 @@ def redirect_to_aviso(request, id):
 		ad_details_response = api_interface.get_ad_details_from_api(id)
 		print ad_details_response
 		if ad_details_response['errorCode']:
-			return HttpResponse(status=404)
+			return JSONResponse({"Aviso OFFLINE"}, status=201)
 		return redirect("http://" + ad_details_response['data']['url'])
 		# print JSONResponse(snippet.data)
 	except Snippet.DoesNotExist:
