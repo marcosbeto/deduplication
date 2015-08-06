@@ -287,6 +287,10 @@ class Image_Processor(object):
 		models = Models()
 		models.validate_arr()
 
+	def check_differents(self):
+		models = Models()
+		models.check_differents()
+
 	def create_duplicateds_group_collection_new(self):
 		models = Models()
 		models.create_duplicateds_group_collection_new()

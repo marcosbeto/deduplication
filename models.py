@@ -581,6 +581,45 @@ class Models(object):
 
 			done_compare = True
 		print "[ok]"
+
+		def check_differents(self):
+
+			skip_compare = 0
+			done_compare = False
+			number_of_similar_aviso_analyzed = 0
+
+			while not done_compare:
+
+				equals_avisos = self.con_mongo.snippets_snippet.find().sort([("rea", 1)]).skip(skip_compare)
+
+			
+				for equal_aviso in equals_avisos:
+
+					number_of_similar_aviso_analyzed += 1
+
+					if number_of_similar_aviso_analyzed%10==0:
+						print str(number_of_similar_aviso_analyzed)
+
+					skip_compare += 1
+
+					array_rea = equal_aviso.get("rea")
+
+					equals_avisos_grouped = self.con_mongo.ads_rea.find({"rea":{"$in":array_rea}}).sort([("rea", 1)]).count()
+						if int(equals_avisos_grouped) < 1:
+							print array_rea
+					
+					# for aviso_id in array_rea:
+
+					
+					# 	equals_avisos_grouped = self.con_mongo.ads_rea.find({"rea":{"$in":[aviso_id]}}).sort([("rea", 1)]).count()
+
+					# 	# print "== " + str(equals_avisos_grouped)
+					
+					# 	if int(equals_avisos_grouped) > 1:
+					# 		print equal_aviso.get("id")
+
+				done_compare = True
+			print "[ok]"
 								
 
 

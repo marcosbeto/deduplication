@@ -31,13 +31,15 @@ class IW_Main(object):
         # Image_Processor().create_raw_equal_avisos()
     
     # Step 6: 
-        Image_Processor().create_duplicateds_group_collection_new()
+        # Image_Processor().create_duplicateds_group_collection_new()
 
 
         # Image_Processor().create_duplicateds_group_collection()
         
 
         # Image_Processor().validate_grouped_equals()
+
+        Image_Processor().check_differents()
         
 
 
