@@ -48,13 +48,20 @@ def snippet_list_api(request, filters):
 	List all code snippets, or create a new snippet.
 	"""
 
-	print filters
+	filters = filters.split("/")[:-1]
+    print "folders:", filters
 
 	if request.method == 'GET':
-		snippets = Snippet.objects.all()
-		serializer = SnippetSerializer(snippets, many=True)
 
-		return JSONResponse(serializer.data)
+		if filters=="all" or filters=="all/":
+
+			snippets = Snippet.objects.all()
+			serializer = SnippetSerializer(snippets, many=True)
+
+			return JSONResponse(serializer.data)
+
+
+
 
 	elif request.method == 'POST':
 		data = JSONParser().parse(request)
