@@ -2,7 +2,6 @@ from django.db import models
 from pygments.lexers import get_all_lexers
 from pygments.styles import get_all_styles
 from djangotoolbox.fields import ListField, DictField
-import IntegerField
 from django_mongodb_engine.contrib import MongoDBManager
 
 class Snippet(models.Model):
@@ -12,7 +11,7 @@ class Snippet(models.Model):
 
 class Ads_equals_with_filters(models.Model):
     rea = ListField()
-    id_aviso = IntegerField()
+    id_aviso = models.IntegerField()
 
     objects = MongoDBManager()
 
