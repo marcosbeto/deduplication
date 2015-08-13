@@ -50,6 +50,9 @@ def snippet_list_api(request, filters):
 	"""
 	filters = filters.split("/")[:-1]
 
+	verification_code = request.GET.get('verification_code')
+	print verification_code
+
 	if request.method == 'GET':
 
 		for filter_unique in filters:
@@ -60,18 +63,15 @@ def snippet_list_api(request, filters):
 				return JSONResponse(serializer.data)
 			else:
 				snippets = list(Ads_equals_with_filters.objects.all())
-
-				# for snippet in snippets:
-				# 	print snippet.id_aviso
-    	
-
 				serializer = SnippetSerializer(snippets, many=True)
 
-				for aviso in serializer.data:
-					reas = aviso.get("rea")
+				# for aviso in serializer.data:
+				# 	reas = aviso.get("rea")
+				# 	for rea in reas:
+				# 		print rea.get("id_aviso")
 
-					for rea in reas:
-						print rea.get("id_aviso")
+						# if filter_unique=="idtipodeoperacion":
+
 
 				return JSONResponse(serializer.data)
 
