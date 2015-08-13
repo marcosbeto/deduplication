@@ -50,8 +50,8 @@ def snippet_list(request, filters):
 		for filter_unique in filters:
 			if filter_unique=="all":
 				snippets = Snippet.objects.all()
-				serializer = SnippetSerializer(snippets, many=True)
-				return JSONResponse(serializer.data)
+				# serializer = SnippetSerializer(snippets, many=True)
+				# return JSONResponse(serializer.data)
 			else:
 				snippets = Ads_equals_with_filters.objects.raw_query(
 					{
