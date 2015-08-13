@@ -49,7 +49,7 @@ def snippet_list_api(request, filters):
 	"""
 
 	filters = filters.split("/")[:-1]
-    print "folders:", filters
+	print "folders:", filters
 
 	if request.method == 'GET':
 
