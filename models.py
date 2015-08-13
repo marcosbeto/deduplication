@@ -70,8 +70,7 @@ class Models(object):
 
 				for id_aviso in array_rea:
 
-					 aviso_json = {"id_aviso":id_aviso,"data":[]}
-
+					aviso_json = {"id_aviso":id_aviso,"data":[]}
 
 					# Prepare SQL query
 					sql = "SELECT * FROM avisos where idaviso = " + str(id_aviso)
