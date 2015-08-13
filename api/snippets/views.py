@@ -77,7 +77,7 @@ def snippet_list_api(request, filters):
 				serializer = SnippetSerializer(snippets, many=True)
 				return JSONResponse(serializer.data)
 			else:
-				snippets = list(Ads_equals_with_filters.objects.raw_query({'rea.data.idtipodeoperacion' : int(idtipodeoperacion)}))
+				snippets = list(Ads_equals_with_filters.objects.raw_query({'rea.data.idtipodeoperacion':int(idtipodeoperacion)}))
 				serializer = SnippetSerializer(snippets, many=True)
 
 				new_json = []
@@ -85,14 +85,14 @@ def snippet_list_api(request, filters):
 				for aviso in serializer.data:
 					reas = aviso.get("rea")
 					if len(reas)>10:
-						print "eae"
-						new_json.append(aviso)
+						# print "eae"
+						serializer.data.pop(aviso)
 					# for rea in reas:
 					# 	print rea.get("id_aviso")
 
 					# 	if filter_unique=="idtipodeoperacion":
 
-				print new_json
+				# print new_json
 				# for aviso2 in new_json.data:
 				# 	reas = aviso2.get("rea")
 				# 	print len(reas)
