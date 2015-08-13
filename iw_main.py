@@ -1,5 +1,6 @@
 from downloader import Downloader
 from image_processor import Image_Processor
+from filters import Filters
 
 class IW_Main(object):
 
@@ -39,7 +40,9 @@ class IW_Main(object):
 
         # Image_Processor().validate_grouped_equals()
 
-        Image_Processor().check_differents()
+        # Image_Processor().check_differents()
+
+        Filters().create_detailed_repeated_ads_filters()
         
 
 

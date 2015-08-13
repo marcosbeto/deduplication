@@ -12,6 +12,7 @@ import time
 import zlib
 import bz2
 import numpy
+import MySQLdb
 
 import cv2
 
@@ -25,14 +26,102 @@ class Models(object):
 
 	def __init__(self):
 		self.con_mongo = self.__db_mongo()
+		self.con_mysql = self.__db_mysql()
 
 	def __db_mongo(self):		
-		utils.print_inline("\n[db] Connecting MongoDB... \n")
+		utils.print_inline("\n[db] Connecting tos MongoDB... \n")
 		connection = MongoClient('localhost', 27017)
 		db = connection['deduplication']
-
 		print "MongoDB - Connected [OK]"
 		return db
+
+
+	def __db_mysql(self):
+		utils.print_inline("\n[db] Connecting to MySQLDB... \n")
+		connection = MySQLdb.connect(host = "192.168.22.78",
+									  user = "imovelro",
+									  passwd = "1m0v3lr0",
+									  db = "navplat_realestate_imovelweb")
+		db = connection.cursor(MySQLdb.cursors.DictCursor)
+		print "MySQLDB - Connected [OK]"
+		return db
+
+	def create_detailed_repeated_ads_filters(self):
+
+		skip_compare = 0
+		done_compare = False
+		number_of_similar_aviso_analyzed = 0
+
+		while not done_compare:
+
+			equals_avisos = self.con_mongo.snippets_snippet.find().sort([("rea", 1)]).skip(skip_compare)
+
+			for equal_aviso in equals_avisos:
+
+				number_of_similar_aviso_analyzed += 1
+
+				if number_of_similar_aviso_analyzed%10==0:
+					print str(number_of_similar_aviso_analyzed)
+
+				skip_compare += 1
+
+				rea_json = {"rea":[]}
+				array_rea = equal_aviso.get("rea")
+
+				for id_aviso in array_rea:
+
+					 aviso_json = {"id_aviso":id_aviso,"data":[]}
+
+
+					# Prepare SQL query
+					sql = "SELECT * FROM avisos where idaviso = " + str(id_aviso)
+
+					try:
+					   # Execute the SQL command
+					   self.con_mysql.execute(sql)
+					   # Fetch all the rows in a list of lists.
+					   results = self.con_mysql.fetchall()
+
+					  
+
+					   for row in results:
+							similar_aviso_json = {
+								"titulo":row["titulo"],
+								"idzona":row["idzona"],
+								"idempresa":row["idempresa"],
+								"idtipodepropiedad":row["idtipodepropiedad"],
+								"idsubtipodepropiedad":row["idsubtipodepropiedad"],
+								"idavisopadre":row["idavisopadre"],
+								"idciudad":row["idciudad"],
+								"precio":row["precio"],
+								"direccion":row["direccion"],
+								"codigopostal":row["codigopostal"],
+								"habitaciones":row["habitaciones"],
+								"garages":row["garages"],
+								"banos":row["banos"],
+								"mediosbanos":row["mediosbanos"],
+								"metroscubiertos":row["metroscubiertos"],
+								"metrostotales":row["metrostotales"],
+								"idtipodeoperacion":row["idtipodeoperacion"]
+							}
+
+							aviso_json["data"].append(similar_aviso_json)
+							rea_json["rea"].append(aviso_json)
+
+							
+
+							print similar_aviso_json
+
+					except:
+					   print "Error: unable to fecth data"
+				
+				self.con_mongo.ads_equals_with_filters.insert(rea_json)
+
+			done_compare = True
+
+
+		# disconnect from server
+		self.con_mysql.close()
 
 	def add_image_histogram(self, aviso_json):
 		self.con_mongo.ads_histograms_online.insert(aviso_json)
