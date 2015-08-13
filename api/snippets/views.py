@@ -49,16 +49,19 @@ def snippet_list_api(request, filters):
 	"""
 
 	filters = filters.split("/")[:-1]
-	print "folders:", filters
+	
+
 
 	if request.method == 'GET':
 
-		if filters=="all" or filters=="all/":
+		for filter_unique in filters:
 
-			snippets = Snippet.objects.all()
-			serializer = SnippetSerializer(snippets, many=True)
+			if filter_unique=="all":
 
-			return JSONResponse(serializer.data)
+				snippets = Snippet.objects.all()
+				serializer = SnippetSerializer(snippets, many=True)
+
+				return JSONResponse(serializer.data)
 
 
 
