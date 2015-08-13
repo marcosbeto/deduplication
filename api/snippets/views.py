@@ -68,8 +68,8 @@ def snippet_list_api(request, filters):
 				serializer = SnippetSerializer(snippets, many=True)
 
 				for aviso in serializer.data:
-					print aviso
-					
+					print aviso.get("rea")
+
 				return JSONResponse(serializer.data)
 
 	elif request.method == 'POST':
