@@ -43,10 +43,13 @@ def snippet_list(request):
 		return JSONResponse(serializer.errors, status=400)
 
 @csrf_exempt
-def snippet_list_api(request):
+def snippet_list_api(request, filters):
 	"""
 	List all code snippets, or create a new snippet.
 	"""
+
+	print filters
+
 	if request.method == 'GET':
 		snippets = Snippet.objects.all()
 		serializer = SnippetSerializer(snippets, many=True)
