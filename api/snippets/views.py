@@ -87,7 +87,7 @@ def snippet_list_api(request, filters):
 					# print reas
 					if len(reas)<10:
 						print "eae"
-						serializer.data.pop(i)
+						del serializer.data[i]
 					# for rea in reas:
 					# 	print rea.get("id_aviso")
 
