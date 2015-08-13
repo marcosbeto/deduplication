@@ -62,7 +62,7 @@ def snippet_list_api(request, filters):
 				snippets = list(Ads_equals_with_filters.objects.all())
 
 				for snippet in snippets:
-					print snippet
+					print snippet.id_aviso
     	
 
 				serializer = SnippetSerializer(snippets, many=True)
