@@ -92,10 +92,10 @@ def snippet_list_api(request, filters):
 
 					# 	if filter_unique=="idtipodeoperacion":
 
-
-				for aviso2 in new_json.data:
-					reas = aviso2.get("rea")
-					print len(reas)
+				print new_json
+				# for aviso2 in new_json.data:
+				# 	reas = aviso2.get("rea")
+				# 	print len(reas)
 					# for rea in reas:
 					# 	print rea.get("id_aviso")
 
