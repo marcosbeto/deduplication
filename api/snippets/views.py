@@ -83,7 +83,7 @@ def snippet_list_api(request, filters):
 				new_json = []
 
 				for i in xrange(len(serializer.data)):
-					reas = serializer.data[i]("rea")
+					reas = serializer.data[i].get("rea")
 					print reas
 					# if len(reas)>10:
 					# 	# print "eae"
