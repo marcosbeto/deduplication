@@ -86,7 +86,7 @@ class Models(object):
 
 					   for row in results:
 							similar_aviso_json = {
-								"titulo":row["titulo"],
+								"titulo":unicode(row["titulo"], "utf-8"),
 								"idzona":row["idzona"],
 								"idempresa":row["idempresa"],
 								"idtipodepropiedad":row["idtipodepropiedad"],
@@ -94,7 +94,7 @@ class Models(object):
 								"idavisopadre":row["idavisopadre"],
 								"idciudad":row["idciudad"],
 								"precio":row["precio"],
-								"direccion":row["direccion"],
+								"direccion":unicode(row["direccion"], "utf-8"),
 								"codigopostal":row["codigopostal"],
 								"habitaciones":row["habitaciones"],
 								"garages":row["garages"],
