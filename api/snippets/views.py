@@ -50,8 +50,23 @@ def snippet_list_api(request, filters):
 	"""
 	filters = filters.split("/")[:-1]
 
-	verification_code = request.GET.get('verification_code')
-	print verification_code
+	titulo = request.GET.get('titulo')
+	idzona = request.GET.get('idzona')
+	idempresa = request.GET.get('idempresa')
+	idtipodepropiedad = request.GET.get('idtipodepropiedad')
+	idsubtipodepropiedad = request.GET.get('idsubtipodepropiedad')
+	idavisopadre = request.GET.get('idavisopadre')
+	idciudad = request.GET.get('idciudad')
+	precio = request.GET.get('precio')
+	direccion = request.GET.get('direccion')
+	codigopostal = request.GET.get('codigopostal')
+	habitaciones = request.GET.get('habitaciones')
+	garages = request.GET.get('garages')
+	banos = request.GET.get('banos')
+	mediosbanos = request.GET.get('mediosbanos')
+	metroscubiertos = request.GET.get('metroscubiertos')
+	metrostotales = request.GET.get('metrostotales')
+	idtipodeoperacion = request.GET.get('idtipodeoperacion')
 
 	if request.method == 'GET':
 
