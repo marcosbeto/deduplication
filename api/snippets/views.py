@@ -71,7 +71,7 @@ def snippet_list_api(request, filters):
 					reas = aviso.get("rea")
 
 					for rea in reas:
-						print rea
+						print rea.get("id_aviso")
 
 				return JSONResponse(serializer.data)
 
