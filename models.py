@@ -82,11 +82,19 @@ class Models(object):
 					# Fetch all the rows in a list of lists.
 					results = self.con_mysql.fetchall()
 
-
-
 					for row in results:
+
+						titulo = ""
+						direccion = ""
+
+						if row["titulo"]!=None:
+							titulo = unicode(row["titulo"], "utf-8", errors='ignore')
+
+						if row["direccion"]!=None:
+							titulo = unicode(row["direccion"], "utf-8", errors='ignore')
+						
 						similar_aviso_json = {
-							"titulo":unicode(row["titulo"], "utf-8", errors='ignore'),
+							"titulo":titulo,
 							"idzona":row["idzona"],
 							"idempresa":row["idempresa"],
 							"idtipodepropiedad":row["idtipodepropiedad"],
@@ -94,7 +102,7 @@ class Models(object):
 							"idavisopadre":row["idavisopadre"],
 							"idciudad":row["idciudad"],
 							"precio":row["precio"],
-							"direccion":unicode(row["direccion"], "utf-8", errors='ignore'),
+							"direccion":direccion,
 							"codigopostal":row["codigopostal"],
 							"habitaciones":row["habitaciones"],
 							"garages":row["garages"],
