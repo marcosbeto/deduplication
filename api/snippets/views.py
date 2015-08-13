@@ -61,11 +61,15 @@ def snippet_list_api(request, filters):
 			else:
 				snippets = list(Ads_equals_with_filters.objects.all())
 
-				for snippet in snippets:
-					print snippet.id_aviso
+				# for snippet in snippets:
+				# 	print snippet.id_aviso
     	
 
 				serializer = SnippetSerializer(snippets, many=True)
+
+				for aviso in serializer.data:
+					print aviso
+					
 				return JSONResponse(serializer.data)
 
 	elif request.method == 'POST':
