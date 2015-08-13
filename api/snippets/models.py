@@ -11,7 +11,7 @@ class Snippet(models.Model):
 
 class Ads_equals_with_filters(models.Model):
     rea = ListField()
-    id_aviso = Integer()
+    id_aviso = IntField()
 
     objects = MongoDBManager()
 
