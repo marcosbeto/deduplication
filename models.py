@@ -76,44 +76,44 @@ class Models(object):
 					# Prepare SQL query
 					sql = "SELECT * FROM avisos where idaviso = " + str(id_aviso)
 
-					try:
-					   # Execute the SQL command
-					   self.con_mysql.execute(sql)
-					   # Fetch all the rows in a list of lists.
-					   results = self.con_mysql.fetchall()
+					# try:
+				   # Execute the SQL command
+				   self.con_mysql.execute(sql)
+				   # Fetch all the rows in a list of lists.
+				   results = self.con_mysql.fetchall()
 
-					  
+				  
 
-					   for row in results:
-							similar_aviso_json = {
-								"titulo":unicode(row["titulo"], "utf-8"),
-								"idzona":row["idzona"],
-								"idempresa":row["idempresa"],
-								"idtipodepropiedad":row["idtipodepropiedad"],
-								"idsubtipodepropiedad":row["idsubtipodepropiedad"],
-								"idavisopadre":row["idavisopadre"],
-								"idciudad":row["idciudad"],
-								"precio":row["precio"],
-								"direccion":unicode(row["direccion"], "utf-8"),
-								"codigopostal":row["codigopostal"],
-								"habitaciones":row["habitaciones"],
-								"garages":row["garages"],
-								"banos":row["banos"],
-								"mediosbanos":row["mediosbanos"],
-								"metroscubiertos":row["metroscubiertos"],
-								"metrostotales":row["metrostotales"],
-								"idtipodeoperacion":row["idtipodeoperacion"]
-							}
+				   for row in results:
+						similar_aviso_json = {
+							"titulo":unicode(row["titulo"], "utf-8"),
+							"idzona":row["idzona"],
+							"idempresa":row["idempresa"],
+							"idtipodepropiedad":row["idtipodepropiedad"],
+							"idsubtipodepropiedad":row["idsubtipodepropiedad"],
+							"idavisopadre":row["idavisopadre"],
+							"idciudad":row["idciudad"],
+							"precio":row["precio"],
+							"direccion":unicode(row["direccion"], "utf-8"),
+							"codigopostal":row["codigopostal"],
+							"habitaciones":row["habitaciones"],
+							"garages":row["garages"],
+							"banos":row["banos"],
+							"mediosbanos":row["mediosbanos"],
+							"metroscubiertos":row["metroscubiertos"],
+							"metrostotales":row["metrostotales"],
+							"idtipodeoperacion":row["idtipodeoperacion"]
+						}
 
-							aviso_json["data"].append(similar_aviso_json)
-							rea_json["rea"].append(aviso_json)
+						aviso_json["data"].append(similar_aviso_json)
+						rea_json["rea"].append(aviso_json)
 
-							
+						
 
-							print similar_aviso_json
+						print similar_aviso_json
 
-					except:
-					   print "Error: unable to fecth data"
+					# except:
+					#    print "Error: unable to fecth data"
 				
 				self.con_mongo.ads_equals_with_filters.insert(rea_json)
 
