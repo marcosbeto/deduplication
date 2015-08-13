@@ -77,7 +77,7 @@ def snippet_list_api(request, filters):
 				serializer = SnippetSerializer(snippets, many=True)
 				return JSONResponse(serializer.data)
 			else:
-				snippets = list(Ads_equals_with_filters.objects.all())
+				snippets = list(Ads_equals_with_filters.objects.raw_query({'rea.data.idtipodeoperacion' : int(idtipodeoperacion)}))
 				serializer = SnippetSerializer(snippets, many=True)
 
 				# for aviso in serializer.data:
