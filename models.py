@@ -77,7 +77,7 @@ class Models(object):
 					sql = "SELECT * FROM avisos where idaviso = " + str(id_aviso)
 
 					# try:
-				   	# Execute the SQL command
+					# Execute the SQL command
 					self.con_mysql.execute(sql)
 					# Fetch all the rows in a list of lists.
 					results = self.con_mysql.fetchall()
@@ -86,7 +86,7 @@ class Models(object):
 
 					for row in results:
 						similar_aviso_json = {
-							"titulo":unicode(row["titulo"], "utf-8"),
+							"titulo":unicode(row["titulo"], "utf-8", errors='ignore'),
 							"idzona":row["idzona"],
 							"idempresa":row["idempresa"],
 							"idtipodepropiedad":row["idtipodepropiedad"],
@@ -94,7 +94,7 @@ class Models(object):
 							"idavisopadre":row["idavisopadre"],
 							"idciudad":row["idciudad"],
 							"precio":row["precio"],
-							"direccion":unicode(row["direccion"], "utf-8"),
+							"direccion":unicode(row["direccion"], "utf-8", errors='ignore'),
 							"codigopostal":row["codigopostal"],
 							"habitaciones":row["habitaciones"],
 							"garages":row["garages"],
