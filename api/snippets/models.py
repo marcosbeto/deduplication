@@ -9,5 +9,10 @@ class Snippet(models.Model):
 
     objects = MongoDBManager()
 
+class Ads_equals_with_filters(models.Model):
+    rea = ListField()
+
+    objects = MongoDBManager()
+
     # class Meta:
     #     ordering = ('rea',)

@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from snippets.models import Snippet
+from snippets.models import Ads_equals_with_filters
 from snippets.serializers import SnippetSerializer
 from django.core import serializers
 from django.template import RequestContext, loader
@@ -47,24 +48,20 @@ def snippet_list_api(request, filters):
 	"""
 	List all code snippets, or create a new snippet.
 	"""
-
 	filters = filters.split("/")[:-1]
-	
-
 
 	if request.method == 'GET':
 
 		for filter_unique in filters:
 
 			if filter_unique=="all":
-
 				snippets = Snippet.objects.all()
 				serializer = SnippetSerializer(snippets, many=True)
-
 				return JSONResponse(serializer.data)
-
-
-
+			else:
+				snippets = Ads_equals_with_filters.objects.all()
+				serializer = SnippetSerializer(snippets, many=True)
+				return JSONResponse(serializer.data)
 
 	elif request.method == 'POST':
 		data = JSONParser().parse(request)
