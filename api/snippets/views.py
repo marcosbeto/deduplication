@@ -22,18 +22,49 @@ class JSONResponse(HttpResponse):
 		super(JSONResponse, self).__init__(content, **kwargs)
 
 @csrf_exempt
-def snippet_list(request):
+def snippet_list(request, filters):
 	"""
 	List all code snippets, or create a new snippet.
 	"""
-	if request.method == 'GET':
-		snippets = Snippet.objects.all()
-		serializer = SnippetSerializer(snippets, many=True)
+	filters = filters.split("/")[:-1]
 
+	titulo = request.GET.get('titulo')
+	idzona = request.GET.get('idzona')
+	idempresa = request.GET.get('idempresa')
+	idtipodepropiedad = request.GET.get('idtipodepropiedad')
+	idsubtipodepropiedad = request.GET.get('idsubtipodepropiedad')
+	idavisopadre = request.GET.get('idavisopadre')
+	idciudad = request.GET.get('idciudad')
+	precio = request.GET.get('precio')
+	direccion = request.GET.get('direccion')
+	codigopostal = request.GET.get('codigopostal')
+	habitaciones = request.GET.get('habitaciones')
+	garages = request.GET.get('garages')
+	banos = request.GET.get('banos')
+	mediosbanos = request.GET.get('mediosbanos')
+	metroscubiertos = request.GET.get('metroscubiertos')
+	metrostotales = request.GET.get('metrostotales')
+	idtipodeoperacion = request.GET.get('idtipodeoperacion')
+
+
+
+	if request.method == 'GET':
+
+		if filter_unique=="all":
+			snippets = Snippet.objects.all()
+			serializer = SnippetSerializer(snippets, many=True)
+			return JSONResponse(serializer.data)
+		else:
+			snippets = list(Ads_equals_with_filters.objects.raw_query(
+				{
+					'rea.data.idtipodeoperacion':int(idtipodeoperacion),
+					'$and': [{'$where': "this.rea.length > 1"}]
+				}
+			))
+			serializer = SnippetSerializer(snippets, many=True)
+			
 		context = {'duplicateds_avisos': snippets}
 		return render(request, 'all_duplicateds.html', context)
-
-		return JSONResponse(serializer.data)
 
 	elif request.method == 'POST':
 		data = JSONParser().parse(request)
@@ -69,46 +100,19 @@ def snippet_list_api(request, filters):
 	idtipodeoperacion = request.GET.get('idtipodeoperacion')
 
 	if request.method == 'GET':
-
-		for filter_unique in filters:
-
-			if filter_unique=="all":
-				snippets = Snippet.objects.all()
-				serializer = SnippetSerializer(snippets, many=True)
-				return JSONResponse(serializer.data)
-			else:
-				snippets = list(Ads_equals_with_filters.objects.raw_query(
-					{
-						'rea.data.idtipodeoperacion':int(idtipodeoperacion),
-						'$and': [{'$where': "this.rea.length > 10"}]
-					}
-				))
-				serializer = SnippetSerializer(snippets, many=True)
-
-				# new_json = []
-
-				# for i in xrange(len(serializer.data)):
-				# 	reas = serializer.data[i].get("rea")
-				# 	# print reas
-				# 	if len(reas)<10:
-				# 		print "eae"
-				# 		del serializer.data[i]
-					# for rea in reas:
-					# 	print rea.get("id_aviso")
-
-					# 	if filter_unique=="idtipodeoperacion":
-
-				# print new_json
-				# for aviso2 in new_json.data:
-				# 	reas = aviso2.get("rea")
-				# 	print len(reas)
-					# for rea in reas:
-					# 	print rea.get("id_aviso")
-
-					# 	if filter_unique=="idtipodeoperacion":
-
-
-				return JSONResponse(serializer.data)
+		if filter_unique=="all":
+			snippets = Snippet.objects.all()
+			serializer = SnippetSerializer(snippets, many=True)
+			return JSONResponse(serializer.data)
+		else:
+			snippets = list(Ads_equals_with_filters.objects.raw_query(
+				{
+					'rea.data.idtipodeoperacion':int(idtipodeoperacion),
+					'$and': [{'$where': "this.rea.length > 1"}]
+				}
+			))
+			serializer = SnippetSerializer(snippets, many=True)
+			return JSONResponse(serializer.data)
 
 	elif request.method == 'POST':
 		data = JSONParser().parse(request)
