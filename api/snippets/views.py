@@ -82,7 +82,7 @@ def snippet_list_api(request, filters):
 
 				for aviso in serializer.data:
 					reas = aviso.get("rea")
-					if len(reas)<2:
+					if len(reas)<3:
 						serializer.data.remove(reas)
 					# for rea in reas:
 					# 	print rea.get("id_aviso")
