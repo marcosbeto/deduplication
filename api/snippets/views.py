@@ -80,7 +80,7 @@ def snippet_list_api(request, filters):
 				snippets = list(Ads_equals_with_filters.objects.raw_query(
 					{
 						'rea.data.idtipodeoperacion':int(idtipodeoperacion),
-						'$where': "this.rea.length > 1" 
+						'$and': [{'$where': "this.rea.length > 1"}]
 					}
 				))
 				serializer = SnippetSerializer(snippets, many=True)
