@@ -59,7 +59,12 @@ def snippet_list_api(request, filters):
 				serializer = SnippetSerializer(snippets, many=True)
 				return JSONResponse(serializer.data)
 			else:
-				snippets = Ads_equals_with_filters.objects.all()
+				snippets = list(Ads_equals_with_filters.objects.all())
+
+				for snippet in snippets:
+					print snippet
+    	
+
 				serializer = SnippetSerializer(snippets, many=True)
 				return JSONResponse(serializer.data)
 
