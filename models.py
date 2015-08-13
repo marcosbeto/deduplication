@@ -71,7 +71,7 @@ class Models(object):
 
 				for id_aviso in array_rea:
 
-					aviso_json = {"id_aviso":id_aviso,"data":[]}
+					
 
 					# Prepare SQL query
 					sql = "SELECT * FROM avisos where idaviso = " + str(id_aviso)
@@ -113,7 +113,7 @@ class Models(object):
 								"idtipodeoperacion":row["idtipodeoperacion"]
 							}
 
-							aviso_json["data"].append(similar_aviso_json)
+							aviso_json = {"id_aviso":id_aviso,"data":similar_aviso_json}
 							rea_json["rea"].append(aviso_json)
 
 					except:
