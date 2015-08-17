@@ -97,7 +97,7 @@ class Image_Processor(object):
 					folder_name = Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + folder_to_download
 
 					for file in os.listdir(folder_name):
-						print file
+						
 						if file.endswith(".jpg"):
 
 							hist = self.get_histogram(self, os.path.join(folder_name, file))
