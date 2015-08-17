@@ -133,7 +133,7 @@ class Models(object):
 	def get_all_avisos_online(self):
 		
 		array_all_avisos_online = []		
-		all_avisos_online = self.con_mongo.avisosonline.find().sort([("idaviso", 1)])
+		all_avisos_online = self.con_mongo.avisosonline_2.find().sort([("idaviso", 1)])
 
 		#iterate in all avisos that have some photo with the same histogram
 		for aviso_online in all_avisos_online:
@@ -290,7 +290,7 @@ class Models(object):
 
 	def is_aviso_online(self,aviso_id):
 
-		aviso_online = self.con_mongo.avisosonline.find({"idaviso":int(aviso_id)}).count()
+		aviso_online = self.con_mongo.avisosonline_2.find({"idaviso":int(aviso_id)}).count()
 
 		if aviso_online > 0:
 			return True
