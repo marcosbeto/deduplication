@@ -46,9 +46,7 @@ def snippet_list(request, filters):
 	metrostotales = request.GET.get('metrostotales')
 	idtipodeoperacion = request.GET.get('idtipodeoperacion')
 
-	if not banos:
-		print 'banos'
-		print banos
+	
 
 	if request.method == 'GET':
 		for filter_unique in filters:
@@ -58,9 +56,11 @@ def snippet_list(request, filters):
 				# return JSONResponse(serializer.data)
 			else:
 
-				raw_query_complete = {
-						'rea.data.idtipodeoperacion':int(idtipodeoperacion)
-					}
+				raw_query_complete = {}
+
+				if idtipodeoperacion:
+					raw_query_complete.update({'rea.data.idtipodeoperacion':int(idtipodeoperacion)})
+
 
 				raw_query_complete.update({'$and': [{'$where': "this.rea.length > 1"}]})
 
