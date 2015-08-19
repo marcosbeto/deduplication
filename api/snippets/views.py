@@ -46,7 +46,9 @@ def snippet_list(request, filters):
 	metrostotales = request.GET.get('metrostotales')
 	idtipodeoperacion = request.GET.get('idtipodeoperacion')
 
-	print banos
+	if not banos:
+		print 'banos'
+		print banos
 
 	if request.method == 'GET':
 		for filter_unique in filters:
