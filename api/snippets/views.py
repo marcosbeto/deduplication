@@ -57,12 +57,15 @@ def snippet_list(request, filters):
 				# serializer = SnippetSerializer(snippets, many=True)
 				# return JSONResponse(serializer.data)
 			else:
-				snippets = Ads_equals_with_filters.objects.raw_query(
-					{
-						'rea.data.idtipodeoperacion':int(idtipodeoperacion),
-						'$and': [{'$where': "this.rea.length > 1"}]
+
+				raw_query_complete = {
+						'rea.data.idtipodeoperacion':int(idtipodeoperacion)
+						
 					}
-				)
+
+				raw_query_complete.append({'$and': [{'$where': "this.rea.length > 1"}]})
+
+				snippets = Ads_equals_with_filters.objects.raw_query(raw_query_complete)
 				# serializer = SnippetSerializer(snippets, many=True)
 			
 		context = {'duplicateds_avisos': snippets}
