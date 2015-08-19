@@ -44,9 +44,6 @@ def snippet_list(request, filters):
 	mediosbanos = request.GET.get('mediosbanos')
 	metroscubiertos = request.GET.get('metroscubiertos')
 	metrostotales = request.GET.get('metrostotales')
-	idtipodeoperacion = 
-
-	
 
 	if request.method == 'GET':
 		for filter_unique in filters:
