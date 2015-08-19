@@ -28,22 +28,6 @@ def snippet_list(request, filters):
 	"""
 	filters = filters.split("/")[:-1]
 
-	titulo = request.GET.get('titulo')
-	idzona = request.GET.get('idzona')
-	idempresa = request.GET.get('idempresa')
-	idtipodepropiedad = request.GET.get('idtipodepropiedad')
-	idsubtipodepropiedad = request.GET.get('idsubtipodepropiedad')
-	idavisopadre = request.GET.get('idavisopadre')
-	idciudad = request.GET.get('idciudad')
-	precio = request.GET.get('precio')
-	direccion = request.GET.get('direccion')
-	codigopostal = request.GET.get('codigopostal')
-	habitaciones = request.GET.get('habitaciones')
-	garages = request.GET.get('garages')
-	banos = request.GET.get('banos')
-	mediosbanos = request.GET.get('mediosbanos')
-	metroscubiertos = request.GET.get('metroscubiertos')
-	metrostotales = request.GET.get('metrostotales')
 
 	if request.method == 'GET':
 		for filter_unique in filters:
@@ -53,13 +37,14 @@ def snippet_list(request, filters):
 				# return JSONResponse(serializer.data)
 			else:
 
-				raw_query_complete = {}
+				raw_query_complete = get_raw_sql_filters(request)
 
-				if request.GET.get('idtipodeoperacion'):
-					raw_query_complete.update({'rea.data.idtipodeoperacion':int(request.GET.get('idtipodeoperacion'))})
+				# idavisopadre = request.GET.get('idavisopadre')
+				# garages = request.GET.get('garages')
+				# banos = request.GET.get('banos')
+				# mediosbanos = request.GET.get('mediosbanos')
 
-
-				raw_query_complete.update({'$and': [{'$where': "this.rea.length > 1"}]})
+				
 
 				snippets = Ads_equals_with_filters.objects.raw_query(raw_query_complete)
 				# serializer = SnippetSerializer(snippets, many=True)
@@ -204,3 +189,54 @@ def snippet_detail_api(request, id):
 	elif request.method == 'DELETE':
 		snippet.delete()
 		return HttpResponse(status=204)
+
+def get_raw_sql_filters(request):
+	
+	raw_query_complete = {}
+
+	if request.GET.get('idtipodeoperacion'):
+		raw_query_complete.update({'rea.data.idtipodeoperacion':int(request.GET.get('idtipodeoperacion'))})
+
+	if request.GET.get('idtipodepropiedad'):
+		raw_query_complete.update({'rea.data.idtipodepropiedad':int(request.GET.get('idtipodepropiedad'))})
+
+	if request.GET.get('idsubtipodepropiedad'):
+		raw_query_complete.update({'rea.data.idsubtipodepropiedad':int(request.GET.get('idsubtipodepropiedad'))})
+
+	if request.GET.get('metroscubiertos'):
+		raw_query_complete.update({'rea.data.metroscubiertos':int(request.GET.get('metroscubiertos'))})
+
+	if request.GET.get('metrostotales'):
+		raw_query_complete.update({'rea.data.metrostotales':int(request.GET.get('metrostotales'))})
+	
+	if request.GET.get('idtipodeoperacion'):
+		raw_query_complete.update({'rea.data.idtipodeoperacion':int(request.GET.get('idtipodeoperacion'))})
+
+	if request.GET.get('habitaciones'):
+		raw_query_complete.update({'rea.data.habitaciones':int(request.GET.get('habitaciones'))})
+
+	if request.GET.get('idciudad'):
+		raw_query_complete.update({'rea.data.idciudad':int(request.GET.get('idciudad'))})
+
+	if request.GET.get('idzona'):
+		raw_query_complete.update({'rea.data.idzona':int(request.GET.get('idzona'))})
+
+	if request.GET.get('precio'):
+		raw_query_complete.update({'rea.data.precio':int(request.GET.get('precio'))})
+
+	if request.GET.get('idempresa'):
+		raw_query_complete.update({'rea.data.idempresa':int(request.GET.get('idempresa'))})
+
+	if request.GET.get('codigopostal'):
+		raw_query_complete.update({'rea.data.codigopostal':request.GET.get('codigopostal')})
+
+	if request.GET.get('direccion'):
+		raw_query_complete.update({'rea.data.direccion':request.GET.get('direccion')})
+
+	if request.GET.get('titulo'):
+		raw_query_complete.update({'rea.data.titulo':request.GET.get('titulo')})
+
+
+	raw_query_complete.update({'$and': [{'$where': "this.rea.length > 1"}]})
+
+	return raw_query_complete
