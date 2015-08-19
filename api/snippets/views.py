@@ -44,7 +44,7 @@ def snippet_list(request, filters):
 	mediosbanos = request.GET.get('mediosbanos')
 	metroscubiertos = request.GET.get('metroscubiertos')
 	metrostotales = request.GET.get('metrostotales')
-	idtipodeoperacion = request.GET.get('idtipodeoperacion')
+	idtipodeoperacion = 
 
 	
 
@@ -58,8 +58,8 @@ def snippet_list(request, filters):
 
 				raw_query_complete = {}
 
-				if idtipodeoperacion:
-					raw_query_complete.update({'rea.data.idtipodeoperacion':int(idtipodeoperacion)})
+				if request.GET.get('idtipodeoperacion'):
+					raw_query_complete.update({'rea.data.idtipodeoperacion':int(request.GET.get('idtipodeoperacion'))})
 
 
 				raw_query_complete.update({'$and': [{'$where': "this.rea.length > 1"}]})
