@@ -163,9 +163,11 @@ class Models(object):
 					equals_avisos_filtered["reas"].append(int(aviso.get("id_aviso")))
 
 					# print equals_avisos_filtered
-
+					print "tamaaaaae"
 					for key in equals_avisos_filtered.keys(): 
+						print str(key) + "###################"
 						if not key == "reas":
+							print str(key) + "---------------------"
 							equals_avisos_filtered = self.add_equal_filtered_add(key, aviso, equals_avisos_filtered)
 
 				print equals_avisos_filtered
@@ -174,7 +176,7 @@ class Models(object):
 
 			done_compare = True
 
-	def add_equal_filtered_add(filter_option, aviso, equals_avisos_filtered):
+	def add_equal_filtered_add(self, filter_option, aviso, equals_avisos_filtered):
 
 		# all_idtipodepropiedad = equals_avisos_filtered["idtipodepropiedad"]
 		all_filters_data = equals_avisos_filtered[filter_option]
