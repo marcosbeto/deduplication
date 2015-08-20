@@ -158,6 +158,8 @@ class Models(object):
 					"direccion":[]
 				} #equal_avisos
 
+				print array_rea
+
 				for aviso in array_rea:
 
 					equals_avisos_filtered["reas"].append(int(aviso.get("id_aviso")))
