@@ -5,7 +5,7 @@
 {% if duplicateds_avisos_filtered %}
     <ul>
     {% for filters in duplicateds_avisos_filtered %}
-        <h3>{{ filters }}<h3>
+        <h3>{{ filters.idtipodeoperacion }}<h3>
     	<li>
     	{% for item in filters.idtipodeoperacion %}
         	<h3>{{ item }}<h3>
