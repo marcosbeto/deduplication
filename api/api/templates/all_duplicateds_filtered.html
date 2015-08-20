@@ -18,9 +18,9 @@
             {% for filters in duplicateds_avisos_filtered %}
             	
                 <div class="panel panel-default">
-                    <div class="panel-heading"> <b>{{filters.idtipodeoperacion|length}}</b> {{ filters.reas }}</div>
+                    <div class="panel-heading"> <b>{{filters.idtipodepropiedad|length}}</b> {{ filters.reas }}</div>
                     <div class="panel-body">
-                        {% for item in filters.idtipodeoperacion %}
+                        {% for item in filters.idtipodepropiedad %}
                             <p>
                                 <b>{{ item.value }}: </b>
                                 {% for aviso_id in item.ida %}
