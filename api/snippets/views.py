@@ -4,6 +4,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from snippets.models import Snippet
 from snippets.models import Ads_equals_with_filters
+from snippets.models import Equal_ads_filtered
 from snippets.serializers import SnippetSerializer
 from django.core import serializers
 from django.template import RequestContext, loader
