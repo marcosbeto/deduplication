@@ -127,6 +127,35 @@ class Models(object):
 		# disconnect from server
 		self.con_mysql.close()
 
+	def group_repeated_ads_filters(self):
+
+		skip_compare = 0
+		done_compare = False
+		number_of_similar_aviso_analyzed = 0
+
+		while not done_compare:
+
+			equals_avisos = self.con_mongo.ads_equals_with_filters.find().sort([("rea", 1)]).skip(skip_compare)
+
+			for equal_aviso in equals_avisos:
+
+				number_of_similar_aviso_analyzed += 1
+
+				if number_of_similar_aviso_analyzed%10==0:
+					print str(number_of_similar_aviso_analyzed)
+
+				skip_compare += 1
+
+				array_rea = equal_aviso.get("rea")
+
+				for aviso in array_rea:
+					print equal_aviso.get("data")
+
+
+
+
+			done_compare = True
+
 	def add_image_histogram(self, aviso_json):
 		self.con_mongo.ads_histograms_online.insert(aviso_json)
 

@@ -49,3 +49,7 @@ class Filters(object):
 	def create_detailed_repeated_ads_filters(self):
 		models = Models()
 		models.create_detailed_repeated_ads_filters()
+
+	def group_repeated_ads_filters(self):
+		models = Models()
+		models.group_repeated_ads_filters()

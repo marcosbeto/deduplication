@@ -38,14 +38,6 @@ def snippet_list(request, filters):
 			else:
 
 				raw_query_complete = get_raw_sql_filters(request)
-
-				# idavisopadre = request.GET.get('idavisopadre')
-				# garages = request.GET.get('garages')
-				# banos = request.GET.get('banos')
-				# mediosbanos = request.GET.get('mediosbanos')
-
-				
-
 				snippets = Ads_equals_with_filters.objects.raw_query(raw_query_complete)
 				# serializer = SnippetSerializer(snippets, many=True)
 			
@@ -203,26 +195,14 @@ def get_raw_sql_filters(request):
 	if request.GET.get('idsubtipodepropiedad'):
 		raw_query_complete.update({'rea.data.idsubtipodepropiedad':int(request.GET.get('idsubtipodepropiedad'))})
 
-	if request.GET.get('metroscubiertos'):
-		raw_query_complete.update({'rea.data.metroscubiertos':int(request.GET.get('metroscubiertos'))})
-
-	if request.GET.get('metrostotales'):
-		raw_query_complete.update({'rea.data.metrostotales':int(request.GET.get('metrostotales'))})
-	
 	if request.GET.get('idtipodeoperacion'):
 		raw_query_complete.update({'rea.data.idtipodeoperacion':int(request.GET.get('idtipodeoperacion'))})
-
-	if request.GET.get('habitaciones'):
-		raw_query_complete.update({'rea.data.habitaciones':int(request.GET.get('habitaciones'))})
 
 	if request.GET.get('idciudad'):
 		raw_query_complete.update({'rea.data.idciudad':int(request.GET.get('idciudad'))})
 
 	if request.GET.get('idzona'):
 		raw_query_complete.update({'rea.data.idzona':int(request.GET.get('idzona'))})
-
-	if request.GET.get('precio'):
-		raw_query_complete.update({'rea.data.precio':int(request.GET.get('precio'))})
 
 	if request.GET.get('idempresa'):
 		raw_query_complete.update({'rea.data.idempresa':int(request.GET.get('idempresa'))})
@@ -236,6 +216,20 @@ def get_raw_sql_filters(request):
 	if request.GET.get('titulo'):
 		raw_query_complete.update({'rea.data.titulo':request.GET.get('titulo')})
 
+	# The following cases recieves a parameter that will represent the percentage of range down and up that will be searched
+	# Example: metroscubiertos = 10 -> we will search for all equal ads that have the metrocubiertos between 90-110% of similar sizes
+
+	if request.GET.get('metroscubiertos'):
+		raw_query_complete.update({'rea.data.metroscubiertos':int(request.GET.get('metroscubiertos'))})
+
+	if request.GET.get('metrostotales'):
+		raw_query_complete.update({'rea.data.metrostotales':int(request.GET.get('metrostotales'))})
+	
+	if request.GET.get('habitaciones'):
+		raw_query_complete.update({'rea.data.habitaciones':int(request.GET.get('habitaciones'))})
+
+	if request.GET.get('precio'):
+		raw_query_complete.update({'rea.data.precio':int(request.GET.get('precio'))})
 
 	raw_query_complete.update({'$and': [{'$where': "this.rea.length > 1"}]})
 
