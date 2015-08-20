@@ -57,8 +57,6 @@ def equals_ads_list_filtered(request):
 	"""
 	List all code snippets, or create a new snippet.
 	"""
-	filters = filters.split("/")[:-1]
-
 	if request.method == 'GET':
 
 		raw_query_complete = get_raw_sql_filters(request)
