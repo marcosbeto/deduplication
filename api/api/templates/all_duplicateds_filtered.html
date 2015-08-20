@@ -20,13 +20,13 @@
         {% if duplicateds_avisos_filtered %}
             {% for filters in duplicateds_avisos_filtered %}
             	
-                <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapse{{filters.reas[0]}}" aria-expanded="false" aria-controls="collapse{{filters.reas[0]}}">
+                <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapse{{filters.reas.0}}" aria-expanded="false" aria-controls="collapse{{filters.reas.0}}">
                     [{% for rea in filters.reas %}
                         {{ rea }}&nbsp;
                     {% endfor %} ]
                 </a>
 
-                <div class="panel panel-default"  class="collapse" id="collapse{{filters.reas[0]}}">
+                <div class="panel panel-default"  class="collapse" id="collapse{{filters.reas.0}}">
                    <!--  -->
 
                    <!--  
