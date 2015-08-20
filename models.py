@@ -135,7 +135,7 @@ class Models(object):
 
 		while not done_compare:
 
-			equals_avisos = self.con_mongo.ads_equals_with_filters.find().sort([("rea", 1)]).skip(skip_compare)
+			equals_avisos = self.con_mongo.snippets_ads_equals_with_filters.find().sort([("rea", 1)]).skip(skip_compare)
 
 			for equal_aviso in equals_avisos:
 
@@ -158,24 +158,13 @@ class Models(object):
 					"direccion":[]
 				} #equal_avisos
 
-				print 'equal_aviso'
-				print equal_aviso
-				print 'array_rea'
-				print array_rea
-
 				for aviso in array_rea:
 
 					equals_avisos_filtered["reas"].append(int(aviso.get("id_aviso")))
 
-					# print equals_avisos_filtered
-					print "tamaaaaae"
 					for key in equals_avisos_filtered.keys(): 
-						print str(key) + "###################"
 						if not key == "reas":
-							print str(key) + "---------------------"
-							equals_avisos_filtered = self.add_equal_filtered_add(key, aviso, equals_avisos_filtered)
-
-				print equals_avisos_filtered
+							self.add_equal_filtered_add(key, aviso, equals_avisos_filtered)
 
 				self.con_mongo.equal_ads_filtered.insert(equals_avisos_filtered)
 
@@ -200,9 +189,6 @@ class Models(object):
 			filter_data_json = {"value":aviso.get("data").get(filter_option),"ida":[int(aviso.get("id_aviso"))]}
 			equals_avisos_filtered[filter_option].append(filter_data_json)
 
-		print "******************************************************************"
-		print equals_avisos_filtered
-		return equals_avisos_filtered
 
 	def add_image_histogram(self, aviso_json):
 		self.con_mongo.ads_histograms_online.insert(aviso_json)
