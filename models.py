@@ -193,6 +193,7 @@ class Models(object):
 			filter_data_json = {"value":aviso.get("data").get(filter_option),"ida":[int(aviso.get("id_aviso"))]}
 			equals_avisos_filtered[filter_option].append(filter_data_json)
 
+		print equals_avisos_filtered
 		return equals_avisos_filtered
 
 	def add_image_histogram(self, aviso_json):
