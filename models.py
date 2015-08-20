@@ -91,7 +91,7 @@ class Models(object):
 								titulo = unicode(row["titulo"], "utf-8", errors='ignore')
 
 							if row["direccion"]!=None:
-								titulo = unicode(row["direccion"], "utf-8", errors='ignore')
+								direccion = unicode(row["direccion"], "utf-8", errors='ignore')
 							
 							similar_aviso_json = {
 								"titulo":titulo,
@@ -119,7 +119,7 @@ class Models(object):
 					except:
 					   print "Error: unable to fecth data"
 				
-				self.con_mongo.ads_equals_with_filters.insert(rea_json)
+				self.con_mongo.ads_equals_with_filters_2.insert(rea_json)
 
 			done_compare = True
 
