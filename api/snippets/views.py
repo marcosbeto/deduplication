@@ -60,7 +60,6 @@ def equals_ads_list_filtered(request):
 	"""
 	if request.method == 'GET':
 
-		raw_query_complete = get_raw_sql_filters(request)
 		snippets = Equal_ads_filtered.objects.all()
 		context = {'duplicateds_avisos_filtered': snippets}
 		print snippets
