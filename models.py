@@ -175,7 +175,6 @@ class Models(object):
 	def add_equal_filtered_add(self, filter_option, aviso, equals_avisos_filtered):
 
 		# all_idtipodepropiedad = equals_avisos_filtered["idtipodepropiedad"]
-		print equals_avisos_filtered
 		all_filters_data = equals_avisos_filtered[filter_option]
 
 		# idtipodepropiedad_added = False
