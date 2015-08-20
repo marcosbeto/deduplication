@@ -18,14 +18,18 @@
             {% for filters in duplicateds_avisos_filtered %}
             	
                 <div class="panel panel-default">
-                    <div class="panel-heading"> <b>{{filters.idtipodepropiedad|length}}</b> {{ filters.reas }}</div>
+                    <div class="panel-heading">
+                        [{% for rea in filters.reas %}
+                            {{ rea }}&nbsp;
+                        {% endfor %} ]
+                    </div>
                     <div class="panel-body">
                         {% for item in filters.idtipodepropiedad %}
                             <p>
-                                <b>{{ item.value }}: </b>
-                                {% for aviso_id in item.ida %}
-                                    {{aviso_id}} 
-                                {% endfor %}
+                                <b>idtipodepropiedad: <u>{{ item.value }}</u></b>
+                                    {% for aviso_id in item.ida %}
+                                        <a href="/redirect_to_aviso/{{ aviso_id }}" target="_blank">{{ aviso_id }}</a>
+                                    {% endfor %}
                             </p>
                         {% endfor %}                        
                     </div>
