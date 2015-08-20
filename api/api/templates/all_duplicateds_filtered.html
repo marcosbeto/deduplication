@@ -28,12 +28,82 @@
                             <i><b>Property Type:</b></i><br>
                             <p>
                             {% for item in filters.idtipodepropiedad %}
-                                        &nbsp;&nbsp; <b>{{ item.value }}</b> | 
-                                        Avisos:  
-                                        [{% for aviso_id in item.ida %}
-                                            <a href="/redirect_to_aviso/{{ aviso_id }}" target="_blank">{{ aviso_id }}</a>
-                                        {% endfor %}]
-                                        <br>
+                                &nbsp;&nbsp; <b>{{ item.value }}</b> | 
+                                Avisos:  
+                                [{% for aviso_id in item.ida %}
+                                    <a href="/redirect_to_aviso/{{ aviso_id }}" target="_blank">{{ aviso_id }}</a>
+                                {% endfor %}]
+                                <br>
+                            {% endfor %}                        
+                            </p>
+                        </p>
+
+                        <p>
+                            <i><b>Negotiation Type:</b></i><br>
+                            <p>
+                            {% for item in filters.idtipodeoperacion %}
+                                &nbsp;&nbsp; <b>{{ item.value }}</b> | 
+                                Avisos:  
+                                [{% for aviso_id in item.ida %}
+                                    <a href="/redirect_to_aviso/{{ aviso_id }}" target="_blank">{{ aviso_id }}</a>
+                                {% endfor %}]
+                                <br>
+                            {% endfor %}                        
+                            </p>
+                        </p>
+
+                        <p>
+                            <i><b>Price:</b></i><br>
+                            <p>
+                            {% for item in filters.precio %}
+                                &nbsp;&nbsp; <b>{{ item.value }}</b> | 
+                                Avisos:  
+                                [{% for aviso_id in item.ida %}
+                                    <a href="/redirect_to_aviso/{{ aviso_id }}" target="_blank">{{ aviso_id }}</a>
+                                {% endfor %}]
+                                <br>
+                            {% endfor %}                        
+                            </p>
+                        </p>
+
+                        <p>
+                            <i><b>Zona de Valor:</b></i><br>
+                            <p>
+                            {% for item in filters.idzona %}
+                                &nbsp;&nbsp; <b>{{ item.value }}</b> | 
+                                Avisos:  
+                                [{% for aviso_id in item.ida %}
+                                    <a href="/redirect_to_aviso/{{ aviso_id }}" target="_blank">{{ aviso_id }}</a>
+                                {% endfor %}]
+                                <br>
+                            {% endfor %}                        
+                            </p>
+                        </p>
+
+                        <p>
+                            <i><b>Title:</b></i><br>
+                            <p>
+                            {% for item in filters.titulo %}
+                                &nbsp;&nbsp; <b>{{ item.value }}</b> | 
+                                Avisos:  
+                                [{% for aviso_id in item.ida %}
+                                    <a href="/redirect_to_aviso/{{ aviso_id }}" target="_blank">{{ aviso_id }}</a>
+                                {% endfor %}]
+                                <br>
+                            {% endfor %}                        
+                            </p>
+                        </p>
+
+                        <p>
+                            <i><b>Address:</b></i><br>
+                            <p>
+                            {% for item in filters.direccion %}
+                                &nbsp;&nbsp; <b>{{ item.value }}</b> | 
+                                Avisos:  
+                                [{% for aviso_id in item.ida %}
+                                    <a href="/redirect_to_aviso/{{ aviso_id }}" target="_blank">{{ aviso_id }}</a>
+                                {% endfor %}]
+                                <br>
                             {% endfor %}                        
                             </p>
                         </p>
