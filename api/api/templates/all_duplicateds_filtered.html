@@ -24,17 +24,18 @@
                         {% endfor %} ]
                     </div>
                     <div class="panel-body">
-                        
-                        <i><b>Property Type:</b></i><br>
                         <p>
-                        {% for item in filters.idtipodepropiedad %}
-                                    - <b>{{ item.value }}</b> | 
-                                    Avisos:  
-                                    [{% for aviso_id in item.ida %}
-                                        <a href="/redirect_to_aviso/{{ aviso_id }}" target="_blank">{{ aviso_id }}</a>
-                                    {% endfor %}]
-                                    <br>
-                        {% endfor %}                        
+                            <i><b>Property Type:</b></i><br>
+                            <p>
+                            {% for item in filters.idtipodepropiedad %}
+                                        &nbsp;&nbsp; <b>{{ item.value }}</b> | 
+                                        Avisos:  
+                                        [{% for aviso_id in item.ida %}
+                                            <a href="/redirect_to_aviso/{{ aviso_id }}" target="_blank">{{ aviso_id }}</a>
+                                        {% endfor %}]
+                                        <br>
+                            {% endfor %}                        
+                            </p>
                         </p>
                     </div>
                 </div>
