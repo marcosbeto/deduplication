@@ -1,14 +1,12 @@
 <h2>All Duplicated Ads - Photo Analysis</h2>
 
-{{ duplicateds_avisos_filtered }}
 
 {% if duplicateds_avisos_filtered %}
     <ul>
     {% for filters in duplicateds_avisos_filtered %}
-        <h3>{{ filters.idtipodeoperacion }}<h3>
     	<li>
     	{% for item in filters.idtipodeoperacion %}
-        	<h3>{{ item }}<h3>
+        	<h3>{{ item.value }}<h3>
             <p>
                 {% for aviso_id in filters.ida %}
                     <a href="/redirect_to_aviso/{{ aviso_id.id_aviso }}" target="_blank">{{ aviso_id }}</a>
