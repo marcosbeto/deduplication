@@ -156,7 +156,7 @@ class Models(object):
 					"idtipodepropiedad":[],
 					"titulo":[],
 					"direccion":[],
-					"is_all_equal":True
+					"equal_filters":0
 				} #equal_avisos
 
 				for aviso in array_rea:
@@ -164,15 +164,15 @@ class Models(object):
 					equals_avisos_filtered["reas"].append(int(aviso.get("id_aviso")))
 
 					for key in equals_avisos_filtered.keys(): 
-						if not key == "reas":
+						if not key == "reas" and not key == "equal_filters":
 							self.add_equal_filtered_add(key, aviso, equals_avisos_filtered)
 
 				is_all_equal = True
 
 				for key in equals_avisos_filtered.keys(): 
-					if not key == "reas":
-						if len(equals_avisos_filtered[key])>1:
-							equals_avisos_filtered[is_all_equal] = False
+					if not key == "reas" and not key == "equal_filters":
+						if len(equals_avisos_filtered[key])==1:
+							equals_avisos_filtered["equal_filters"] += 1
 							break
 
 				self.con_mongo.equal_ads_filtered.insert(equals_avisos_filtered)
