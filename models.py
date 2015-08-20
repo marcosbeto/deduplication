@@ -166,7 +166,7 @@ class Models(object):
 
 					for key in equals_avisos_filtered.keys(): 
 						if not key == "reas":
-							self.add_equal_filtered_add(key, aviso, equals_avisos_filtered)
+							equals_avisos_filtered = self.add_equal_filtered_add(key, aviso, equals_avisos_filtered)
 
 				self.con_mongo.equal_ads_filtered.insert(equals_avisos_filtered)
 
@@ -190,6 +190,8 @@ class Models(object):
 		if len(all_filters_data) == 0 or not aviso_added:
 			filter_data_json = {"value":aviso.get("data").get(filter_option),"ida":[int(aviso.get("id_aviso"))]}
 			equals_avisos_filtered[filter_option].append(filter_data_json)
+
+		return equals_avisos_filtered
 
 	def add_image_histogram(self, aviso_json):
 		self.con_mongo.ads_histograms_online.insert(aviso_json)
