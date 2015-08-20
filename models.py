@@ -149,7 +149,7 @@ class Models(object):
 				array_rea = equal_aviso.get("rea")
 
 				for aviso in array_rea:
-					print equal_aviso.get("data")
+					print aviso.get("data")
 
 
 
