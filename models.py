@@ -148,11 +148,36 @@ class Models(object):
 
 				array_rea = equal_aviso.get("rea")
 
+				equals_avisos_filtered = {
+					"reas":[],
+					"precio":[],
+					"idtipodeoperacion":[],
+					"idzona":[],
+					"idtipodepropiedad":[],
+					"titulo":[],
+					"direccion":[]
+				} #equal_avisos
+
 				for aviso in array_rea:
-					print aviso.get("data").get("titulo")
+
+					equals_avisos_filtered["reas"].append(aviso.get("id_aviso"))
+
+					all_idtipodepropiedad = equals_avisos_filtered["idtipodepropiedad"]
+
+					idtipodepropiedad_added = False
+					
+					for idtipodepropiedad in all_idtipodepropiedad:
+						
+						if aviso.get("data").get("idtipodepropiedad") == idtipodepropiedad["value"]:
+							idtipodepropiedad_added = True
+							idtipodepropiedad["ida"].append(aviso.get("id_aviso"))
+
+					if len(all_idtipodepropiedad) == 0 or not idtipodepropiedad_added:
+						idtipodepropiedad_json = {"value":aviso.get("data").get("idtipodepropiedad"),"ida":[aviso.get("id_aviso")]}
+						equals_avisos_filtered["idtipodepropiedad"].append(idtipodepropiedad_json)
 
 
-
+				self.con_mongo.equal_ads_filtered.insert(equals_avisos_filtered)
 
 			done_compare = True
 
