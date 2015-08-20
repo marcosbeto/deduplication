@@ -158,6 +158,9 @@ class Models(object):
 					"direccion":[]
 				} #equal_avisos
 
+				print 'equal_aviso'
+				print equal_aviso
+				print 'array_rea'
 				print array_rea
 
 				for aviso in array_rea:
