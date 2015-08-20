@@ -20,18 +20,16 @@
         {% if duplicateds_avisos_filtered %}
             {% for filters in duplicateds_avisos_filtered %}
             	
+                <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapse{{filters.reas}}" aria-expanded="false" aria-controls="collapse{{filters.reas}}">
+                    [{% for rea in filters.reas %}
+                        {{ rea }}&nbsp;
+                    {% endfor %} ]
+                </a>
+
                 <div class="panel panel-default">
-                    <div class="panel-heading" controls="collapse{{filters.reas}}">
-                        [{% for rea in filters.reas %}
-                            {{ rea }}&nbsp;
-                        {% endfor %} ]
-                    </div>
+                   <!--  -->
 
-                    <!--  -->
-
-                    <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                      Link with href
-                    </a>
+                   <!--  
                     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                       Button with data-target
                     </button>
@@ -39,10 +37,9 @@
                       <div class="well">
                         ...
                       </div>
-                    </div>
+                    </div> -->
 
                     <!--  -->
-
                     <div class="panel-body" class="collapse" id="collapse{{filters.reas}}">
                         <p>
                             <i><b>Property Type:</b></i><br>
