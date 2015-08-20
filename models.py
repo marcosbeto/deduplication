@@ -172,8 +172,7 @@ class Models(object):
 				for key in equals_avisos_filtered.keys(): 
 					if not key == "reas" and not key == "equal_filters":
 						if len(equals_avisos_filtered[key])==1:
-							equals_avisos_filtered["equal_filters"] += 1
-							break
+							equals_avisos_filtered["equal_filters"] = equals_avisos_filtered["equal_filters"] + 1
 
 				self.con_mongo.equal_ads_filtered.insert(equals_avisos_filtered)
 
