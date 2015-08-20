@@ -53,6 +53,38 @@ def snippet_list(request, filters):
 		return JSONResponse(serializer.errors, status=400)
 
 @csrf_exempt
+def equals_ads_list_filtered(request, filters):
+	"""
+	List all code snippets, or create a new snippet.
+	"""
+	filters = filters.split("/")[:-1]
+
+	if request.method == 'GET':
+
+		for filter_unique in filters:
+			if filter_unique=="all":
+				snippets = Snippet.objects.all()
+				context = {'duplicateds_avisos': snippets}
+
+				return render(request, 'all_duplicateds.html', context)
+			else:
+				raw_query_complete = get_raw_sql_filters(request)
+				snippets = Equal_ads_filtered.objects.all()
+				context = {'duplicateds_avisos_filtered': snippets}
+
+				return render(request, 'all_duplicateds_filtered.html', context)
+	
+	elif request.method == 'POST':
+		data = JSONParser().parse(request)
+		serializer = SnippetSerializer(data=data)
+		
+		if serializer.is_valid():
+			serializer.save()
+			return JSONResponse(serializer.data, status=201)
+		
+		return JSONResponse(serializer.errors, status=400)
+
+@csrf_exempt
 def snippet_list_api(request, filters):
 	"""
 	List all code snippets, or create a new snippet.

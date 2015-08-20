@@ -123,7 +123,6 @@ class Models(object):
 
 			done_compare = True
 
-
 		# disconnect from server
 		self.con_mysql.close()
 

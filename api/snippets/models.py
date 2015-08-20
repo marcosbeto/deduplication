@@ -15,5 +15,19 @@ class Ads_equals_with_filters(models.Model):
 
     objects = MongoDBManager()
 
+class Equal_ads_filtered(models.Model):
+    reas = ListField()
+    equal_filters = models.IntegerField(null=True)
+    precio = ListField()
+    idtipodeoperacion = ListField()
+    idzona = ListField()
+    idtipodepropiedad = ListField()
+    titulo = ListField()
+    direccion = ListField()
+
+    objects = MongoDBManager()
+
+
+
     # class Meta:
     #     ordering = ('rea',)
