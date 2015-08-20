@@ -18,12 +18,13 @@
             {% for filters in duplicateds_avisos_filtered %}
             	
                 <div class="panel panel-default">
-                    <div class="panel-heading">
+                    <div class="panel-heading" controls="collapse{{filters.reas}}">
                         [{% for rea in filters.reas %}
                             {{ rea }}&nbsp;
                         {% endfor %} ]
                     </div>
-                    <div class="panel-body">
+
+                    <div class="panel-body" class="collapse" id="collapse{{filters.reas}}">
                         <p>
                             <i><b>Property Type:</b></i><br>
                             <p>
