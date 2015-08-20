@@ -168,6 +168,8 @@ class Models(object):
 						if not key == "reas":
 							equals_avisos_filtered = self.add_equal_filtered_add(key, aviso, equals_avisos_filtered)
 
+				print equals_avisos_filtered
+
 				self.con_mongo.equal_ads_filtered.insert(equals_avisos_filtered)
 
 			done_compare = True
