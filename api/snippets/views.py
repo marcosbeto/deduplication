@@ -63,6 +63,7 @@ def equals_ads_list_filtered(request):
 		raw_query_complete = get_raw_sql_filters(request)
 		snippets = Equal_ads_filtered.objects.all()
 		context = {'duplicateds_avisos_filtered': snippets}
+		print snippets
 		return render(request, 'all_duplicateds_filtered.html', context)
 	
 	elif request.method == 'POST':
