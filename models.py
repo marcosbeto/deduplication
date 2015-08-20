@@ -135,7 +135,7 @@ class Models(object):
 
 		while not done_compare:
 
-			equals_avisos = self.con_mongo.ads_equals_with_filters_2.find().sort([("rea", 1)]).skip(skip_compare)
+			equals_avisos = self.con_mongo.ads_equals_with_filters.find().sort([("rea", 1)]).skip(skip_compare)
 
 			for equal_aviso in equals_avisos:
 
@@ -160,26 +160,37 @@ class Models(object):
 
 				for aviso in array_rea:
 
-					equals_avisos_filtered["reas"].append(aviso.get("id_aviso"))
+					equals_avisos_filtered["reas"].append(int(aviso.get("id_aviso")))
 
-					all_idtipodepropiedad = equals_avisos_filtered["idtipodepropiedad"]
+					# print equals_avisos_filtered
 
-					idtipodepropiedad_added = False
-					
-					for idtipodepropiedad in all_idtipodepropiedad:
-						
-						if aviso.get("data").get("idtipodepropiedad") == idtipodepropiedad["value"]:
-							idtipodepropiedad_added = True
-							idtipodepropiedad["ida"].append(aviso.get("id_aviso"))
-
-					if len(all_idtipodepropiedad) == 0 or not idtipodepropiedad_added:
-						idtipodepropiedad_json = {"value":aviso.get("data").get("idtipodepropiedad"),"ida":[aviso.get("id_aviso")]}
-						equals_avisos_filtered["idtipodepropiedad"].append(idtipodepropiedad_json)
-
+					for key in equals_avisos_filtered.keys(): 
+						if not key == "reas":
+							self.add_equal_filtered_add(key, aviso, equals_avisos_filtered)
 
 				self.con_mongo.equal_ads_filtered.insert(equals_avisos_filtered)
 
 			done_compare = True
+
+	def add_equal_filtered_add(self, filter_option, aviso, equals_avisos_filtered):
+
+		# all_idtipodepropiedad = equals_avisos_filtered["idtipodepropiedad"]
+		print equals_avisos_filtered
+		all_filters_data = equals_avisos_filtered[filter_option]
+
+		# idtipodepropiedad_added = False
+		aviso_added = False
+		
+		# for idtipodepropiedad in all_idtipodepropiedad:
+		for filter_data in all_filters_data:
+			
+			if aviso.get("data").get(filter_option) == filter_data["value"]:
+				aviso_added = True
+				filter_data["ida"].append(int(aviso.get("id_aviso")))
+
+		if len(all_filters_data) == 0 or not aviso_added:
+			filter_data_json = {"value":aviso.get("data").get(filter_option),"ida":[int(aviso.get("id_aviso"))]}
+			equals_avisos_filtered[filter_option].append(filter_data_json)
 
 	def add_image_histogram(self, aviso_json):
 		self.con_mongo.ads_histograms_online.insert(aviso_json)
