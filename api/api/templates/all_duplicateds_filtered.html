@@ -1,21 +1,40 @@
-<h2>All Duplicated Ads - Photo Analysis</h2>
+<html>
+    <head>
+                <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </head>
+    
+    <body>
+        <h2>All Duplicated Ads - Photo Analysis</h2>
 
 
-{% if duplicateds_avisos_filtered %}
-    <ul>
-    {% for filters in duplicateds_avisos_filtered %}
-    	<li>
-    	{% for item in filters.idtipodeoperacion %}
-        	<h3>{{ item.value }}<h3>
-            <p>
-                {% for aviso_id in filters.ida %}
-                    <a href="/redirect_to_aviso/{{ aviso_id.id_aviso }}" target="_blank">{{ aviso_id }}</a>
-    	        {% endfor %}
-            </p>
-        {% endfor %}
-    	</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No duplicated avisos.</p>
-{% endif %}
+        {% if duplicateds_avisos_filtered %}
+            {% for filters in duplicateds_avisos_filtered %}
+            	
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{ filters.reas }}</div>
+                    <div class="panel-body">
+                        {% for item in filters.idtipodeoperacion %}
+                            <p>
+                                <b>{{ item.value }}: </b>
+                                {% for aviso_id in item.ida %}
+                                    {{aviso_id}} 
+                                {% endfor %}
+                            </p>
+                        {% endfor %}                        
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+            <p>No duplicated avisos.</p>
+        {% endif %}
+    </body>
+</html
