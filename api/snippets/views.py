@@ -62,7 +62,6 @@ def equals_ads_list_filtered(request):
 
 		snippets = Equal_ads_filtered.objects.all()
 		context = {'duplicateds_avisos_filtered': snippets}
-		print snippets
 		return render(request, 'all_duplicateds_filtered.html', context)
 	
 	elif request.method == 'POST':
@@ -129,11 +128,9 @@ def snippet_list_api(request, filters):
 def redirect_to_aviso(request, id):
 	try:
 		ad_details_response = api_interface.get_ad_details_from_api(id)
-		print ad_details_response
 		if ad_details_response['errorCode']:
 			return JSONResponse({"Aviso OFFLINE"}, status=201)
 		return redirect("http://" + ad_details_response['data']['url'])
-		# print JSONResponse(snippet.data)
 	except Snippet.DoesNotExist:
 		return HttpResponse(status=404)
 
@@ -177,7 +174,6 @@ def snippet_detail_api(request, id):
 	"""
 	try:
 		snippet = Snippet.objects.raw_query({'rea' : int(id)})
-		# print JSONResponse(snippet.data)
 	except Snippet.DoesNotExist:
 		return HttpResponse(status=404)
 
