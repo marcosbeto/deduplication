@@ -20,7 +20,7 @@ class IW_Main(object):
 #TODO: REMOVE DUPLICATED ID_AVISS
     
     # Step 2: Compressing histograms string for each photo to make the storage and search less costly
-        # Image_Processor().save_compressed_histogram_online()
+        Image_Processor().save_compressed_histogram_online()
     
     # Step 3: Finds other ads that have similiar photos
         # Image_Processor().create_similar_photos_collection()
@@ -38,7 +38,7 @@ class IW_Main(object):
         # Filters().create_detailed_repeated_ads_filters()
 
     # Step 8: Grouping all the equal ads by its filters
-        Filters().group_repeated_ads_filters()
+        # Filters().group_repeated_ads_filters()
 
 
         # Image_Processor().create_duplicateds_group_collection()
