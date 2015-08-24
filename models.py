@@ -376,122 +376,127 @@ class Models(object):
 		skip = 0
 
 		while not done:
-		
-			print "Searching in ads_similar collection..."
-			all_similar_avisos = self.con_mongo.ads_similar.find().sort([("id", 1)]).skip(skip)
-			print "[Ok]"
+			
+			try: 
+				print "Searching in ads_similar collection..."
+				all_similar_avisos = self.con_mongo.ads_similar.find().sort([("id", 1)]).skip(skip)
+				print "[Ok]"
 
-			#iterating in all avisos that has duplicated images
-			for similar_aviso in all_similar_avisos:
-				skip += 1
-				
-				photos = similar_aviso.get("ph")
-				number_of_photos_similar_aviso = similar_aviso.get("np")
-
-				# number_of_photos_similar_aviso_lt = 0
-				# number_of_photos_similar_aviso_gt = 0
-
-				# if number_of_photos_similar_aviso > 3:
-				# 	number_of_photos_similar_aviso_lt = (90*number_of_photos_similar_aviso)/100
-				# 	number_of_photos_similar_aviso_gt = (100*number_of_photos_similar_aviso)/100
-				# 	print 'number_of_photos_similar_aviso_lt: ' + str(number_of_photos_similar_aviso_lt)
-				# 	print 'number_of_photos_similar_aviso_gt: ' + str(number_of_photos_similar_aviso_gt)
-
-
-				unique_similar_avisos = []
-
-				#jsoin that will save all equal avisos, where "equal avisos" represents avisos where the group of its photos is 90% equal
-				aviso_json = {"id":similar_aviso.get("id"),"eq":[]} #equal_avisos
-
-				for photo in photos:
-
-					#getting all similar photos
-					similar_photos = photo.get("sp")
-
-					for similar_photo in similar_photos:
-
-						similar_id_aviso = similar_photo.get("s")
-						similar_aviso_already_on_array = False
-						
-						#iterating all unique similar_avisos
-						for index, unique_similar_aviso in enumerate(unique_similar_avisos, start=0):
-							
-							#if similar_id_aviso already exists in json
-							if unique_similar_aviso.get("id")==similar_id_aviso:
-								similar_aviso_already_on_array = True
-								unique_similar_avisos[index]['npe'] += 1
-								number_total_photos_parent = unique_similar_avisos[index]['npp']
-
-								#calculating the % of similarity of the group of photos between the aviso and the aviso that has similar photos
-								percentage_of_similar = utils.percentage(unique_similar_avisos[index]['npe'],number_total_photos_parent)
-
-								unique_similar_avisos[index]['pssp'] = int(percentage_of_similar) #ppercentage_similar_self_parent
-								
-						#did not find any similar id_aviso or the array is empty
-						if not similar_aviso_already_on_array:      
-
-							try:
-
-								#searching for a similar avisos inside similar photos that have the same number of photo of the main aviso that is being searched
-								# if number_of_photos_similar_aviso_lt == 0 or number_of_photos_similar_aviso_gt == 0:
-								# 	similar_avisos_support = self.con_mongo.ads_similar_new.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
-								# else:
-								# 	similar_avisos_support = self.con_mongo.ads_similar_new.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
-							
-								skip_compare = 0
-								done_compare = False
-
-								while not done_compare:
-									similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100).skip(skip_compare)
-
-									for similar_aviso_support in similar_avisos_support:
-
-										skip_compare += 1
-
-										number_of_ads_similar = similar_aviso_support.get("np")
-										percentage_of_similar = utils.percentage(1,number_of_ads_similar)
-
-										similar_aviso_json = {"id":similar_id_aviso,
-										"npe":1, #"num_photos_equal":1,
-										"npt": number_of_ads_similar, #"num_photos_total": number_of_ads_similar,
-										"npp":number_of_photos_similar_aviso, #"num_photos_parent":number_of_ads_similar,
-										"pssp": int(percentage_of_similar), #"percentage_similar_self_parent": int(percentage_of_similar),
-										}
-										
-										#adding the similar aviso with the percentage of the similarity between the photos of both avisos
-										unique_similar_avisos.append(similar_aviso_json)
-									done_compare = True
-								
-							except:
-								pass
-
-
-				only_equal_avisos = []
-
-				# print 'unique_similar_avisos: ' + str(similar_aviso.get("id"))
-				# print unique_similar_avisos
-
-				# adding to json only ads that have more than 90% of similarity in the group of both photos
-				for unique_similar_aviso in unique_similar_avisos:
-
-					percentage_number_of_photos = utils.percentage(unique_similar_aviso['npp'],unique_similar_aviso['npt'])
+				#iterating in all avisos that has duplicated images
+			
+				for similar_aviso in all_similar_avisos:
+					skip += 1
 					
-					#checkinf if the aviso being compared to main_aviso has similar number of photos
-					if percentage_number_of_photos>=90 and percentage_number_of_photos<=100:
-						if unique_similar_aviso['pssp']>90:
-							aviso_json["eq"].append(unique_similar_aviso) #equal_avisos
+					photos = similar_aviso.get("ph")
+					number_of_photos_similar_aviso = similar_aviso.get("np")
+
+					# number_of_photos_similar_aviso_lt = 0
+					# number_of_photos_similar_aviso_gt = 0
+
+					# if number_of_photos_similar_aviso > 3:
+					# 	number_of_photos_similar_aviso_lt = (90*number_of_photos_similar_aviso)/100
+					# 	number_of_photos_similar_aviso_gt = (100*number_of_photos_similar_aviso)/100
+					# 	print 'number_of_photos_similar_aviso_lt: ' + str(number_of_photos_similar_aviso_lt)
+					# 	print 'number_of_photos_similar_aviso_gt: ' + str(number_of_photos_similar_aviso_gt)
+
+
+					unique_similar_avisos = []
+
+					#jsoin that will save all equal avisos, where "equal avisos" represents avisos where the group of its photos is 90% equal
+					aviso_json = {"id":similar_aviso.get("id"),"eq":[]} #equal_avisos
+
+					for photo in photos:
+
+						#getting all similar photos
+						similar_photos = photo.get("sp")
+
+						for similar_photo in similar_photos:
+
+							similar_id_aviso = similar_photo.get("s")
+							similar_aviso_already_on_array = False
+							
+							#iterating all unique similar_avisos
+							for index, unique_similar_aviso in enumerate(unique_similar_avisos, start=0):
+								
+								#if similar_id_aviso already exists in json
+								if unique_similar_aviso.get("id")==similar_id_aviso:
+									similar_aviso_already_on_array = True
+									unique_similar_avisos[index]['npe'] += 1
+									number_total_photos_parent = unique_similar_avisos[index]['npp']
+
+									#calculating the % of similarity of the group of photos between the aviso and the aviso that has similar photos
+									percentage_of_similar = utils.percentage(unique_similar_avisos[index]['npe'],number_total_photos_parent)
+
+									unique_similar_avisos[index]['pssp'] = int(percentage_of_similar) #ppercentage_similar_self_parent
+									
+							#did not find any similar id_aviso or the array is empty
+							if not similar_aviso_already_on_array:      
+
+								try:
+
+									#searching for a similar avisos inside similar photos that have the same number of photo of the main aviso that is being searched
+									# if number_of_photos_similar_aviso_lt == 0 or number_of_photos_similar_aviso_gt == 0:
+									# 	similar_avisos_support = self.con_mongo.ads_similar_new.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
+									# else:
+									# 	similar_avisos_support = self.con_mongo.ads_similar_new.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
+								
+									skip_compare = 0
+									done_compare = False
+
+									while not done_compare:
+										similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100).skip(skip_compare)
+
+										for similar_aviso_support in similar_avisos_support:
+
+											skip_compare += 1
+
+											number_of_ads_similar = similar_aviso_support.get("np")
+											percentage_of_similar = utils.percentage(1,number_of_ads_similar)
+
+											similar_aviso_json = {"id":similar_id_aviso,
+											"npe":1, #"num_photos_equal":1,
+											"npt": number_of_ads_similar, #"num_photos_total": number_of_ads_similar,
+											"npp":number_of_photos_similar_aviso, #"num_photos_parent":number_of_ads_similar,
+											"pssp": int(percentage_of_similar), #"percentage_similar_self_parent": int(percentage_of_similar),
+											}
+											
+											#adding the similar aviso with the percentage of the similarity between the photos of both avisos
+											unique_similar_avisos.append(similar_aviso_json)
+										done_compare = True
+									
+								except:
+									pass
+
+
+					only_equal_avisos = []
+
+					# print 'unique_similar_avisos: ' + str(similar_aviso.get("id"))
+					# print unique_similar_avisos
+
+					# adding to json only ads that have more than 90% of similarity in the group of both photos
+					for unique_similar_aviso in unique_similar_avisos:
+
+						percentage_number_of_photos = utils.percentage(unique_similar_aviso['npp'],unique_similar_aviso['npt'])
 						
-				#inserting in mongo the collection of equals avisos
-				if len(aviso_json["eq"]) > 0:
-					self.con_mongo.ads_pre_equals.insert(aviso_json)
+						#checkinf if the aviso being compared to main_aviso has similar number of photos
+						if percentage_number_of_photos>=90 and percentage_number_of_photos<=100:
+							if unique_similar_aviso['pssp']>90:
+								aviso_json["eq"].append(unique_similar_aviso) #equal_avisos
+							
+					#inserting in mongo the collection of equals avisos
+					if len(aviso_json["eq"]) > 0:
+						self.con_mongo.ads_pre_equals.insert(aviso_json)
 
-				number_of_similar_aviso_analyzed += 1
+					number_of_similar_aviso_analyzed += 1
 
-				if number_of_similar_aviso_analyzed%100==0:
-					now = time.time()
-					print str(number_of_similar_aviso_analyzed) + " - " + str(now-start)
+					if number_of_similar_aviso_analyzed%100==0:
+						now = time.time()
+						print str(number_of_similar_aviso_analyzed) + " - " + str(now-start)
 
-			done = True
+				done = True
+			except:
+				print "First exception"
+				pass
 
 		print "[OK] Analized " + str(number_of_similar_aviso_analyzed) + " avisos and 'ads_equals' collection created."
 
