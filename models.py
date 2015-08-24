@@ -380,7 +380,7 @@ class Models(object):
 			try: 
 				print "Searching in ads_similar collection..."
 				all_similar_avisos = self.con_mongo.ads_similar.find().sort([("id", 1)]).skip(skip)
-				print "[Ok]"
+				print "[Ok]" 
 
 				#iterating in all avisos that has duplicated images
 			
@@ -390,20 +390,16 @@ class Models(object):
 					photos = similar_aviso.get("ph")
 					number_of_photos_similar_aviso = similar_aviso.get("np")
 
-					# number_of_photos_similar_aviso_lt = 0
-					# number_of_photos_similar_aviso_gt = 0
-
-					# if number_of_photos_similar_aviso > 3:
-					# 	number_of_photos_similar_aviso_lt = (90*number_of_photos_similar_aviso)/100
-					# 	number_of_photos_similar_aviso_gt = (100*number_of_photos_similar_aviso)/100
-					# 	print 'number_of_photos_similar_aviso_lt: ' + str(number_of_photos_similar_aviso_lt)
-					# 	print 'number_of_photos_similar_aviso_gt: ' + str(number_of_photos_similar_aviso_gt)
-
-
 					unique_similar_avisos = []
 
 					#jsoin that will save all equal avisos, where "equal avisos" represents avisos where the group of its photos is 90% equal
 					aviso_json = {"id":similar_aviso.get("id"),"eq":[]} #equal_avisos
+
+					number_of_similar_aviso_analyzed += 1
+
+					# if number_of_similar_aviso_analyzed%1==0:
+					now = time.time()
+					print str(number_of_similar_aviso_analyzed) + " - " + str(now-start) + " - " + str(similar_aviso.get("id"))
 
 					for photo in photos:
 
@@ -434,12 +430,6 @@ class Models(object):
 
 								try:
 
-									#searching for a similar avisos inside similar photos that have the same number of photo of the main aviso that is being searched
-									# if number_of_photos_similar_aviso_lt == 0 or number_of_photos_similar_aviso_gt == 0:
-									# 	similar_avisos_support = self.con_mongo.ads_similar_new.find({"id":similar_id_aviso, "np":number_of_photos_similar_aviso},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
-									# else:
-									# 	similar_avisos_support = self.con_mongo.ads_similar_new.find({"id":similar_id_aviso, "np" : { "$gt" :  number_of_photos_similar_aviso_lt, "$lt" : number_of_photos_similar_aviso_gt}},no_cursor_timeout=False).sort([("id", 1)]).batch_size(100)
-								
 									skip_compare = 0
 									done_compare = False
 
@@ -487,11 +477,6 @@ class Models(object):
 					if len(aviso_json["eq"]) > 0:
 						self.con_mongo.ads_pre_equals.insert(aviso_json)
 
-					number_of_similar_aviso_analyzed += 1
-
-					if number_of_similar_aviso_analyzed%100==0:
-						now = time.time()
-						print str(number_of_similar_aviso_analyzed) + " - " + str(now-start)
 
 				done = True
 			except:
