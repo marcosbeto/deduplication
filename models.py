@@ -434,7 +434,7 @@ class Models(object):
 									done_compare = False
 
 									while not done_compare:
-										similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso}, {"np": 1}, no_cursor_timeout=False).sort([("id", 1)]).batch_size(100).skip(skip_compare)
+										similar_avisos_support = self.con_mongo.ads_similar.find({"id":similar_id_aviso}, {"np": 1}, no_cursor_timeout=False).sort([("np", 1)]).batch_size(100).skip(skip_compare)
 
 										for similar_aviso_support in similar_avisos_support:
 
