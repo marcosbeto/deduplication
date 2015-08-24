@@ -20,10 +20,10 @@ class IW_Main(object):
 #TODO: REMOVE DUPLICATED ID_AVISS
     
     # Step 2: Compressing histograms string for each photo to make the storage and search less costly
-        Image_Processor().save_compressed_histogram_online()
+        # Image_Processor().save_compressed_histogram_online()
     
     # Step 3: Finds other ads that have similiar photos
-        # Image_Processor().create_similar_photos_collection()
+        Image_Processor().create_similar_photos_collection()
     
     # Step 4: Finds the ads that are exactly or __% with similiar photos
         # Image_Processor().create_equals_avisos_collection()
