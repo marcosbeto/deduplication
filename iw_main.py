@@ -23,10 +23,10 @@ class IW_Main(object):
         # Image_Processor().save_compressed_histogram_online()
     
     # Step 3: Finds other ads that have similiar photos
-        Image_Processor().create_similar_photos_collection()
+        # Image_Processor().create_similar_photos_collection()
     
     # Step 4: Finds the ads that are exactly or __% with similiar photos
-        # Image_Processor().create_equals_avisos_collection()
+        Image_Processor().create_equals_avisos_collection()
 
     # Step 5: Creates an array with all equal ads
         # Image_Processor().create_raw_equal_avisos()
