@@ -55,7 +55,7 @@ class Models(object):
 
 		while not done_compare:
 
-			equals_avisos = self.con_mongo.snippets_snippet.find().sort([("rea", 1)]).skip(skip_compare)
+			equals_avisos = self.con_mongo.ads_equals_grouped.find().sort([("rea", 1)]).skip(skip_compare)
 
 			for equal_aviso in equals_avisos:
 
@@ -119,7 +119,7 @@ class Models(object):
 					except:
 					   print "Error: unable to fecth data"
 				
-				self.con_mongo.ads_equals_with_filters_2.insert(rea_json)
+				self.con_mongo.ads_equals_filtered.insert(rea_json)
 
 			done_compare = True
 
@@ -134,7 +134,7 @@ class Models(object):
 
 		while not done_compare:
 
-			equals_avisos = self.con_mongo.ads_equals_with_filters_2.find().sort([("rea", 1)]).skip(skip_compare)
+			equals_avisos = self.con_mongo.ads_equals_filtered.find().sort([("rea", 1)]).skip(skip_compare)
 
 			for equal_aviso in equals_avisos:
 
@@ -173,7 +173,7 @@ class Models(object):
 						if len(equals_avisos_filtered[key])==1:
 							equals_avisos_filtered["equal_filters"] = equals_avisos_filtered["equal_filters"] + 1
 
-				self.con_mongo.equal_ads_filtered.insert(equals_avisos_filtered)
+				self.con_mongo.ads_equals_filtered_grouped.insert(equals_avisos_filtered)
 
 			done_compare = True
 
