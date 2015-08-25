@@ -53,3 +53,7 @@ class Filters(object):
 	def group_repeated_ads_filters(self):
 		models = Models()
 		models.group_repeated_ads_filters()
+
+	def group_equals_filtered_by_size(self):
+		models = Models()
+		models.group_equals_filtered_by_size()

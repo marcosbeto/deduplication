@@ -134,7 +134,7 @@ class Models(object):
 
 		while not done_compare:
 
-			equals_avisos = self.con_mongo.ads_equals_filtered.find().sort([("rea", 1)]).skip(skip_compare)
+			equals_avisos = self.con_mongo.ads_equals_filtered.find().sort([("rea", 1)]).skip(skip_compare)snippets_ads_equals_filtered_grouped
 
 			for equal_aviso in equals_avisos:
 
@@ -251,6 +251,48 @@ class Models(object):
 
 				except: 
 					print "Error: unable to fecth data"
+
+	def group_equals_filtered_by_size(self):
+
+		skip_compare = 0
+		done_compare = False
+		number_of_similar_aviso_analyzed = 0
+		numbered_filtered_equal_ads = []
+
+		while not done_compare:
+
+			equals_avisos = self.con_mongo.snippets_ads_equals_filtered_grouped.find().sort([("reas", 1)]).skip(skip_compare)
+
+			for equal_aviso in equals_avisos:
+
+				number_of_similar_aviso_analyzed += 1
+
+				if number_of_similar_aviso_analyzed%10==0:
+					print str(number_of_similar_aviso_analyzed)
+
+				skip_compare += 1
+
+				array_reas_size = len(equal_aviso.get("reas"))
+
+				size_already_on_array = False
+
+				for index, numbered_group in enumerate(numbered_filtered_equal_ads, start=0):
+					noe = numbered_group.get("noe")
+					if noe == array_reas_size:
+						unique_similar_avisos[index]['reas'].append(equal_aviso)
+						size_already_on_array = True
+						self.con_mongo.grouped_number_of_ads_equals.update({"noe" :noe},{'$set' : {"reas":unique_similar_avisos[index]['reas']}}) #raw_equal_avisos
+
+						break
+
+				if len(numbered_filtered_equal_ads) == 0 or not size_already_on_array:
+					number_of_equals_json = {"noe":array_reas_size,"reas":[]}
+					number_of_equals_json["reas"].append(equal_aviso)
+
+					self.con_mongo.grouped_number_of_ads_equals.insert(number_of_equals_json)
+					numbered_filtered_equal_ads.append(number_of_equals_json)
+
+			done_compare = True
 
 
 	def add_image_histogram(self, aviso_json):
