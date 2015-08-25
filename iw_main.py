@@ -29,10 +29,10 @@ class IW_Main(object):
         # Image_Processor().create_equals_avisos_collection()
 
     # Step 5: Creates an array with all equal ads
-        Image_Processor().create_raw_equal_avisos()
+        # Image_Processor().create_raw_equal_avisos()
     
     # Step 6: 
-        # Image_Processor().create_duplicateds_group_collection_new()
+        Image_Processor().create_duplicateds_group_collection_new()
 
     # Step 7: Adding some filters to each of equal aviso data 
         # Filters().create_detailed_repeated_ads_filters()
