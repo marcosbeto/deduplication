@@ -65,7 +65,7 @@ def snippet_list(request, filters):
 		return JSONResponse(serializer.errors, status=400)
 
 @csrf_exempt
-def equals_ads_list_filtered(request):
+def equals_ads_list_filtered(self, request):
 	"""
 	List all code snippets, or create a new snippet.
 	"""
