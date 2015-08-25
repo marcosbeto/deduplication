@@ -157,7 +157,7 @@ class Models(object):
 					"direccion":[],
 					"idavisopadre":[],
 					"idempresa":[],
-					"idcentralvenda:"[],
+					"idcentralvenda":[],
 					"equal_filters":0
 				} #equal_avisos
 
