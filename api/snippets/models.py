@@ -24,10 +24,7 @@ class Ads_equals_filtered_grouped(models.Model):
     idtipodepropiedad = ListField()
     titulo = ListField()
     direccion = ListField()
+    idavisopadre = ListField()
+    idempresa = ListField()
 
     objects = MongoDBManager()
-
-
-
-    # class Meta:
-    #     ordering = ('rea',)

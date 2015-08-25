@@ -110,7 +110,7 @@ class Models(object):
 								"mediosbanos":row["mediosbanos"],
 								"metroscubiertos":row["metroscubiertos"],
 								"metrostotales":row["metrostotales"],
-								"idtipodeoperacion":row["idtipodeoperacion"]
+								"idtipodeoperacion":row["idtipodeoperacion"],
 							}
 
 							aviso_json = {"id_aviso":id_aviso,"data":similar_aviso_json}
@@ -155,6 +155,9 @@ class Models(object):
 					"idtipodepropiedad":[],
 					"titulo":[],
 					"direccion":[],
+					"idavisopadre":[],
+					"idempresa":[],
+					"idcentralvenda:"[],
 					"equal_filters":0
 				} #equal_avisos
 
@@ -164,7 +167,7 @@ class Models(object):
 
 					for key in equals_avisos_filtered.keys(): 
 						if not key == "reas" and not key == "equal_filters":
-							self.add_equal_filtered_add(key, aviso, equals_avisos_filtered)
+							self.add_equal_filtered(key, aviso, equals_avisos_filtered)
 
 				is_all_equal = True
 
@@ -177,7 +180,7 @@ class Models(object):
 
 			done_compare = True
 
-	def add_equal_filtered_add(self, filter_option, aviso, equals_avisos_filtered):
+	def add_equal_filtered(self, filter_option, aviso, equals_avisos_filtered):
 
 		# all_idtipodepropiedad = equals_avisos_filtered["idtipodepropiedad"]
 		all_filters_data = equals_avisos_filtered[filter_option]
@@ -188,13 +191,60 @@ class Models(object):
 		# for idtipodepropiedad in all_idtipodepropiedad:
 		for filter_data in all_filters_data:
 			
-			if aviso.get("data").get(filter_option) == filter_data["value"]:
-				aviso_added = True
-				filter_data["ida"].append(int(aviso.get("id_aviso")))
+			if not filter_option == "idcentralvenda":
+				if aviso.get("data").get(filter_option) == filter_data["value"]:
+					aviso_added = True
+					filter_data["ida"].append(int(aviso.get("id_aviso")))
+			else:
+				idempresa = aviso.get("data").get("idempresa")
+				idaviso = aviso.get("id_aviso")
 
+				sql = "SELECT * FROM empresas where idempresa = " + str(idempresa)
+
+				try:
+					# Execute the SQL command
+					self.con_mysql.execute(sql)
+					# Fetch all the rows in a list of lists.
+					results = self.con_mysql.fetchall()
+
+					for row in results:
+
+						idcentralvenda = None
+
+						if row["idempresapadre"] != None and row["idempresapadre"] == filter_data["value"]:
+							aviso_added = True
+							filter_data["ida"].append(int(aviso.get("id_aviso")))
+				
 		if len(all_filters_data) == 0 or not aviso_added:
-			filter_data_json = {"value":aviso.get("data").get(filter_option),"ida":[int(aviso.get("id_aviso"))]}
-			equals_avisos_filtered[filter_option].append(filter_data_json)
+			
+			if not filter_option == "idcentralvenda":
+				filter_data_json = {"value":aviso.get("data").get(filter_option),"ida":[int(aviso.get("id_aviso"))]}
+				equals_avisos_filtered[filter_option].append(filter_data_json)
+			else:
+				idempresa = aviso.get("data").get("idempresa")
+				idaviso = aviso.get("id_aviso")
+
+				sql = "SELECT * FROM empresas where idempresa = " + str(idempresa)
+
+				try:
+					# Execute the SQL command
+					self.con_mysql.execute(sql)
+					# Fetch all the rows in a list of lists.
+					results = self.con_mysql.fetchall()
+
+					for row in results:
+
+						idcentralvenda = None
+
+						if row["idempresapadre"] != None:
+						idcentralvenda = row["idempresapadre"]
+						filter_data_json = {"value":idcentralvenda,"ida":[int(aviso.get("id_aviso"))]}
+						equals_avisos_filtered["idcentralvenda"].append(filter_data_json)
+							
+						
+
+				except: 
+					print "Error: unable to fecth data"
 
 
 	def add_image_histogram(self, aviso_json):
