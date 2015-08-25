@@ -239,9 +239,9 @@ class Models(object):
 						idcentralvenda = None
 
 						if row["idempresapadre"] != None:
-						idcentralvenda = row["idempresapadre"]
-						filter_data_json = {"value":idcentralvenda,"ida":[int(aviso.get("id_aviso"))]}
-						equals_avisos_filtered["idcentralvenda"].append(filter_data_json)
+							idcentralvenda = row["idempresapadre"]
+							filter_data_json = {"value":idcentralvenda,"ida":[int(aviso.get("id_aviso"))]}
+							equals_avisos_filtered["idcentralvenda"].append(filter_data_json)
 
 				except: 
 					print "Error: unable to fecth data"
