@@ -10,6 +10,7 @@ from django.core import serializers
 from django.template import RequestContext, loader
 from django.shortcuts import render, redirect
 
+
 import pymongo
 from pymongo import MongoClient
 
@@ -41,7 +42,7 @@ def snippet_list(request, filters):
 				# return JSONResponse(serializer.data)
 			else:
 
-				raw_query_complete = get_raw_sql_filters(request)
+				raw_query_complete = get_raw_filters(request)
 				snippets = Ads_equals_with_filters.objects.raw_query(raw_query_complete)
 				# serializer = SnippetSerializer(snippets, many=True)
 			
@@ -63,7 +64,7 @@ def equals_ads_list_filtered(request):
 	"""
 	if request.method == 'GET':
 
-		snippets = Ads_equals_filtered_grouped.objects.find()[:5]
+		snippets = Ads_equals_filtered_grouped.objects.raw_query()[:10]
 		context = {'duplicateds_avisos_filtered': snippets}
 		return render(request, 'all_duplicateds_filtered.html', context)
 	
@@ -204,7 +205,7 @@ def snippet_detail_api(request, id):
 		snippet.delete()
 		return HttpResponse(status=204)
 
-def get_raw_sql_filters(request):
+def get_raw_filters(request):
 	
 	raw_query_complete = {}
 
