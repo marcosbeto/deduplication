@@ -94,7 +94,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django_mongodb_engine',
         'NAME': 'deduplication',
-        'HOST': '192.168.22.97',
+        'HOST': 'localhost',
         'PORT': 27017,
     }
 }
