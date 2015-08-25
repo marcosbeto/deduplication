@@ -63,7 +63,7 @@ def equals_ads_list_filtered(request):
 	"""
 	if request.method == 'GET':
 
-		snippets = Ads_equals_filtered_grouped.objects[:5]
+		snippets = Ads_equals_filtered_grouped.objects.find()[:5]
 		context = {'duplicateds_avisos_filtered': snippets}
 		return render(request, 'all_duplicateds_filtered.html', context)
 	
