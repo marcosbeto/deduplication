@@ -173,7 +173,7 @@ class Models(object):
 						if len(equals_avisos_filtered[key])==1:
 							equals_avisos_filtered["equal_filters"] = equals_avisos_filtered["equal_filters"] + 1
 
-				self.con_mongo.ads_equals_filtered_grouped.insert(equals_avisos_filtered)
+				self.con_mongo.snippets_ads_equals_filtered_grouped.insert(equals_avisos_filtered)
 
 			done_compare = True
 
