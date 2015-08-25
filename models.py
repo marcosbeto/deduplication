@@ -211,9 +211,10 @@ class Models(object):
 
 						idcentralvenda = None
 
-						if row["idempresapadre"] != None and row["idempresapadre"] == filter_data["value"]:
+						if (row["idempresapadre"] != None and row["idempresapadre"] == str(idempresa) + "."+ str(filter_data["value"])) or (row["idempresapadre"] == None and row["idempresapadre"] == str(idempresa) + "." + str(idempresa)):
 							aviso_added = True
 							filter_data["ida"].append(int(aviso.get("id_aviso")))
+						
 				except:
 					print "Error: unable to fecth data"
 				
@@ -239,9 +240,12 @@ class Models(object):
 						idcentralvenda = None
 
 						if row["idempresapadre"] != None:
-							idcentralvenda = row["idempresapadre"]
-							filter_data_json = {"value":idcentralvenda,"ida":[int(aviso.get("id_aviso"))]}
-							equals_avisos_filtered["idcentralvenda"].append(filter_data_json)
+							idcentralvenda = str(idempresa) + "." + str(row["idempresapadre"])
+						else:
+							idcentralvenda = str(idempresa) + "." + str(idempresa)
+
+						filter_data_json = {"value":idcentralvenda,"ida":[int(aviso.get("id_aviso"))]}
+						equals_avisos_filtered["idcentralvenda"].append(filter_data_json)
 
 				except: 
 					print "Error: unable to fecth data"
