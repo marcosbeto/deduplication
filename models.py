@@ -134,7 +134,7 @@ class Models(object):
 
 		while not done_compare:
 
-			equals_avisos = self.con_mongo.ads_equals_filtered.find().sort([("rea", 1)]).skip(skip_compare)snippets_ads_equals_filtered_grouped
+			equals_avisos = self.con_mongo.ads_equals_filtered.find().sort([("rea", 1)]).skip(skip_compare)
 
 			for equal_aviso in equals_avisos:
 
