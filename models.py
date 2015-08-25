@@ -211,10 +211,12 @@ class Models(object):
 
 						idcentralvenda = None
 
-						if (row["idempresapadre"] != None and row["idempresapadre"] == str(idempresa) + "."+ str(filter_data["value"])) or (row["idempresapadre"] == None and row["idempresapadre"] == str(idempresa) + "." + str(idempresa)):
+						if row["idempresapadre"] != None and filter_data["value"] == str(idempresa) + "." + str(row["idempresapadre"]):
 							aviso_added = True
 							filter_data["ida"].append(int(aviso.get("id_aviso")))
-						
+						elif row["idempresapadre"] == None and filter_data["value"] == str(idempresa) + "." + str(idempresa):
+							aviso_added = True
+							filter_data["ida"].append(int(aviso.get("id_aviso")))
 				except:
 					print "Error: unable to fecth data"
 				
