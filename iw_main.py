@@ -35,10 +35,10 @@ class IW_Main(object):
         # Image_Processor().create_duplicateds_group_collection_new()
 
     # Step 7: Adding some filters to each of equal aviso data 
-        Filters().create_detailed_repeated_ads_filters()
+        # Filters().create_detailed_repeated_ads_filters()
 
     # Step 8: Grouping all the equal ads by its filters
-        # Filters().group_repeated_ads_filters()
+        Filters().group_repeated_ads_filters()
 
 
         # Image_Processor().create_duplicateds_group_collection()
