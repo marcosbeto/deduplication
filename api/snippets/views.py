@@ -22,16 +22,8 @@ class JSONResponse(HttpResponse):
 	"""
 	def __init__(self, data, **kwargs):
 		content = JSONRenderer().render(data)
-		self.con_mongo = self.__db_mongo()
 		kwargs['content_type'] = 'application/json'
 		super(JSONResponse, self).__init__(content, **kwargs)
-
-	def __db_mongo(self):		
-		utils.print_inline("\n[db] Connecting tos MongoDB... \n")
-		connection = MongoClient('localhost', 27017)
-		db = connection['deduplication']
-		print "MongoDB - Connected [OK]"
-		return db
 
 @csrf_exempt
 def snippet_list(request, filters):
@@ -71,8 +63,7 @@ def equals_ads_list_filtered(self, request):
 	"""
 	if request.method == 'GET':
 
-		# snippets = Ads_equals_filtered_grouped.objects.all()
-		snippets = self.con_mongo.snippets_ads_equals_filtered_grouped.find().sort([("rea", 1)]).skip(10)
+		snippets = Ads_equals_filtered_grouped.skip(0).limit(10)
 		context = {'duplicateds_avisos_filtered': snippets}
 		return render(request, 'all_duplicateds_filtered.html', context)
 	
