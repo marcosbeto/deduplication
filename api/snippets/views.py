@@ -4,7 +4,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from snippets.models import Snippet
 from snippets.models import Ads_equals_with_filters
-from snippets.models import Equal_ads_filtered
+from snippets.models import Ads_equals_filtered_grouped
 from snippets.serializers import SnippetSerializer
 from django.core import serializers
 from django.template import RequestContext, loader
@@ -60,7 +60,7 @@ def equals_ads_list_filtered(request):
 	"""
 	if request.method == 'GET':
 
-		snippets = Equal_ads_filtered.objects.all()
+		snippets = Ads_equals_filtered_grouped.objects.all()
 		context = {'duplicateds_avisos_filtered': snippets}
 		return render(request, 'all_duplicateds_filtered.html', context)
 	

@@ -15,7 +15,7 @@ class Ads_equals_with_filters(models.Model):
 
     objects = MongoDBManager()
 
-class Equal_ads_filtered(models.Model):
+class Ads_equals_filtered_grouped(models.Model):
     reas = ListField()
     equal_filters = models.IntegerField(null=True)
     precio = ListField()
