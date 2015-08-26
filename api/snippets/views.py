@@ -5,6 +5,7 @@ from rest_framework.parsers import JSONParser
 from snippets.models import Snippet
 from snippets.models import Ads_equals_with_filters
 from snippets.models import Ads_equals_filtered_grouped
+from snippets.models import Grouped_number_of_ads_equals
 from snippets.serializers import SnippetSerializer
 from django.core import serializers
 from django.template import RequestContext, loader
@@ -67,6 +68,27 @@ def equals_ads_list_filtered(request):
 		snippets = Ads_equals_filtered_grouped.objects.raw_query()[:10]
 		context = {'duplicateds_avisos_filtered': snippets}
 		return render(request, 'all_duplicateds_filtered.html', context)
+	
+	elif request.method == 'POST':
+		data = JSONParser().parse(request)
+		serializer = SnippetSerializer(data=data)
+		
+		if serializer.is_valid():
+			serializer.save()
+			return JSONResponse(serializer.data, status=201)
+		
+		return JSONResponse(serializer.errors, status=400)
+
+@csrf_exempt
+def equals_ads_list_filtered_grouped(request):
+	"""
+	List all code snippets, or create a new snippet.
+	"""
+	if request.method == 'GET':
+
+		snippets = Grouped_number_of_ads_equals.objects.order_by('nog')
+		context = {'duplicateds_avisos_filtered': snippets}
+		return render(request, 'all_duplicateds_filtered_grouped.html', context)
 	
 	elif request.method == 'POST':
 		data = JSONParser().parse(request)

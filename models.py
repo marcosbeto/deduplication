@@ -281,15 +281,14 @@ class Models(object):
 					if noe == array_reas_size:
 						# numbered_filtered_equal_ads[index]['reas'].append(equal_aviso)
 						size_already_on_array = True
-						self.con_mongo.grouped_number_of_ads_equals.update({"noe":noe},{'$push' : {"reas":equal_aviso.get("reas")}}) #raw_equal_avisos
+						self.con_mongo.snippets_grouped_number_of_ads_equals.update({"noe":noe},{'$push' : {"reas":equal_aviso.get("reas")}}) #raw_equal_avisos
 						break
 
 				if len(numbered_filtered_equal_ads) == 0 or not size_already_on_array:
 					number_of_equals_json = {"noe":array_reas_size,"reas":[]}
 					number_of_equals_json["reas"].append(equal_aviso.get("reas"))
-
 					
-					self.con_mongo.grouped_number_of_ads_equals.insert(number_of_equals_json)
+					self.con_mongo.snippets_grouped_number_of_ads_equals.insert(number_of_equals_json)
 					
 					numbered_filtered_equal_ads.append(number_of_equals_json)
 
@@ -297,13 +296,13 @@ class Models(object):
 
 		print "First phase finished."
 
-		all_grouped = self.con_mongo.grouped_number_of_ads_equals.find()
+		all_grouped = self.con_mongo.snippets_grouped_number_of_ads_equals.find()
 
 		for group in all_grouped:
 
 			size = len(group.get("reas"))
 			_id = group.get("_id")
-			self.con_mongo.grouped_number_of_ads_equals.update({"_id":_id},{'$set' : {"nog":size}}) #raw_equal_avisos
+			self.con_mongo.snippets_grouped_number_of_ads_equals.update({"_id":_id},{'$set' : {"nog":size}}) #raw_equal_avisos
 
 		print "Secondr phase finished."
 

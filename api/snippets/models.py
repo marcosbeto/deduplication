@@ -28,3 +28,10 @@ class Ads_equals_filtered_grouped(models.Model):
     idempresa = ListField()
 
     objects = MongoDBManager()
+
+class Grouped_number_of_ads_equals(models.Model):
+    reas = ListField()
+    noe = models.IntegerField(null=True)
+    nog = models.IntegerField(null=True)
+    objects = MongoDBManager()
+     
