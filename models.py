@@ -286,7 +286,7 @@ class Models(object):
 
 				if len(numbered_filtered_equal_ads) == 0 or not size_already_on_array:
 					number_of_equals_json = {"noe":array_reas_size,"reas":[]}
-					number_of_equals_json["reas"].append(equal_aviso)
+					number_of_equals_json["reas"].append(equal_aviso.get("reas"))
 
 					self.con_mongo.grouped_number_of_ads_equals.insert(number_of_equals_json)
 					numbered_filtered_equal_ads.append(number_of_equals_json)
