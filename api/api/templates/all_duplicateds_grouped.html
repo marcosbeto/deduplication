@@ -17,10 +17,11 @@
 		    $( document ).ready(function() {
 		    	$('.equal_button').click(function(){
 				    var catid;
-				    catid = $(this).attr("data-catid");
-				     $.get('/rango/like_category/', {category_id: catid}, function(data){
-				               $('#like_count').html(data);
-				               $('#likes').hide();
+				    number_ads = $(this).attr("number-ads");
+				    number_groups = $(this).attr("number-groups");
+				     $.get('/group/', {number_of_ads: number_ads}, function(data){
+				               $('#info_container'+number_groups).html(data);
+				               // $('likes').hide();
 				           });
 				});
 			});
@@ -77,10 +78,9 @@
 
 		{% if duplicateds_avisos_filtered %}
 			{% for filters in duplicateds_avisos_filtered %}
-				<span class="equal_button" data-catid={{ filters.noe }}><b>{{ filters.nog }}</b> groups and <b>{{ filters.noe }}</b> avisos per group</span>
-				<a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapse{{filters.reas.0}}" aria-expanded="false" aria-controls="collapse{{filters.reas.0}}">
-					
-				</a>
+				<span class="equal_button" number-ads={{ filters.noe }} number-groups={{ filters.nog }}><b>{{ filters.nog }}</b> groups and <b>{{ filters.noe }}</b> avisos per group</span>
+				<div id="info_container{{filters.nog }}">
+				</div>
 
 				<br>
 
