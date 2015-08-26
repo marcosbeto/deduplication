@@ -100,6 +100,26 @@ def equals_ads_list_filtered_grouped(request):
 		
 		return JSONResponse(serializer.errors, status=400)
 
+
+@csrf_exempt
+def get_group_number_of_ads(request):
+	context = RequestContext(request)
+    number_of_ads = None
+    if request.method == 'GET':
+        number_of_ads = request.GET['number_of_ads']
+
+	    likes = 0
+	    if number_of_ads:
+	        grouped = Ads_equals_filtered_grouped.objects(reas__size=number_of_ads)
+	        context = {'duplicateds_avisos_filtered': snippets}
+			
+	        # if grouped:
+	        #     likes = category.likes + 1
+	        #     category.likes =  likes
+	        #     category.save()
+
+	    return JSONResponse(serializer.context, status=201)
+
 @csrf_exempt
 def snippet_list_api(request, filters):
 	"""
