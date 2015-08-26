@@ -111,6 +111,9 @@ def get_group_number_of_ads(request):
 		likes = 0
 		if number_of_ads:
 			grouped = Ads_equals_filtered_grouped.objects.filter(__raw__={'$where': 'reas.length ==' + number_of_ads})
+			
+			print grouped
+
 			contexts = {'duplicateds_avisos_filtered': grouped}
 			
 			# if grouped:
