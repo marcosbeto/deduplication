@@ -64,7 +64,7 @@
 
 		{% if duplicateds_avisos_filtered %}
 			{% for filters in duplicateds_avisos_filtered %}
-				<b>{% filters.nog %}</b> groups and <b>{% filters.nog %}</b> avisos per group
+				<b>{{ filters.nog }}</b> groups and <b>{{ filters.nog }}</b> avisos per group
 				<a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapse{{filters.reas.0}}" aria-expanded="false" aria-controls="collapse{{filters.reas.0}}">
 					[{% for rea in filters.reas %}
 						{{ rea }}&nbsp;
