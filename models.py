@@ -281,7 +281,7 @@ class Models(object):
 					if noe == array_reas_size:
 						# numbered_filtered_equal_ads[index]['reas'].append(equal_aviso)
 						size_already_on_array = True
-						self.con_mongo.grouped_number_of_ads_equals.update({"noe":noe},{'$push' : {"reas":equal_aviso}}) #raw_equal_avisos
+						self.con_mongo.grouped_number_of_ads_equals.update({"noe":noe},{'$push' : {"reas":equal_aviso.get("reas")}}) #raw_equal_avisos
 						break
 
 				if len(numbered_filtered_equal_ads) == 0 or not size_already_on_array:
