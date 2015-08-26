@@ -78,7 +78,7 @@
 
 		{% if duplicateds_avisos_filtered %}
 			{% for filters in duplicateds_avisos_filtered %}
-				<span class="equal_button" number-ads={{ filters.noe }} number-groups={{ filters.nog }}><b>{{ filters.nog }}</b> groups and <b>{{ filters.noe }}</b> avisos per group</span>
+				<a><span class="equal_button" number-ads={{ filters.noe }} number-groups={{ filters.nog }}><b>{{ filters.nog }}</b> groups and <b>{{ filters.noe }}</b> avisos per group</span></a>
 				<div id="info_container{{filters.nog }}">
 				</div>
 
