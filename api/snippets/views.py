@@ -110,7 +110,7 @@ def get_group_number_of_ads(request):
 
 		likes = 0
 		if number_of_ads:
-			grouped = Ads_equals_filtered_grouped.objects.filter({'$where': 'this.reas.length =' + number_of_ads})
+			grouped = Ads_equals_filtered_grouped.objects.raw_query({ "reas": { "$elemMatch": { "$size": number_of_ads}}})
 			
 			print grouped
 
