@@ -288,6 +288,7 @@ class Models(object):
 					number_of_equals_json = {"noe":array_reas_size,"reas":[],"size":0}
 					number_of_equals_json["reas"].append(equal_aviso.get("reas"))
 					number_of_equals_json["size"] = len(number_of_equals_json["reas"])
+
 					
 					self.con_mongo.grouped_number_of_ads_equals.insert(number_of_equals_json)
 					
@@ -295,6 +296,17 @@ class Models(object):
 
 			done_compare = True
 
+		print "First phase finished."
+
+		all_grouped = self.con_mongo.grouped_number_of_ads_equals.find()
+
+		for group in all_grouped:
+
+			size = len(group.get("reas"))
+			_id = group.get("_id")
+			self.con_mongo.grouped_number_of_ads_equals.update({"_id":_id},{'$set' : {"size":size}}) #raw_equal_avisos
+
+		print "Second phase finished."
 
 	def add_image_histogram(self, aviso_json):
 		self.con_mongo.ads_histograms_online.insert(aviso_json)
