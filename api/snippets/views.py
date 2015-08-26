@@ -86,7 +86,7 @@ def equals_ads_list_filtered_grouped(request):
 	"""
 	if request.method == 'GET':
 
-		snippets = Grouped_number_of_ads_equals.objects.order_by('nog')
+		snippets = Grouped_number_of_ads_equals.objects.order_by('-nog')
 		context = {'duplicateds_avisos_filtered': snippets}
 		return render(request, 'all_duplicateds_grouped.html', context)
 	
