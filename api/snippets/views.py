@@ -88,7 +88,7 @@ def equals_ads_list_filtered_grouped(request):
 
 		snippets = Grouped_number_of_ads_equals.objects.order_by('nog')
 		context = {'duplicateds_avisos_filtered': snippets}
-		return render(request, 'all_duplicateds_filtered_grouped.html', context)
+		return render(request, 'all_duplicateds_grouped.html', context)
 	
 	elif request.method == 'POST':
 		data = JSONParser().parse(request)
