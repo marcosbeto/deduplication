@@ -279,10 +279,9 @@ class Models(object):
 				for index, numbered_group in enumerate(numbered_filtered_equal_ads, start=0):
 					noe = numbered_group.get("noe")
 					if noe == array_reas_size:
-						numbered_filtered_equal_ads[index]['reas'].append(equal_aviso)
+						# numbered_filtered_equal_ads[index]['reas'].append(equal_aviso)
 						size_already_on_array = True
-						self.con_mongo.grouped_number_of_ads_equals.update({"noe" :noe},{'$set' : {"reas":numbered_filtered_equal_ads[index]['reas']}}) #raw_equal_avisos
-
+						self.con_mongo.grouped_number_of_ads_equals.update({"noe":noe},{'$push' : {"reas":equal_aviso}}) #raw_equal_avisos
 						break
 
 				if len(numbered_filtered_equal_ads) == 0 or not size_already_on_array:
