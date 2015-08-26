@@ -119,7 +119,7 @@ def get_group_number_of_ads(request):
 			#     category.save()
 
 			return JSONResponse(serializer.contexts, status=201)
-	   return JSONResponse(serializer.errors, status=400)
+	return JSONResponse(serializer.errors, status=400)
 
 @csrf_exempt
 def snippet_list_api(request, filters):
