@@ -7,6 +7,7 @@ from snippets.models import Ads_equals_with_filters
 from snippets.models import Ads_equals_filtered_grouped
 from snippets.models import Grouped_number_of_ads_equals
 from snippets.serializers import SnippetSerializer
+from snippets.serializers import SnippetSerializer_Numbers
 from django.core import serializers
 from django.template import RequestContext, loader
 from django.shortcuts import render, redirect
@@ -110,8 +111,13 @@ def get_group_number_of_ads(request):
 
 		likes = 0
 		if number_of_ads:
-			grouped = Ads_equals_filtered_grouped.objects.raw_query({ "reas": { "$elemMatch": { "$size": number_of_ads}}})
+			grouped = Ads_equals_filtered_grouped.objects.raw_query({ "reas": { "$size": number_of_ads}})
+			serializer = SnippetSerializer_Numbers(grouped, many=True)
 			
+			return JSONResponse(serializer.data)
+			
+
+
 			print grouped
 
 			contexts = {'duplicateds_avisos_filtered': grouped}
