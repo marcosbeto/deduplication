@@ -112,7 +112,7 @@ def get_group_number_of_ads(request):
 		likes = 0
 		if number_of_ads:
 			print number_of_ads
-			grouped = Ads_equals_filtered_grouped.objects.raw_query({ "reas": { "$size": number_of_ads}})
+			grouped = Ads_equals_filtered_grouped.objects.raw_query({ "reas": { "$size": int(number_of_ads)}})
 			serializer = SnippetSerializer_Numbers(grouped, many=True)
 			return JSONResponse(serializer.data)
 			
