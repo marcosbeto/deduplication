@@ -285,10 +285,12 @@ class Models(object):
 						break
 
 				if len(numbered_filtered_equal_ads) == 0 or not size_already_on_array:
-					number_of_equals_json = {"noe":array_reas_size,"reas":[],"size":len(number_of_equals_json["reas"])+1}
+					number_of_equals_json = {"noe":array_reas_size,"reas":[],"size":0)}
 					number_of_equals_json["reas"].append(equal_aviso.get("reas"))
-
+					number_of_equals_json["size"] = len(number_of_equals_json["reas"])
+					
 					self.con_mongo.grouped_number_of_ads_equals.insert(number_of_equals_json)
+					
 					numbered_filtered_equal_ads.append(number_of_equals_json)
 
 			done_compare = True
