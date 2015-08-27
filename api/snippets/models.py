@@ -17,7 +17,7 @@ class Ads_equals_with_filters(models.Model):
 
 class Ads_equals_filtered_grouped(models.Model):
     reas = ListField()
-    equal_filters = models.IntegerField(null=True)
+    equal_filters = models.IntegerField()
     precio = ListField()
     idtipodeoperacion = ListField()
     idzona = ListField()

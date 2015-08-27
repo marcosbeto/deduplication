@@ -8,6 +8,7 @@ from snippets.models import Ads_equals_filtered_grouped
 from snippets.models import Grouped_number_of_ads_equals
 from snippets.serializers import SnippetSerializer
 from snippets.serializers import SnippetSerializer_Numbers
+from snippets.serializers import SnippetSerializer_Grouped_Filtered
 from django.core import serializers
 from django.template import RequestContext, loader
 from django.shortcuts import render, redirect
@@ -87,7 +88,7 @@ def equals_ads_list_filtered_grouped(request):
 	"""
 	if request.method == 'GET':
 
-		snippets = Grouped_number_of_ads_equals.objects.order_by('-nog')
+		snippets = Grouped_number_of_ads_equals.objects.order_by('noe')
 		context = {'duplicateds_avisos_filtered': snippets}
 		return render(request, 'all_duplicateds_grouped.html', context)
 	
@@ -106,28 +107,42 @@ def equals_ads_list_filtered_grouped(request):
 def get_group_number_of_ads(request):
 	context = RequestContext(request)
 	number_of_ads = None
-	if request.method == 'GET':
-		number_of_ads = request.GET['number_of_ads']
 
-		likes = 0
+	if request.method == 'GET':
+
+		number_of_ads = request.GET['number_of_ads']
+		pagination = request.GET['pagination']
+		action = request.GET['action']
+
 		if number_of_ads:
 			print number_of_ads
-			grouped = Ads_equals_filtered_grouped.objects.raw_query({ "reas": { "$size": int(number_of_ads)}})
-			serializer = SnippetSerializer_Numbers(grouped, many=True)
+			if action=="prev":
+				print 'pagination' + pagination
+				grouped = Ads_equals_filtered_grouped.objects.raw_query({ "reas": { "$size": int(number_of_ads)}}).order_by('-equal_filters')[int(pagination)-10:int(pagination)]
+			else:
+				grouped = Ads_equals_filtered_grouped.objects.raw_query({ "reas": { "$size": int(number_of_ads)}}).order_by('-equal_filters')[int(pagination):int(pagination)+10]
+			
+			serializer = SnippetSerializer_Grouped_Filtered(grouped, many=True)
+			
 			return JSONResponse(serializer.data)
-			
 
+	return JSONResponse(serializer.errors, status=400)
 
-			print grouped
+@csrf_exempt
+def get_group_number_of_ads_filtered(request):
+	context = RequestContext(request)
 
-			contexts = {'duplicateds_avisos_filtered': grouped}
-			
-			# if grouped:
-			#     likes = category.likes + 1
-			#     category.likes =  likes
-			#     category.save()
+	if request.method == 'GET':
 
-			return JSONResponse(serializer.contexts, status=201)
+		id_aviso = request.GET['id_aviso']
+
+		if id_aviso:
+			grouped = Ads_equals_filtered_grouped.objects.raw_query({ "reas": int(id_aviso)})
+
+			serializer = SnippetSerializer_Grouped_Filtered(grouped, many=True)
+
+			return JSONResponse(serializer.data)
+
 	return JSONResponse(serializer.errors, status=400)
 
 @csrf_exempt
@@ -309,3 +324,6 @@ def get_raw_filters(request):
 	raw_query_complete.update({'$and': [{'$where': "this.rea.length > 1"}]})
 
 	return raw_query_complete
+
+def jsonResponse(responseDict):
+	return HttpResponse(simplejson.dumps(responseDict), mimetype='application/json')
