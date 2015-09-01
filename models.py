@@ -16,6 +16,7 @@ import numpy
 import MySQLdb
 import re
 import os
+import urllib
 
 import cv2
 
