@@ -99,13 +99,13 @@ class Models(object):
 					if multimedia["idtipodemultimedia"] == 2:
 
 						# try:
-
-						URL_TO_DOWNLOAD_PHOTO = Constants.URL_BASE_MULTIMEDIA + base_path_to_save_photo + "100x75/" + str(multimedia["idmultimediaaviso"]) + ".jpg"
+						photo_file = str(multimedia["idmultimediaaviso"]) + ".jpg"
+						URL_TO_DOWNLOAD_PHOTO = Constants.URL_BASE_MULTIMEDIA + base_path_to_save_photo + "100x75/" + photo_file
 
 						if not os.path.exists(local_path_to_save_photo): 
 							os.makedirs(local_path_to_save_photo) #creating aviso directory to save photo
 
-						urllib.urlretrieve(URL_TO_DOWNLOAD_PHOTO, local_path_to_save_photo) #downloading photo
+						urllib.urlretrieve(URL_TO_DOWNLOAD_PHOTO, local_path_to_save_photo + photo_file) #downloading photo
 						size = format(utils.bytesto(os.path.getsize(local_path_to_save_photo), 'm'),'.4f') #size in megabytes of each photo
 
 						number_of_photos_from_ad += 1
