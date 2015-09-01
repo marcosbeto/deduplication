@@ -109,7 +109,8 @@ class Models(object):
 
 
 					print "[#AD] Photos from:  %s: %s | Tamanho:%s\n" % (str(id_aviso),str(number_of_photos_from_ad),str(total_size_downloaded_from_ad))
-
+		except:
+			pass
 
 	def create_detailed_repeated_ads_filters(self):
 
