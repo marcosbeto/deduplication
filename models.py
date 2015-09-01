@@ -102,7 +102,7 @@ class Models(object):
 						URL_TO_DOWNLOAD_PHOTO = Constants.URL_BASE_MULTIMEDIA + base_path_to_save_photo + "100x75/" + str(multimedia["idmultimediaaviso"]) + ".jpg"
 
 						if not os.path.exists(local_path_to_save_photo): 
-							os.mkdir(local_path_to_save_photo) #creating aviso directory to save photo
+							os.makedirs(local_path_to_save_photo) #creating aviso directory to save photo
 
 						urllib.urlretrieve(URL_TO_DOWNLOAD_PHOTO, local_path_to_save_photo) #downloading photo
 						size = format(utils.bytesto(os.path.getsize(local_path_to_save_photo), 'm'),'.4f') #size in megabytes of each photo
