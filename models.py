@@ -71,7 +71,7 @@ class Models(object):
 
 			number_avisos_added = self.con_mongo.ads_histograms_online.find({"id_aviso":id_aviso}).sort([("id_aviso", 1)]).count()
 
-			if is_aviso_already_added==0:
+			if number_avisos_added==0:
 
 				if len(str(id_aviso))<10:
 					id_aviso = format(int(id_aviso), "010")
