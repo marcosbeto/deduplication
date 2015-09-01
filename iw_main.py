@@ -14,6 +14,9 @@ class IW_Main(object):
 
         # Image_Processor().create_images_histogram_from_images_backup_iw() #<---- USED WITH ALL PHOTOS FROM BACKUP (OFFLINE + ONLINE)
         
+    #Step 0: Looking for all new avisos from SQL table that is not presented in our histogram table yet
+        Image_Processor().get_new_online_avisos()
+
     # Step 1: Cropping and creating histograms from all photos in backup
         # Image_Processor().create_images_histogram_from_online_ads() # <---- CURRENT IN USE: USED WITH BACKUP AND CURRENT ONLINE AVISOS
 
@@ -41,7 +44,7 @@ class IW_Main(object):
         # Filters().group_repeated_ads_filters()
 
     # Step 9: 
-        Filters().group_equals_filtered_by_size()
+        # Filters().group_equals_filtered_by_size()
 
 
         # Image_Processor().create_duplicateds_group_collection()

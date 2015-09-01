@@ -46,7 +46,6 @@ class Image_Processor(object):
 			number_of_files +=1
 
 
-
 	def create_images_histogram_from_online_ads(self):	
 		models = Models()
 
@@ -255,6 +254,10 @@ class Image_Processor(object):
 		return cropped_image
 
 	
+	def get_new_online_avisos(self):
+		models = Models()
+		models.get_new_online_avisos()
+
 	def save_compressed_histogram_online(self):
 		models = Models()
 		models.save_compressed_histogram_online()

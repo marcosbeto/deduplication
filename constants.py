@@ -11,7 +11,11 @@ class Constants:
 
 	PHOTO_SIZE_TO_DOWNLOAD = "50x37"
 
-	LOCAL_DIR_SAVE_PHOTO = "../../../iwprodimages/avisos/2/"
+	LOCAL_DIR_SAVE_PHOTO = "../../../iwnewimages/avisos/2/"
+	# LOCAL_DIR_SAVE_PHOTO = "../../../iwprodimages/avisos/2/"
+
+	URL_BASE_MULTIMEDIA = "http://akstatic.imovelweb.com.br/avisos/2/"
+
 	# LOCAL_DIR_SAVE_PHOTO = "photos_avisos"
 
 	NUMBER_OF_ADS_RETURNED_API = 18

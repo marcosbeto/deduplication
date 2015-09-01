@@ -47,6 +47,104 @@ class Models(object):
 		print "MySQLDB - Connected [OK]"
 		return db
 
+	def get_new_online_avisos(self):
+
+		sql = "SELECT * FROM avisosonline"
+
+		try:
+			self.con_mysql.execute(sql)
+			all_avisos_sql = self.con_mysql.fetchall()
+
+			for aviso in all_avisos_sql:
+
+				number_of_photos_from_ad = 0
+				total_size_downloaded_from_ad = 0
+
+				id_aviso = aviso["id_aviso"]
+
+				number_avisos_added = self.con_mongo.ads_histograms_online.find({"id_aviso":id_aviso}).sort([("id_aviso", 1)]).count()
+
+				if is_aviso_already_added==0:
+
+					if len(str(id_aviso))<10:
+						id_aviso = format(int(id_aviso), "010")
+
+					aviso_id_splitted = re.findall(r'.{1,2}',str(id_aviso),re.DOTALL)
+
+					base_path_to_save_photo = ""
+
+					for folder_name in aviso_id_splitted:
+						base_path_to_save_photo +=  folder_name + "/"
+					
+					local_path_to_save_photo = Constants.LOCAL_DIR_SAVE_PHOTO + base_path_to_save_photo + "100x75/"
+
+					sql_multimedia = "SELECT * FROM multimediaaviso where idaviso = " + str(id_aviso)
+
+					try: 
+						self.con_mysql.execute(sql_multimedia)
+						all_multimedia_from_aviso = self.con_mysql.fetchall()
+
+						for multimedia in all_multimedia_from_aviso:
+
+							if multimedia["idtipodemultimedia"] == 2:
+
+								try:
+
+									URL_TO_DOWNLOAD_PHOTO = Constants.URL_BASE_MULTIMEDIA + base_path_to_save_photo + "100x75/" + str(multimedia["idmultimediaaviso"]) + ".jpg"
+
+									if not os.path.exists(local_path_to_save_photo): 
+										os.mkdir(local_path_to_save_photo) #creating aviso directory to save photo
+
+									urllib.urlretrieve(URL_TO_DOWNLOAD_PHOTO, local_path_to_save_photo) #downloading photo
+									size = format(utils.bytesto(os.path.getsize(local_path_to_save_photo), 'm'),'.4f') #size in megabytes of each photo
+
+									number_of_photos_from_ad += 1
+									total_size_downloaded_from_ad = total_size_downloaded_from_ad + float(size)
+
+						print "[#AD] Photos from:  %s: %s | Tamanho:%s\n" % (str(id_aviso),str(number_of_photos_from_ad),str(total_size_downloaded_from_ad))
+
+									
+									url_to_download_photo = 
+
+
+
+
+
+									for root, dirs, files in os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
+
+										folder_to_download = ""
+										for folder in dirs:
+
+											if folder == "100x75":
+
+												folder_to_download = "100x75"
+												break
+
+											elif folder == "1200x1200":
+
+												folder_to_download = "1200x1200"
+												break
+
+
+										folder_name = Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + folder_to_download
+
+										for file in os.listdir(folder_name):
+											
+											if file.endswith(".jpg"):
+
+												hist = self.get_histogram(self, os.path.join(folder_name, file))
+												hist_json = {"photo_path":folder_name + "/" + file, "histogram":json.dumps(hist.tolist())}
+												aviso_json["photos"].append(hist_json)
+
+										if len(os.listdir(folder_name))>0:
+											models.add_image_histogram(aviso_json)
+
+										break
+
+								except:
+									pass
+
+
 	def create_detailed_repeated_ads_filters(self):
 
 		skip_compare = 0
