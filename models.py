@@ -15,6 +15,7 @@ import bz2
 import numpy
 import MySQLdb
 import re
+import os
 
 import cv2
 
