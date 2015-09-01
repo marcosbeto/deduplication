@@ -101,48 +101,14 @@ class Models(object):
 									number_of_photos_from_ad += 1
 									total_size_downloaded_from_ad = total_size_downloaded_from_ad + float(size)
 
-						print "[#AD] Photos from:  %s: %s | Tamanho:%s\n" % (str(id_aviso),str(number_of_photos_from_ad),str(total_size_downloaded_from_ad))
-
-									
-									url_to_download_photo = 
-
-
-
-
-
-									for root, dirs, files in os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
-
-										folder_to_download = ""
-										for folder in dirs:
-
-											if folder == "100x75":
-
-												folder_to_download = "100x75"
-												break
-
-											elif folder == "1200x1200":
-
-												folder_to_download = "1200x1200"
-												break
-
-
-										folder_name = Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + folder_to_download
-
-										for file in os.listdir(folder_name):
-											
-											if file.endswith(".jpg"):
-
-												hist = self.get_histogram(self, os.path.join(folder_name, file))
-												hist_json = {"photo_path":folder_name + "/" + file, "histogram":json.dumps(hist.tolist())}
-												aviso_json["photos"].append(hist_json)
-
-										if len(os.listdir(folder_name))>0:
-											models.add_image_histogram(aviso_json)
-
-										break
-
+								
 								except:
 									pass
+					except:
+						pass
+
+
+					print "[#AD] Photos from:  %s: %s | Tamanho:%s\n" % (str(id_aviso),str(number_of_photos_from_ad),str(total_size_downloaded_from_ad))
 
 
 	def create_detailed_repeated_ads_filters(self):
