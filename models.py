@@ -55,12 +55,19 @@ class Models(object):
 		self.con_mysql.execute(sql)
 		all_avisos_sql = self.con_mysql.fetchall()
 
+		number_avisos_sql_avisos_online = 0
+
 		for aviso in all_avisos_sql:
+
+			number_avisos_sql_avisos_online += 1
+
+			if number_avisos_sql_avisos_online%10==0:
+				print str(number_avisos_sql_avisos_online)
 
 			number_of_photos_from_ad = 0
 			total_size_downloaded_from_ad = 0
 
-			id_aviso = aviso["id_aviso"]
+			id_aviso = aviso["idaviso"]
 
 			number_avisos_added = self.con_mongo.ads_histograms_online.find({"id_aviso":id_aviso}).sort([("id_aviso", 1)]).count()
 
