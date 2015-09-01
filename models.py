@@ -51,66 +51,66 @@ class Models(object):
 
 		sql = "SELECT * FROM avisosonline"
 
-		try:
-			self.con_mysql.execute(sql)
-			all_avisos_sql = self.con_mysql.fetchall()
+		# try:
+		self.con_mysql.execute(sql)
+		all_avisos_sql = self.con_mysql.fetchall()
 
-			for aviso in all_avisos_sql:
+		for aviso in all_avisos_sql:
 
-				number_of_photos_from_ad = 0
-				total_size_downloaded_from_ad = 0
+			number_of_photos_from_ad = 0
+			total_size_downloaded_from_ad = 0
 
-				id_aviso = aviso["id_aviso"]
+			id_aviso = aviso["id_aviso"]
 
-				number_avisos_added = self.con_mongo.ads_histograms_online.find({"id_aviso":id_aviso}).sort([("id_aviso", 1)]).count()
+			number_avisos_added = self.con_mongo.ads_histograms_online.find({"id_aviso":id_aviso}).sort([("id_aviso", 1)]).count()
 
-				if is_aviso_already_added==0:
+			if is_aviso_already_added==0:
 
-					if len(str(id_aviso))<10:
-						id_aviso = format(int(id_aviso), "010")
+				if len(str(id_aviso))<10:
+					id_aviso = format(int(id_aviso), "010")
 
-					aviso_id_splitted = re.findall(r'.{1,2}',str(id_aviso),re.DOTALL)
+				aviso_id_splitted = re.findall(r'.{1,2}',str(id_aviso),re.DOTALL)
 
-					base_path_to_save_photo = ""
+				base_path_to_save_photo = ""
 
-					for folder_name in aviso_id_splitted:
-						base_path_to_save_photo +=  folder_name + "/"
-					
-					local_path_to_save_photo = Constants.LOCAL_DIR_SAVE_PHOTO + base_path_to_save_photo + "100x75/"
+				for folder_name in aviso_id_splitted:
+					base_path_to_save_photo +=  folder_name + "/"
+				
+				local_path_to_save_photo = Constants.LOCAL_DIR_SAVE_PHOTO + base_path_to_save_photo + "100x75/"
 
-					sql_multimedia = "SELECT * FROM multimediaaviso where idaviso = " + str(id_aviso)
+				sql_multimedia = "SELECT * FROM multimediaaviso where idaviso = " + str(id_aviso)
 
-					try: 
-						self.con_mysql.execute(sql_multimedia)
-						all_multimedia_from_aviso = self.con_mysql.fetchall()
+				# try: 
+				self.con_mysql.execute(sql_multimedia)
+				all_multimedia_from_aviso = self.con_mysql.fetchall()
 
-						for multimedia in all_multimedia_from_aviso:
+				for multimedia in all_multimedia_from_aviso:
 
-							if multimedia["idtipodemultimedia"] == 2:
+					if multimedia["idtipodemultimedia"] == 2:
 
-								try:
+						# try:
 
-									URL_TO_DOWNLOAD_PHOTO = Constants.URL_BASE_MULTIMEDIA + base_path_to_save_photo + "100x75/" + str(multimedia["idmultimediaaviso"]) + ".jpg"
+						URL_TO_DOWNLOAD_PHOTO = Constants.URL_BASE_MULTIMEDIA + base_path_to_save_photo + "100x75/" + str(multimedia["idmultimediaaviso"]) + ".jpg"
 
-									if not os.path.exists(local_path_to_save_photo): 
-										os.mkdir(local_path_to_save_photo) #creating aviso directory to save photo
+						if not os.path.exists(local_path_to_save_photo): 
+							os.mkdir(local_path_to_save_photo) #creating aviso directory to save photo
 
-									urllib.urlretrieve(URL_TO_DOWNLOAD_PHOTO, local_path_to_save_photo) #downloading photo
-									size = format(utils.bytesto(os.path.getsize(local_path_to_save_photo), 'm'),'.4f') #size in megabytes of each photo
+						urllib.urlretrieve(URL_TO_DOWNLOAD_PHOTO, local_path_to_save_photo) #downloading photo
+						size = format(utils.bytesto(os.path.getsize(local_path_to_save_photo), 'm'),'.4f') #size in megabytes of each photo
 
-									number_of_photos_from_ad += 1
-									total_size_downloaded_from_ad = total_size_downloaded_from_ad + float(size)
+						number_of_photos_from_ad += 1
+						total_size_downloaded_from_ad = total_size_downloaded_from_ad + float(size)
 
-								
-								except:
-									pass
-					except:
-						pass
+						
+						# except:
+						# 	pass
+				# except:
+				# 	pass
 
 
-					print "[#AD] Photos from:  %s: %s | Tamanho:%s\n" % (str(id_aviso),str(number_of_photos_from_ad),str(total_size_downloaded_from_ad))
-		except:
-			pass
+				print "[#AD] Photos from:  %s: %s | Tamanho:%s\n" % (str(id_aviso),str(number_of_photos_from_ad),str(total_size_downloaded_from_ad))
+		# except:
+		# 	pass
 
 	def create_detailed_repeated_ads_filters(self):
 
