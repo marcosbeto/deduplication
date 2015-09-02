@@ -62,7 +62,7 @@ class Image_Processor(object):
 
 			number_of_files +=1
 
-			aviso_json = {"id_aviso":aviso_id, "photos":[]}
+			aviso_json = {"id_aviso":aviso_id, "photos":[], "date":time.strftime("%d/%m/%Y")}
 
 			# print os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder)
 			try:
