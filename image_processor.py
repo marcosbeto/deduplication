@@ -186,12 +186,13 @@ class Image_Processor(object):
 					for file in os.listdir(folder_name):
 						
 						if file.endswith(".jpg"):
-
-							
-
-							hist = self.get_histogram(self, os.path.join(folder_name, file))
-							hist_json = {"photo_path":folder_name + "/" + file, "histogram":json.dumps(hist.tolist())}
-							aviso_json["photos"].append(hist_json)
+							try:	
+								hist = self.get_histogram(self, os.path.join(folder_name, file))
+								hist_json = {"photo_path":folder_name + "/" + file, "histogram":json.dumps(hist.tolist())}
+								aviso_json["photos"].append(hist_json)
+							except:
+								print "Error: " + folder_name + "/" + file
+								pass
 
 					if len(os.listdir(folder_name))>0:
 						models.add_image_histogram(aviso_json)
@@ -199,7 +200,6 @@ class Image_Processor(object):
 					break
 
 			except:
-				print "Error: " + folder_name + "/" + file
 				pass
 
 
