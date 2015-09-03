@@ -189,19 +189,19 @@ class Models(object):
 							precio = row["precio"]
 							idtipodeoperacion = row["idtipodeoperacion"] 
 
-							try:
-								sql_avisos_tipo_operacion = "SELECT * FROM avisostiposdeoperaciones where idaviso = " + str(id_aviso)
-								self.con_mysql.execute(sql_avisos_tipo_negociation)
-								# Fetch all the rows in a list of lists.
-								results_tipo_operacion = self.con_mysql.fetchall()
+							# try:
+							sql_avisos_tipo_operacion = "SELECT * FROM avisostiposdeoperaciones where idaviso = " + str(id_aviso)
+							self.con_mysql.execute(sql_avisos_tipo_negociation)
+							# Fetch all the rows in a list of lists.
+							results_tipo_operacion = self.con_mysql.fetchall()
 
-								for item in results_tipo_operacion:
-									precio = item["precio"]
-									idtipodeoperacion = item["idtipodeoperacion"]
-									break
+							for item in results_tipo_operacion:
+								precio = item["precio"]
+								idtipodeoperacion = item["idtipodeoperacion"]
+								break
 
-							except:
-								pass
+							# except:
+								# pass
 							
 							similar_aviso_json = {
 								"titulo":titulo,
