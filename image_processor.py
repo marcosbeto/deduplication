@@ -141,7 +141,7 @@ class Image_Processor(object):
 
 			number_avisos_sql_avisos_online += 1
 
-			if number_avisos_sql_avisos_online%10==0:
+			if number_avisos_sql_avisos_online%100==0:
 				print str(number_avisos_sql_avisos_online)
 
 			number_of_photos_from_ad = 0
@@ -153,53 +153,54 @@ class Image_Processor(object):
 			aviso_json = {"id_aviso":aviso_id, "photos":[], "date":time.strftime("%d/%m/%Y")}
 
 			# print os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder)
-			# try:
+			try:
 
-			if len(str(aviso_id))<10:
-				aviso_id = format(int(aviso_id), "010")
+				if len(str(aviso_id))<10:
+					aviso_id = format(int(aviso_id), "010")
 
-			aviso_id_splitted = re.findall(r'.{1,2}',str(aviso_id),re.DOTALL)
+				aviso_id_splitted = re.findall(r'.{1,2}',str(aviso_id),re.DOTALL)
 
-			complete_folder = ""
+				complete_folder = ""
 
-			for folder_name in aviso_id_splitted:
-				complete_folder +=  folder_name + "/"
+				for folder_name in aviso_id_splitted:
+					complete_folder +=  folder_name + "/"
 
-			for root, dirs, files in os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
+				for root, dirs, files in os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
 
-				folder_to_download = ""
-				for folder in dirs:
+					folder_to_download = ""
+					for folder in dirs:
 
-					if folder == "100x75":
+						if folder == "100x75":
 
-						folder_to_download = "100x75"
-						break
+							folder_to_download = "100x75"
+							break
 
-					elif folder == "1200x1200":
+						elif folder == "1200x1200":
 
-						folder_to_download = "1200x1200"
-						break
+							folder_to_download = "1200x1200"
+							break
 
 
-				folder_name = Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + folder_to_download
+					folder_name = Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + folder_to_download
 
-				for file in os.listdir(folder_name):
-					
-					if file.endswith(".jpg"):
+					for file in os.listdir(folder_name):
+						
+						if file.endswith(".jpg"):
 
-						print folder_name + "/" + file
+							
 
-						hist = self.get_histogram(self, os.path.join(folder_name, file))
-						hist_json = {"photo_path":folder_name + "/" + file, "histogram":json.dumps(hist.tolist())}
-						aviso_json["photos"].append(hist_json)
+							hist = self.get_histogram(self, os.path.join(folder_name, file))
+							hist_json = {"photo_path":folder_name + "/" + file, "histogram":json.dumps(hist.tolist())}
+							aviso_json["photos"].append(hist_json)
 
-				if len(os.listdir(folder_name))>0:
-					models.add_image_histogram(aviso_json)
+					if len(os.listdir(folder_name))>0:
+						models.add_image_histogram(aviso_json)
 
-				break
+					break
 
-			# except:
-			# 	pass
+			except:
+				print "Error: " + folder_name + "/" + file
+				pass
 
 
 					# print files
