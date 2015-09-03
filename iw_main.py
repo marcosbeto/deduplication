@@ -18,7 +18,10 @@ class IW_Main(object):
         # Image_Processor().get_new_online_avisos()
 
     # Step 1: Cropping and creating histograms from all photos in backup
-        Image_Processor().create_images_histogram_from_online_ads() # <---- CURRENT IN USE: USED WITH BACKUP AND CURRENT ONLINE AVISOS
+        # Image_Processor().create_images_histogram_from_online_ads() # <---- CURRENT IN USE: USED WITH BACKUP AND CURRENT ONLINE AVISOS
+
+    # Step 1.1 (alternative): Cropping and creating histograms from all photos in backup
+        Image_Processor().create_images_histogram_from_online_ads_sql() # <---- CURRENT IN USE: USED WITH BACKUP AND CURRENT ONLINE AVISOS
 
 #TODO: REMOVE DUPLICATED ID_AVISS
     

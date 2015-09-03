@@ -124,6 +124,91 @@ class Image_Processor(object):
 
 				# print files
 
+	def create_images_histogram_from_online_ads_sql(self):	
+		
+
+		sql = "SELECT idaviso FROM avisosonline"
+
+		# try:
+		self.con_mysql.execute(sql)
+		all_avisos_sql = self.con_mysql.fetchall()
+
+		number_avisos_sql_avisos_online = 0
+
+		for aviso in all_avisos_sql:
+
+			number_avisos_sql_avisos_online += 1
+
+			if number_avisos_sql_avisos_online%10==0:
+				print str(number_avisos_sql_avisos_online)
+
+			number_of_photos_from_ad = 0
+			total_size_downloaded_from_ad = 0
+
+			aviso_id = aviso["idaviso"]
+
+
+			aviso_json = {"id_aviso":aviso_id, "photos":[], "date":time.strftime("%d/%m/%Y")}
+
+			# print os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder)
+			# try:
+
+			if len(str(aviso_id))<10:
+				aviso_id = format(int(aviso_id), "010")
+
+			aviso_id_splitted = re.findall(r'.{1,2}',str(aviso_id),re.DOTALL)
+
+			complete_folder = ""
+
+			for folder_name in aviso_id_splitted:
+				complete_folder +=  folder_name + "/"
+
+			for root, dirs, files in os.walk(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
+
+				folder_to_download = ""
+				for folder in dirs:
+
+					if folder == "100x75":
+
+						folder_to_download = "100x75"
+						break
+
+					elif folder == "1200x1200":
+
+						folder_to_download = "1200x1200"
+						break
+
+
+				folder_name = Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder + folder_to_download
+
+				for file in os.listdir(folder_name):
+					
+					if file.endswith(".jpg"):
+
+						print folder_name
+
+						hist = self.get_histogram(self, os.path.join(folder_name, file))
+						hist_json = {"photo_path":folder_name + "/" + file, "histogram":json.dumps(hist.tolist())}
+						aviso_json["photos"].append(hist_json)
+
+				if len(os.listdir(folder_name))>0:
+					models.add_image_histogram(aviso_json)
+
+				break
+
+			# except:
+			# 	pass
+
+
+					# print files
+
+				# for file in os.listdir(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
+				#     if file.endswith(".jpg"):
+				#         print(file)
+
+				
+
+				# print files
 
 	def create_images_histogram_from_images_backup_iw(self):
 
