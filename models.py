@@ -68,7 +68,7 @@ class Models(object):
 
 	def get_new_online_avisos(self):
 
-		sql = "SELECT * FROM avisosonline"
+		sql = "SELECT idaviso FROM avisosonline"
 
 		# try:
 		self.con_mysql.execute(sql)
@@ -104,7 +104,7 @@ class Models(object):
 				
 				local_path_to_save_photo = Constants.LOCAL_DIR_SAVE_PHOTO + base_path_to_save_photo + "100x75/"
 
-				sql_multimedia = "SELECT * FROM multimediaaviso where idaviso = " + str(id_aviso)
+				sql_multimedia = "SELECT idtipodemultimedia, idmultimediaaviso FROM multimediaaviso where idaviso = " + str(id_aviso)
 
 				# try: 
 				self.con_mysql.execute(sql_multimedia)
