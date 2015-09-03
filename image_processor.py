@@ -126,10 +126,7 @@ class Image_Processor(object):
 
 	def create_images_histogram_from_online_ads_sql(self):	
 		
-
 		models = Models()
-
-
 		sql = "SELECT idaviso FROM avisosonline"
 
 		# try:
