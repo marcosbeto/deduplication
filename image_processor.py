@@ -187,7 +187,7 @@ class Image_Processor(object):
 					
 					if file.endswith(".jpg"):
 
-						print folder_name
+						print folder_name + "/" + file
 
 						hist = self.get_histogram(self, os.path.join(folder_name, file))
 						hist_json = {"photo_path":folder_name + "/" + file, "histogram":json.dumps(hist.tolist())}
