@@ -106,32 +106,34 @@ class Models(object):
 
 				sql_multimedia = "SELECT idtipodemultimedia, idmultimediaaviso FROM multimediaaviso where idaviso = " + str(id_aviso)
 
-				# try: 
-				self.con_mysql.execute(sql_multimedia)
-				all_multimedia_from_aviso = self.con_mysql.fetchall()
+				try: 
+					self.con_mysql.execute(sql_multimedia)
+					all_multimedia_from_aviso = self.con_mysql.fetchall()
 
-				for multimedia in all_multimedia_from_aviso:
+					for multimedia in all_multimedia_from_aviso:
 
-					if multimedia["idtipodemultimedia"] == 2:
+						if multimedia["idtipodemultimedia"] == 2:
 
-						# try:
-						photo_file = str(multimedia["idmultimediaaviso"]) + ".jpg"
-						URL_TO_DOWNLOAD_PHOTO = Constants.URL_BASE_MULTIMEDIA + base_path_to_save_photo + "100x75/" + photo_file
+							try:
+								photo_file = str(multimedia["idmultimediaaviso"]) + ".jpg"
+								URL_TO_DOWNLOAD_PHOTO = Constants.URL_BASE_MULTIMEDIA + base_path_to_save_photo + "100x75/" + photo_file
 
-						if not os.path.exists(local_path_to_save_photo): 
-							os.makedirs(local_path_to_save_photo) #creating aviso directory to save photo
+								if not os.path.exists(local_path_to_save_photo): 
+									os.makedirs(local_path_to_save_photo) #creating aviso directory to save photo
 
-						urllib.urlretrieve(URL_TO_DOWNLOAD_PHOTO, local_path_to_save_photo + photo_file) #downloading photo
-						size = format(utils.bytesto(os.path.getsize(local_path_to_save_photo), 'm'),'.4f') #size in megabytes of each photo
+								urllib.urlretrieve(URL_TO_DOWNLOAD_PHOTO, local_path_to_save_photo + photo_file) #downloading photo
+								size = format(utils.bytesto(os.path.getsize(local_path_to_save_photo), 'm'),'.4f') #size in megabytes of each photo
 
-						number_of_photos_from_ad += 1
-						total_size_downloaded_from_ad = total_size_downloaded_from_ad + float(size)
+								number_of_photos_from_ad += 1
+								total_size_downloaded_from_ad = total_size_downloaded_from_ad + float(size)
 
-						
-						# except:
-						# 	pass
-				# except:
-				# 	pass
+							
+							except:
+								print "Error 1 in id_aviso: " + str(id_aviso)
+								pass
+				except:
+					print "Error 2 in id_aviso: " + str(id_aviso)
+					pass
 
 
 				print "[#AD] Photos from:  %s: %s | Tamanho:%s\n" % (str(id_aviso),str(number_of_photos_from_ad),str(total_size_downloaded_from_ad))
