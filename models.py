@@ -191,7 +191,7 @@ class Models(object):
 
 						# try:
 						sql_avisos_tipo_operacion = "SELECT * FROM avisostiposdeoperaciones where idaviso = " + str(id_aviso)
-						self.con_mysql.execute(sql_avisos_tipo_negociation)
+						self.con_mysql.execute(sql_avisos_tipo_operacion)
 						# Fetch all the rows in a list of lists.
 						results_tipo_operacion = self.con_mysql.fetchall()
 
