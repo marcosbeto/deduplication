@@ -198,6 +198,8 @@ class Models(object):
 						for item in results_tipo_operacion:
 							precio = item["precio"]
 							idtipodeoperacion = item["idtipodeoperacion"]
+
+							print str(precio) + " - " + str(idtipodeoperacion)
 							break
 
 						# except:
