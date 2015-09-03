@@ -185,6 +185,23 @@ class Models(object):
 
 							if row["direccion"]!=None:
 								direccion = unicode(row["direccion"], "utf-8", errors='ignore')
+
+							precio = row["precio"]
+							idtipodeoperacion = row["idtipodeoperacion"] 
+
+							try:
+								sql_avisos_tipo_operacion = "SELECT * FROM avisostiposdeoperaciones where idaviso = " + str(id_aviso)
+								self.con_mysql.execute(sql_avisos_tipo_negociation)
+								# Fetch all the rows in a list of lists.
+								results_tipo_operacion = self.con_mysql.fetchall()
+
+								for item in results_tipo_operacion:
+									precio = item["precio"]
+									idtipodeoperacion = item["idtipodeoperacion"]
+									break
+
+							except:
+								pass
 							
 							similar_aviso_json = {
 								"titulo":titulo,
@@ -194,7 +211,7 @@ class Models(object):
 								"idsubtipodepropiedad":row["idsubtipodepropiedad"],
 								"idavisopadre":row["idavisopadre"],
 								"idciudad":row["idciudad"],
-								"precio":row["precio"],
+								"precio":precio,
 								"direccion":direccion,
 								"codigopostal":row["codigopostal"],
 								"habitaciones":row["habitaciones"],
@@ -203,8 +220,10 @@ class Models(object):
 								"mediosbanos":row["mediosbanos"],
 								"metroscubiertos":row["metroscubiertos"],
 								"metrostotales":row["metrostotales"],
-								"idtipodeoperacion":row["idtipodeoperacion"],
+								"idtipodeoperacion":idtipodeoperacion,
 							}
+
+
 
 							aviso_json = {"id_aviso":id_aviso,"data":similar_aviso_json}
 							rea_json["rea"].append(aviso_json)
