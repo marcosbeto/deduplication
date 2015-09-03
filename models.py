@@ -50,6 +50,22 @@ class Models(object):
 		print "MySQLDB - Connected [OK]"
 		return db
 
+	def get_all_avisosonline_sql(self):
+		
+		try:
+			sql = "SELECT idaviso FROM avisosonline"
+
+			self.con_mysql.execute(sql)
+			all_avisos_sql = self.con_mysql.fetchall()
+
+			return all_avisos_sql
+		
+		except:
+			pass
+
+		return None
+
+
 	def get_new_online_avisos(self):
 
 		sql = "SELECT * FROM avisosonline"

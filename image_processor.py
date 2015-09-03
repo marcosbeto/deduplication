@@ -127,11 +127,13 @@ class Image_Processor(object):
 	def create_images_histogram_from_online_ads_sql(self):	
 		
 
+		models = Models()
+
+
 		sql = "SELECT idaviso FROM avisosonline"
 
 		# try:
-		self.con_mysql.execute(sql)
-		all_avisos_sql = self.con_mysql.fetchall()
+		all_avisos_sql = models.get_all_avisosonline_sql()
 
 		number_avisos_sql_avisos_online = 0
 
