@@ -418,7 +418,7 @@ class Models(object):
 			_id = group.get("_id")
 			self.con_mongo.snippets_grouped_number_of_ads_equals.update({"_id":_id},{'$set' : {"nog":size}}) #raw_equal_avisos
 
-		print "Secondr phase finished."
+		print "Seconde phase finished."
 
 	def add_image_histogram(self, aviso_json):
 		self.con_mongo.ads_histograms_online.insert(aviso_json)

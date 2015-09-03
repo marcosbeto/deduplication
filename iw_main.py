@@ -44,10 +44,10 @@ class IW_Main(object):
         # Filters().create_detailed_repeated_ads_filters()
 
     # Step 8: Grouping all the equal ads by its filters
-        Filters().group_repeated_ads_filters()
+        # Filters().group_repeated_ads_filters()
 
     # Step 9: 
-        # Filters().group_equals_filtered_by_size()
+        Filters().group_equals_filtered_by_size()
 
 
         # Image_Processor().create_duplicateds_group_collection()
