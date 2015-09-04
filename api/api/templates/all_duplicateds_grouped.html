@@ -186,12 +186,12 @@
 							 		last_id = this
 							 	});
 
-							 	bg_color = "rgba(245, 95, 8, 0.31);"
+							 	bg_color = "rgb(8, 166, 245);"
 
 							 	if (equals_filters>7)
-							 		bg_color = "rgba(245, 8, 8, 0.51);"
+							 		bg_color = "rgba(245, 8, 8, 1);"
 			               		
-							 	complete_html +=  '<div class="groupButton" last-id="' + last_id + '"><span style="background-color: ' + bg_color + 'padding: 5px;border-radius: 3px;cursor:pointer;" >' + line + '</span></div><br>'
+							 	complete_html +=  '<li class="list-group-item groupButton" last-id="' + last_id + '" style="color: ' + bg_color + ';font-weight:bold;overflow-x: scroll;"><span style="padding: 5px;border-radius: 3px;cursor:pointer;" >' + line + '</span></li>'
 
 							 	number_of_ads++;
 							});
@@ -307,7 +307,7 @@
         <h1>Components</h1>
         <p>Over a dozen reusable components built to provide iconography, dropdowns, input groups, navigation, alerts, and much more.</p>
     </div> -->
-	<div style="margin-left:10px">
+	<div style="padding:15px">
 		<h2>All Duplicated Ads - Photo Analysis</h2>
 		<hr>
 
@@ -315,22 +315,21 @@
 			<div class="col-xs-3" style="height: 420px;overflow-y: scroll;">
 				{% if duplicateds_avisos_filtered %}
 					
-					{% for filters in duplicateds_avisos_filtered %}
-						<div id="resultContainer">
-							<span class="equal_button" id="equal_button{{filters.nog }}_{{ filters.noe }}" number-ads="{{ filters.noe }}" number-groups="{{ filters.nog }}" pagination="0" type="initial" style="cursor:pointer;" ><b>{{ filters.noe }}</b> avisos per group</span> (<b>{{ filters.nog }}</b> groups)
-						</div>
+					<ul class="list-group">
+						{% for filters in duplicateds_avisos_filtered %}
+						  <li class="list-group-item">
+						  	<span class="equal_button" id="equal_button{{filters.nog }}_{{ filters.noe }}" number-ads="{{ filters.noe }}" number-groups="{{ filters.nog }}" pagination="0" type="initial" style="cursor:pointer;" ><b>{{ filters.noe }}</b> avisos per group (<b>{{ filters.nog }}</b> groups) &nbsp;<span class="glyphicon glyphicon glyphicon-log-out" aria-hidden="true"></span></span>
 
-						<br>
-
-					{% endfor %}
-
+						  </li>
+						{% endfor %}
+					</ul>
 				{% else %}
 					<p>No duplicated avisos.</p>
 				{% endif %}
 			</div>
 			<div class="col-xs-9" style="white-space: nowrap;overflow-x: scroll;">
-				<div id="dataContainer" number-ads="" number-groups="" pagination="0">
-				</div>
+				<ul class="list-group" id="dataContainer" number-ads="" number-groups="" pagination="0">
+				</ul>
 				<span style="cursor:pointer;display:none;" type='prev' class="prevButton">Prev </span><span style="cursor:pointer;display:none" class="nextButton" type="next" > Next</span>
 
 			</div>
