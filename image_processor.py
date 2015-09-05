@@ -206,10 +206,10 @@ class Image_Processor(object):
 				pass
 
 
-			for image_error in all_images_with_error:
-				print utils.print_inline(image_error + ", ")
+		for image_error in all_images_with_error:
+			print utils.print_inline(image_error + ", ")
 
-			print "# of images with error: " + str(number_images_with_error)
+		print "# of images with error: " + str(number_images_with_error)
 
 				# for file in os.listdir(Constants.LOCAL_DIR_SAVE_PHOTO + complete_folder):
 				#     if file.endswith(".jpg"):
