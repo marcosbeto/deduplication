@@ -91,57 +91,58 @@ class Models(object):
 			sql_images_to_download = "SELECT COUNT(idaviso) FROM imagestodownload WHERE idaviso = " + str(id_aviso)
 			self.con_mysql.execute(sql_images_to_download)
 			number_images_to_download = self.con_mysql.fetchone()
-			print number_images_to_download['COUNT(idaviso)']
 
-			number_avisos_added = self.con_mongo.ads_histograms_online.find({"id_aviso":id_aviso}).sort([("id_aviso", 1)]).count()
+			if int(number_images_to_download['COUNT(idaviso)']) == 0:
 
-			if number_avisos_added==0:
+				number_avisos_added = self.con_mongo.ads_histograms_online.find({"id_aviso":id_aviso}).sort([("id_aviso", 1)]).count()
 
-				if len(str(id_aviso))<10:
-					id_aviso = format(int(id_aviso), "010")
+				if number_avisos_added==0:
 
-				aviso_id_splitted = re.findall(r'.{1,2}',str(id_aviso),re.DOTALL)
+					if len(str(id_aviso))<10:
+						id_aviso = format(int(id_aviso), "010")
 
-				base_path_to_save_photo = ""
+					aviso_id_splitted = re.findall(r'.{1,2}',str(id_aviso),re.DOTALL)
 
-				for folder_name in aviso_id_splitted:
-					base_path_to_save_photo +=  folder_name + "/"
-				
-				local_path_to_save_photo = Constants.LOCAL_DIR_SAVE_PHOTO + base_path_to_save_photo + "100x75/"
+					base_path_to_save_photo = ""
 
-				sql_multimedia = "SELECT idtipodemultimedia, idmultimediaaviso FROM multimediaaviso where idaviso = " + str(id_aviso)
+					for folder_name in aviso_id_splitted:
+						base_path_to_save_photo +=  folder_name + "/"
+					
+					local_path_to_save_photo = Constants.LOCAL_DIR_SAVE_PHOTO + base_path_to_save_photo + "100x75/"
 
-				try: 
-					self.con_mysql.execute(sql_multimedia)
-					all_multimedia_from_aviso = self.con_mysql.fetchall()
+					sql_multimedia = "SELECT idtipodemultimedia, idmultimediaaviso FROM multimediaaviso where idaviso = " + str(id_aviso)
 
-					for multimedia in all_multimedia_from_aviso:
+					try: 
+						self.con_mysql.execute(sql_multimedia)
+						all_multimedia_from_aviso = self.con_mysql.fetchall()
 
-						if multimedia["idtipodemultimedia"] == 2:
+						for multimedia in all_multimedia_from_aviso:
 
-							try:
-								photo_file = str(multimedia["idmultimediaaviso"]) + ".jpg"
-								URL_TO_DOWNLOAD_PHOTO = Constants.URL_BASE_MULTIMEDIA + base_path_to_save_photo + "100x75/" + photo_file
+							if multimedia["idtipodemultimedia"] == 2:
 
-								if not os.path.exists(local_path_to_save_photo): 
-									os.makedirs(local_path_to_save_photo) #creating aviso directory to save photo
+								try:
+									photo_file = str(multimedia["idmultimediaaviso"]) + ".jpg"
+									URL_TO_DOWNLOAD_PHOTO = Constants.URL_BASE_MULTIMEDIA + base_path_to_save_photo + "100x75/" + photo_file
 
-								urllib.urlretrieve(URL_TO_DOWNLOAD_PHOTO, local_path_to_save_photo + photo_file) #downloading photo
-								size = format(utils.bytesto(os.path.getsize(local_path_to_save_photo), 'm'),'.4f') #size in megabytes of each photo
+									if not os.path.exists(local_path_to_save_photo): 
+										os.makedirs(local_path_to_save_photo) #creating aviso directory to save photo
 
-								number_of_photos_from_ad += 1
-								total_size_downloaded_from_ad = total_size_downloaded_from_ad + float(size)
+									urllib.urlretrieve(URL_TO_DOWNLOAD_PHOTO, local_path_to_save_photo + photo_file) #downloading photo
+									size = format(utils.bytesto(os.path.getsize(local_path_to_save_photo), 'm'),'.4f') #size in megabytes of each photo
 
-							
-							except:
-								print "Error 1 in id_aviso: " + str(id_aviso)
-								pass
-				except:
-					print "Error 2 in id_aviso: " + str(id_aviso)
-					pass
+									number_of_photos_from_ad += 1
+									total_size_downloaded_from_ad = total_size_downloaded_from_ad + float(size)
+
+								
+								except:
+									print "Error 1 in id_aviso: " + str(id_aviso)
+									pass
+					except:
+						print "Error 2 in id_aviso: " + str(id_aviso)
+						pass
 
 
-				print "[#AD] Photos from:  %s: %s | Tamanho:%s\n" % (str(id_aviso),str(number_of_photos_from_ad),str(total_size_downloaded_from_ad))
+					print "[#AD] Photos from:  %s: %s | Tamanho:%s\n" % (str(id_aviso),str(number_of_photos_from_ad),str(total_size_downloaded_from_ad))
 		# except:
 		# 	pass
 
