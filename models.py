@@ -90,7 +90,7 @@ class Models(object):
 
 			sql_images_to_download = "SELECT COUNT(idaviso) FROM imagestodownload WHERE idaviso = " + str(id_aviso)
 			self.con_mysql.execute(sql_images_to_download)
-			number_images_to_download = self.con_mysql.fetch_one()
+			number_images_to_download = self.con_mysql.fetchone()
 			print number_images_to_download
 
 			number_avisos_added = self.con_mongo.ads_histograms_online.find({"id_aviso":id_aviso}).sort([("id_aviso", 1)]).count()
