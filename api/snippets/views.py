@@ -174,8 +174,8 @@ def snippet_list_api(request, filters):
 
 		for filter_unique in filters:
 			if filter_unique=="all":
-				snippets = Snippet.objects.all()
-				serializer = SnippetSerializer(snippets, many=True)
+				snippets = Grouped_number_of_ads_equals.objects.all()
+				serializer = SnippetSerializer_Numbers(snippets, many=True)
 				return JSONResponse(serializer.data)
 			else:
 				snippets = list(Ads_equals_with_filters.objects.raw_query(
