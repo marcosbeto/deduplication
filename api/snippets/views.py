@@ -254,7 +254,7 @@ def snippet_detail_api(request, id):
 
 		if snippet:
 			all_avisos = snippet.values()
-			serializer = SnippetSerializer_Numbers(all_avisos)
+			serializer = SnippetSerializer_Numbers(snippet)
 			return JSONResponse(serializer.data)
 		else:
 			all_avisos = [{"Message":"No duplicated ads found."}]
