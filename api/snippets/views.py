@@ -253,7 +253,7 @@ def snippet_detail_api(request, id):
 	if request.method == 'GET':
 
 		if snippet:
-			all_avisos = snippet.values('reas')
+			all_avisos = snippet.values('reas')[0]
 			print all_avisos
 			serializer = SnippetSerializer_Numbers(all_avisos)
 			return JSONResponse(serializer.data)
