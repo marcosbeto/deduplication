@@ -244,15 +244,17 @@ def snippet_detail_api(request, id):
 	Retrieve, update or delete a code snippet.
 	"""
 	try:
-		snippet = Snippet.objects.raw_query({'rea' : int(id)})
+		snippet = Grouped_number_of_ads_equals.objects.raw_query({'reas':{'$elemMatch':{'$elemMatch':{'$in':[int(id)]}}}})
+		# snippet = Grouped_number_of_ads_equals.objects.raw_query({'rea' : int(id)})
+
 	except Snippet.DoesNotExist:
 		return HttpResponse(status=404)
 
 	if request.method == 'GET':
 
 		if snippet:
-			all_avisos = snippet.values('rea')[0]
-			serializer = SnippetSerializer(all_avisos)
+			all_avisos = snippet.values('reas')
+			serializer = SnippetSerializer_Numbers(all_avisos)
 			return JSONResponse(serializer.data)
 		else:
 			all_avisos = [{"Message":"No duplicated ads found."}]
