@@ -11,7 +11,7 @@ from snippets.serializers import SnippetSerializer_Numbers
 from snippets.serializers import SnippetSerializer_Grouped_Filtered
 from django.core import serializers
 from django.template import RequestContext, loader
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 
 
 import pymongo
@@ -28,6 +28,10 @@ class JSONResponse(HttpResponse):
 		content = JSONRenderer().render(data)
 		kwargs['content_type'] = 'application/json'
 		super(JSONResponse, self).__init__(content, **kwargs)
+
+@csrf_exempt
+def go_to_virtual_tour(request):
+	return render(request, 'pano/index_pano_2.html')
 
 @csrf_exempt
 def snippet_list(request, filters):
