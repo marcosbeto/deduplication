@@ -11,7 +11,7 @@
 
               var imgList = [
               { src: '{{ MEDIA_URL }}images/sala_5.jpg', title: 'Panorama #1', projection: 'flat',
-                 pan: 146, tilt: -20, scale: 0.5, horzFov: 360, horizon: 5, panSpeed:1,
+                 pan: 146, tilt: -20, scale: 0.5, horzFov: 360, horizon: 5, panSpeed:7, dispVertFov: 4, vertFov: 4, mouseTilt: 10,
                  hotspots: [
                     
                     { pan: 24, tilt: -44, url: "javascript:viewer.selectImage(2);", img: "{{ MEDIA_URL }}images/arrow_3_lc.png" },
@@ -33,7 +33,7 @@
                  ]
                },
                 { src: '{{ MEDIA_URL }}images/varanda_5.jpg', title: 'Panorama #1', projection: 'flat',
-                 pan: 220, tilt: 0, scale: 0.2, horzFov: 360, vertFov:45, horizon: 3, panSpeed:1,
+                 pan: 190, tilt: 0, scale: 0.2, horzFov: 360, vertFov:45, horizon: 3, panSpeed:1,
                  hotspots: [
                     { pan: 4, tilt: -45, url: "javascript:viewer.selectImage(0);", img: "{{ MEDIA_URL }}images/arrow_12_lc.png" }
                  ]
@@ -48,12 +48,15 @@
               viewer.orientationMode = "absolute";
               // viewer.enabled = false;
               // alert(viewer.scale)
-              viewer.maxScale = 0.6;
-              viewer.minScale = 0.4;
+              viewer.maxScale = 1;
+              viewer.minScale = 0.5;
               viewer.mouseMode = "grab";
               viewer.imageList = imgList;
               viewer.selectImage(0);
               viewer.setSpeed(10,10);
+              // viewer.tilt=45;
+              viewer.dispVertFov = 4;
+              viewer.mouseTilt = 10;
               viewer.onImageLoaded =
                  function() {/* document.getElementById('imageTitle').innerHTML = viewer.image.title; */};
               viewer.onDblClick =

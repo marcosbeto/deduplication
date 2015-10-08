@@ -11,7 +11,7 @@
 
               var imgList = [
               { src: '{{ MEDIA_URL }}images/sala_5.jpg', title: 'Panorama #1', projection: 'flat',
-                 pan: 146, tilt: -20, scale: 0.5, horzFov: 360, horizon: 5, panSpeed:1,
+                 pan: 146, tilt: -20, scale: 0.5, horzFov: 360, horizon: 5, panSpeed:1, dispVertFov:4, vertFov: 10, 
                  hotspots: [
                     
                     { pan: 24, tilt: -44, url: "javascript:viewer.selectImage(2);", img: "{{ MEDIA_URL }}images/arrow_3_lc.png" },
@@ -54,6 +54,7 @@
               viewer.imageList = imgList;
               viewer.selectImage(0);
               viewer.setSpeed(10,10);
+              viewer.dispVertFov = 4;
               viewer.onImageLoaded =
                  function() {/* document.getElementById('imageTitle').innerHTML = viewer.image.title; */};
               viewer.onDblClick =
