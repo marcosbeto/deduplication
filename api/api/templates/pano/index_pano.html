@@ -2,7 +2,10 @@
 <html>
    <head>
       <title>Panorado JS Demo #2</title>
-      <script src="js/Panorado_min.js" defer></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    
+      <script src="{{ MEDIA_URL }}js/Panorado_min.js"></script>
       <script defer>
          // var imgList = [
          //     { src: 'myroom_spherical.jpg', title: 'Panorama #1', projection: 'flat',
@@ -12,13 +15,15 @@
             
          //  ];
 
+          $(document).ready(function() {
+
            var imgList = [
-            { src: 'sala_2.jpg', title: 'Panorama #1', projection: 'flat',
+            { src: '{{ MEDIA_URL }}images/sala_2.jpg', title: 'Panorama #1', projection: 'flat',
                pan: 90, tilt: -20, scale: 0.5, horzFov: 360, horizon: 5, panSpeed:1,
                hotspots: [
                   
-                  { pan: -34, tilt: -48, url: "javascript:viewer.selectImage(2);", img: "arrow_from_living_to_room_big_right.png" },
-                  { pan: 167, tilt: -37, url: "javascript:viewer.selectImage(1);", img: "arrow_from_living_to_room_big.png" }
+                  { pan: -34, tilt: -48, url: "javascript:viewer.selectImage(2);", img: "{{ MEDIA_URL }}images/arrow_from_living_to_room_big_right.png" },
+                  { pan: 167, tilt: -37, url: "javascript:viewer.selectImage(1);", img: "{{ MEDIA_URL }}images/arrow_from_living_to_room_big.png" }
                ]
             },
             // { src: 'hall.jpg', title: 'Panorama #2', horzFov: 360, projection: 'flat' ,
@@ -29,24 +34,24 @@
             //    ]
             //  // { src: 'FlatImage1.jpg', title: 'Flat Image #1', horzFov: 20, projection: 'flat' }
             // },
-            { src: 'myroom.jpg', title: 'Panorama #1', projection: 'flat',
+            { src: '{{ MEDIA_URL }}images/myroom.jpg', title: 'Panorama #1', projection: 'flat',
                pan: 220, tilt: -10, scale: 0.2, horzFov: 360, vertFov:45, horizon: 3, panSpeed:1,
                hotspots: [
-                  { pan: 64, tilt: -55, url: "javascript:viewer.selectImage(0);", img: "arrow_from_living_to_room_big.png" }
+                  { pan: 64, tilt: -55, url: "javascript:viewer.selectImage(0);", img: "{{ MEDIA_URL }}images/arrow_from_living_to_room_big.png" }
                ]
              },
-             { src: 'cozinha_2.jpg', title: 'Panorama #1', projection: 'flat',
+             { src: '{{ MEDIA_URL }}images/cozinha_2.jpg', title: 'Panorama #1', projection: 'flat',
                pan: 220, tilt: -20, scale: 0.2, horzFov: 360, horizon: 5, panSpeed:1,
                hotspots: [
                   // { pan: -83, tilt: -26, url: "javascript:viewer.selectImage(1);", img: "arrow_from_living_to_room.png" },
-                  { pan: 195, tilt: -48, url: "javascript:viewer.selectImage(0);", img: "arrow_from_living_to_room_big_right.png" }
+                  { pan: 195, tilt: -48, url: "javascript:viewer.selectImage(0);", img: "{{ MEDIA_URL }}images/arrow_from_living_to_room_big_right.png" }
                ]
              },
 
 
           ];
 
-         window.onload = function() {
+        
             viewer = new PanoradoJS(document.getElementById("viewerCanvas"));
             viewer.controls.visible = false;
             viewer.orientationMode = "absolute";
@@ -63,7 +68,7 @@
             viewer.onDblClick =
                function() { viewer.zoomToCursor(2); };
             // document.getElementById("version").innerHTML = viewer.version;
-         };
+         });
       </script>
    </head>
    <body>

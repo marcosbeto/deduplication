@@ -34,6 +34,11 @@ def go_to_virtual_tour(request):
 	return render(request, 'pano/index_pano_2.html')
 
 @csrf_exempt
+def go_to_virtual_tour_fail(request):
+	return render(request, 'pano/index_pano.html')
+
+
+@csrf_exempt
 def snippet_list(request, filters):
 	"""
 	List all code snippets, or create a new snippet.

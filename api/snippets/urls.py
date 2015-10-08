@@ -13,4 +13,5 @@ urlpatterns = patterns('snippets.views',
     url(r'^group/$', 'get_group_number_of_ads'),
     url(r'^filtered/$', 'get_group_number_of_ads_filtered'),
     url(r'^virtual-tour/$', 'go_to_virtual_tour'),
+    url(r'^virtual-tour-fail/$', 'go_to_virtual_tour_fail'),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
