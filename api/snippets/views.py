@@ -35,7 +35,7 @@ def go_to_virtual_tour(request):
 
 @csrf_exempt
 def go_to_virtual_tour_fail(request):
-	return render(request, 'pano/index_pano.html')
+	return render(request, 'pano/index_three.html')
 
 
 @csrf_exempt
