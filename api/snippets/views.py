@@ -30,8 +30,10 @@ class JSONResponse(HttpResponse):
 		super(JSONResponse, self).__init__(content, **kwargs)
 
 @csrf_exempt
-def go_to_virtual_tour(request):
-	return render(request, 'pano/index_pano_2.html')
+def go_to_virtual_tour(request, location):
+	print location
+	context = {'location': location}
+	return render(request, 'pano/index_three.html', context)
 
 @csrf_exempt
 def go_to_virtual_tour_fail(request):

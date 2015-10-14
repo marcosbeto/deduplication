@@ -12,6 +12,6 @@ urlpatterns = patterns('snippets.views',
     url(r'^redirect_to_aviso/(?P<id>[^\?]+)/$', 'redirect_to_aviso'),
     url(r'^group/$', 'get_group_number_of_ads'),
     url(r'^filtered/$', 'get_group_number_of_ads_filtered'),
-    url(r'^virtual-tour/$', 'go_to_virtual_tour'),
+    url(r'^virtual-tour/(?P<location>[^\?]+)/$', 'go_to_virtual_tour'),
     url(r'^virtual-tour-2/$', 'go_to_virtual_tour_fail'),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
