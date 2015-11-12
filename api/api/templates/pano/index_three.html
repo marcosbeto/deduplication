@@ -42,16 +42,109 @@
   <body>
 
     <div id="container"></div>
-    <div id="container2"></div>
     
-    <div style="position:absolute;top:10px;left:10px;background-color:#ff00ff;">
-      <div class="btn-group" role="group" aria-label="...">
-        <button type="button" class="btn btn-default" onclick="location.href='/virtual-tour/sala';">Sala</button>
-        <button type="button" class="btn btn-default" onclick="location.href='/virtual-tour/varanda';">Varanda</button>
-        <button type="button" class="btn btn-default" onclick="location.href='/virtual-tour/quarto';">Quarto</button>
-        <button type="button" class="btn btn-default" onclick="location.href='/virtual-tour/cozinha';">Cozinha</button>
+    <div class="row" style="height: 70px;background-color: rgba(255, 255, 255, 0.5);top:0px;position:absolute;width: 100%;left: 0px;margin-right: 0px;margin-left: 0px;">
+      <div class="col-xs-5">
+        <table><tbody>
+          <tr>
+            <td style="padding-top: 8px;padding-left: 8px;">
+              <img class="img-responsive" src="http://imovelweb.urbanizo.com.s3.amazonaws.com/images/images/logoImovelWebTransparentBackground.png" style="max-height: 45px;">
+            </td>
+            <td style="padding-left: 25px;padding-top: 21px;color: #000000;font-size: 18pt;font-weight: 300;">
+              Tour Virtual <span style="font-size: 8pt;font-weight: bold;color: #C34902;">beta</span>
+            </td>
+          </tr>
+        </tbody></table>
+      </div>
+      <div class="col-xs-offset-4 col-xs-3" style="right:-101px;margin-top: 18px;">
+        <span type="button" class="btn btn-sm" style="color: #fff;
+          text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+          background-color: #f16000;
+          background-image: -moz-linear-gradient(top,#f60,#db5800);
+          background-image: -webkit-gradient(linear,0 0,0 100%,from(#f60),to(#db5800));
+          background-image: -webkit-linear-gradient(top,#f60,#db5800);
+          background-image: -o-linear-gradient(top,#f60,#db5800);
+          background-image: linear-gradient(to bottom,#f60,#db5800);
+          background-repeat: repeat-x;
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff6600', endColorstr='#ffdb5800', GradientType=0);
+          border-color: #db5800 #db5800 #8f3900;
+          border-color: rgba(0,0,0,.1)rgba(0,0,0,.1)rgba(0,0,0,.25);
+          filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+          }">
+          Quero saber mais sobre o Tour Virtual
+        </span>
       </div>
     </div>
+
+<div style="position:absolute;top:90px;left:17px;">
+  <button type="button" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Voltar para o anúncio principal</button>
+  <span type="button" class="btn btn-sm" style="color: #fff;
+          text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+          background-color: #f16000;
+          background-image: -moz-linear-gradient(top,#f60,#db5800);
+          background-image: -webkit-gradient(linear,0 0,0 100%,from(#f60),to(#db5800));
+          background-image: -webkit-linear-gradient(top,#f60,#db5800);
+          background-image: -o-linear-gradient(top,#f60,#db5800);
+          background-image: linear-gradient(to bottom,#f60,#db5800);
+          background-repeat: repeat-x;
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff6600', endColorstr='#ffdb5800', GradientType=0);
+          border-color: #db5800 #db5800 #8f3900;
+          border-color: rgba(0,0,0,.1)rgba(0,0,0,.1)rgba(0,0,0,.25);
+          filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+          }">
+          Contatar anunciante
+        </span>
+</div>
+
+<div class="row" style="
+    height: 94px;
+    background-color: rgba(13, 16, 0, 0.22);
+    bottom: 0px;
+    position:absolute;
+    width: 100%;
+    left: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+    /* text-align: center; */
+  ">
+
+  <div style="height:30px;width: 269px;background-color: rgba(13, 16, 0, 0.22);position:absolute;left:10px;top:-30px;color: #F1F1F1;padding=left: 1;padding-left: 15px;padding-top: 5px;">Veja outros cômodos desse imóvel <span class="glyphicon glyphicon-triangle-bottom" style="left: 6px;top: 3px;"></span></div>
+  
+  <div class="col-xs-12" style="padding-top: 10px;">
+    
+    <div>
+    
+      <table style="margin-left: 10px;"><tbody>
+        <tr>
+          <td>
+              <a href="/virtual-tour/sala/"><img src="{{ MEDIA_URL }}images/sala_thumb.jpg" style="width: 100px;height: 75px;opacity: 0.8;border: #8C8E73 1px solid;" border="0"></a>
+          </td>
+          <td style="padding-left: 20px;">
+              <a href="/virtual-tour/cozinha/"><img src="{{ MEDIA_URL }}images/cozinha_thumb.jpg" style="width:100px;height:75px;opacity: 0.8;border: #8C8E73 1px solid;" border="0"></a>
+          </td>
+          <td style="padding-left: 20px;">
+              <a href="/virtual-tour/quarto/"><img src="{{ MEDIA_URL }}images/quarto_thumb.jpg" style="width:100px;height:75px;opacity: 0.8;border: #8C8E73 1px solid;" border="0"></a>
+          </td>
+          <td style="padding-left: 20px;">
+              <a href="/virtual-tour/varanda/"><img src="{{ MEDIA_URL }}images/varanda_thumb.jpg" style="width:100px;height:75px;opacity: 0.8;border: #8C8E73 1px solid;" border="0"></a>
+          </td>
+        </tr>
+       </tbody></table>
+
+    </div>
+
+  </div>
+
+</div>
+    
+     <!--  <div style="position:absolute;top:10px;left:10px;background-color:#ff00ff;">
+        <div class="btn-group" role="group" aria-label="...">
+          <button type="button" class="btn btn-default" onclick="location.href='/virtual-tour/sala';">Sala</button>
+          <button type="button" class="btn btn-default" onclick="location.href='/virtual-tour/varanda';">Varanda</button>
+          <button type="button" class="btn btn-default" onclick="location.href='/virtual-tour/quarto';">Quarto</button>
+          <button type="button" class="btn btn-default" onclick="location.href='/virtual-tour/cozinha';">Cozinha</button>
+        </div>
+      </div> -->
 
     <script src="{{ MEDIA_URL }}js/three.min.js"></script>
 
